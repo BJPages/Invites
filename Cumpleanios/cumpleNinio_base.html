@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Invitación</title>
+
+<!-- CONFIGURACIÓN -->
+<script>
+const INVITE_CONFIG = {
+  backgroundImage: "https://tudominio.com/bg.jpg",
+  headerImage:   "https://tudominio.com/header.png",
+  footerImage:   "https://tudominio.com/footer.png",
+
+  showHeaderImage: true,
+  showTitle: true,
+  showName: true,
+  showReason: true,
+  showLocation: true,
+  showFooterImage: true,
+
+  // Textos
+  titleText: "¡Te invito a mi fiesta!",
+  childName: "Sofi",
+  reasonText: "Cumplo 6 años 🎉",
+  locationText: "Salón Arcoíris — Calle Fiesta 123",
+
+  // Tiempo entre cada aparición (ms)
+  appearDelay: 450
+};
+</script>
+
+<style>
+  body {
+    margin:0;
+    font-family: system-ui, sans-serif;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    text-align: center;
+    min-height: 100vh;
+  }
+
+  .wrapper {
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .hidden { opacity: 0; transform: translateY(10px); }
+  .show { opacity: 1; transform: translateY(0); transition: .5s ease; }
+
+  .btn-start {
+    margin-top: 40vh;
+    padding: 14px 20px;
+    font-size: 18px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    background: linear-gradient(90deg,#fb7185,#facc15,#38bdf8);
+    color:#0f172a;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.07); }
+    100% { transform: scale(1); }
+  }
+
+  img {
+    width: 100%;
+    border-radius: 12px;
+  }
+
+  .element {
+    margin: 14px 0;
+    font-size: 20px;
+    font-weight: 600;
+    text-shadow: 0 3px 6px rgba(0,0,0,0.5);
+  }
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+  <!-- BOTÓN INICIAL (solo esto se ve al inicio) -->
+  <button class="btn-start" id="openBtn">Abrir invitación ▶</button>
+
+  <!-- CONTENIDO (oculto al inicio) -->
+  <div id="content" style="margin-top:20px;">
+
+    <img id="headerImg" class="hidden" alt="Header" />
+
+    <div id="title" class="element hidden"></div>
+    <div id="name" class="element hidden"></div>
+    <div id="reason" class="element hidden"></div>
+    <div id="location" class="element hidden"></div>
+
+    <img id="footerImg" class="hidden" style="margin-top:20px;" alt="Footer" />
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const C = INVITE_CONFIG;
+
+  // Fondo dinámico
+  if (C.backgroundImage) document.body.style.backgroundImage = `url(${C.backgroundImage})`;
+
+  // Elementos
+  const el = {
+    headerImg: document.getElementById("headerImg"),
+    title: document.getElementById("title"),
+    name: document.getElementById("name"),
+    reason: document.getElementById("reason"),
+    location: document.getElementById("location"),
+    footerImg: document.getElementById("footerImg")
+  };
+
+  // Rellenar textos e imágenes
+  if (C.headerImage) el.headerImg.src = C.headerImage;
+  if (C.footerImage) el.footerImg.src = C.footerImage;
+
+  el.title.textContent = C.titleText;
+  el.name.textContent = C.childName;
+  el.reason.textContent = C.reasonText;
+  el.location.textContent = C.locationText;
+
+  // Orden de aparición
+  const sequence = [];
+  if (C.showHeaderImage) sequence.push(el.headerImg);
+  if (C.showTitle) sequence.push(el.title);
+  if (C.showName) sequence.push(el.name);
+  if (C.showReason) sequence.push(el.reason);
+  if (C.showLocation) sequence.push(el.location);
+  if (C.showFooterImage) sequence.push(el.footerImg);
+
+  // Evento del botón
+  document.getElementById("openBtn").onclick = () => {
+    document.getElementById("openBtn").style.display = "none";
+
+    // Aparece cada elemento con delay
+    sequence.forEach((item, index) => {
+      setTimeout(() => {
+        item.classList.remove("hidden");
+        item.classList.add("show");
+      }, index * C.appearDelay);
+    });
+  };
+});
+</script>
+</body>
+</html>

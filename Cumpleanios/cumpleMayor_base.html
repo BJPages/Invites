@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Invitación a la Fiesta</title>
+
+  <!-- Para que se vea bien en celulares -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Meta básica para compartir en WhatsApp / redes -->
+  <meta property="og:title" content="¡Estás invitad@ a mi fiesta!" />
+  <meta property="og:description" content="Acompáñame a celebrar una noche increíble. Da clic para ver los detalles." />
+  <meta property="og:type" content="website" />
+  <!-- <meta property="og:image" content="https://tudominio.com/imagen-fiesta.jpg" /> -->
+
+  <!--
+    🔧 CONFIGURACIÓN RÁPIDA DE LA INVITACIÓN
+    Solo edita los textos y enlaces dentro de INVITE_CONFIG.
+    No necesitas tocar nada más del HTML.
+  -->
+  <script>
+    const INVITE_CONFIG = {
+      // Etiqueta de arriba
+      badgeLabel: "Fiesta exclusiva",
+
+      // Título principal y subtítulo
+      eventTitle: "Noche de Fiesta & Amigos",
+      subtitle: "Te invito a celebrar conmigo una noche llena de música, buena vibra y sorpresas. ¡No faltes!",
+
+      // Detalles de fecha y hora
+      dateTitle: "Sábado 14 de diciembre, 2025",
+      dateSubtitle: "Recepción desde las 8:00 p.m.",
+
+      // Lugar
+      placeTitle: "Salón Aurora",
+      placeSubtitle: "Calle Fiesta 123, Col. Centro",
+
+      // Dress code
+      dressTitle: "Dress code: Chic casual",
+      dressSubtitle: "Tonos negros / metálicos opcional ✨",
+
+      // Regalo
+      giftTitle: "Regalo",
+      giftSubtitle: "Tu presencia es el mejor detalle 💛",
+
+      // Anfitrión
+      hostInitial: "A",
+      hostName: "Alex Martínez",
+
+      // Nota de confirmación
+      noteText: "Por favor confirma tu asistencia para poder darte acceso a la lista y organizar mejor la comida y las bebidas.",
+
+      // WhatsApp (solo número con lada, sin + ni espacios)
+      whatsappNumber: "522226763338",
+      whatsappMessage: "¡Hola! Confirmo mi asistencia a la fiesta. 🎉",
+
+      // Enlace de Google Maps
+      mapsUrl: "https://maps.app.goo.gl/",
+
+      // Nota al final
+      footnote:
+        "Muestra esta invitación en la entrada. Válida para 1 persona. Prohibido el ingreso de bebidas externas."
+    };
+
+    // Rellena el contenido dinámico al cargar la página
+    document.addEventListener("DOMContentLoaded", () => {
+      const C = INVITE_CONFIG;
+
+      // Textos principales
+      document.getElementById("badge-label").textContent = C.badgeLabel;
+      document.getElementById("hero-title").textContent = C.eventTitle;
+      document.getElementById("hero-subtitle").textContent = C.subtitle;
+
+      // Detalles
+      document.getElementById("date-title").textContent = C.dateTitle;
+      document.getElementById("date-subtitle").textContent = C.dateSubtitle;
+
+      document.getElementById("place-title").textContent = C.placeTitle;
+      document.getElementById("place-subtitle").textContent = C.placeSubtitle;
+
+      document.getElementById("dress-title").textContent = C.dressTitle;
+      document.getElementById("dress-subtitle").textContent = C.dressSubtitle;
+
+      document.getElementById("gift-title").textContent = C.giftTitle;
+      document.getElementById("gift-subtitle").textContent = C.giftSubtitle;
+
+      // Anfitrión
+      document.getElementById("host-initial").textContent = C.hostInitial;
+      document.getElementById("host-name").textContent = C.hostName;
+
+      // Nota
+      document.getElementById("note-text").textContent = C.noteText;
+
+      // WhatsApp
+      const waUrl =
+        "https://wa.me/" +
+        C.whatsappNumber +
+        "?text=" +
+        encodeURIComponent(C.whatsappMessage);
+      document.getElementById("whatsapp-btn").setAttribute("href", waUrl);
+
+      // Maps
+      document.getElementById("maps-link").setAttribute("href", C.mapsUrl);
+
+      // Nota final
+      document.getElementById("footnote").textContent = C.footnote;
+    });
+  </script>
+
+  <style>
+    :root {
+      --bg-main: #020617;
+      --card-bg: rgba(15, 23, 42, 0.9);
+      --accent: #f97316;
+      --accent-soft: rgba(249, 115, 22, 0.15);
+      --text-main: #f9fafb;
+      --text-muted: #cbd5f5;
+      --border-soft: rgba(148, 163, 184, 0.35);
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.7);
+      --radius-lg: 18px;
+      --radius-full: 999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, #1e293b 0, transparent 60%),
+        radial-gradient(circle at bottom, #0f172a 0, #020617 60%);
+      color: var(--text-main);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .invite-wrapper {
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      width: 100%;
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 20px 18px 18px;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -60%;
+      background:
+        conic-gradient(from 210deg,
+          rgba(249, 115, 22, 0.5),
+          transparent,
+          rgba(56, 189, 248, 0.4),
+          transparent,
+          rgba(249, 115, 22, 0.6)
+        );
+      opacity: 0.35;
+      filter: blur(18px);
+      z-index: -1;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .tag-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(249, 115, 22, 0.9);
+    }
+
+    .hero-title {
+      font-size: clamp(26px, 6vw, 32px);
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      margin-bottom: 6px;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .divider {
+      border-top: 1px dashed rgba(148, 163, 184, 0.5);
+      margin: 12px 0 14px;
+    }
+
+    .details {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+    }
+
+    .detail-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 30% 20%, rgba(248, 250, 252, 0.9), transparent),
+        radial-gradient(circle at 80% 90%, rgba(249, 115, 22, 0.8), rgba(59, 130, 246, 0.6));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .detail-text-main {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .detail-text-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .host {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .host-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #f9fafb, #e5e7eb);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .host-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .host-name {
+      font-size: 13px;
+    }
+
+    .note {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .btn-primary {
+      border: none;
+      outline: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: var(--radius-full);
+      font-size: 14px;
+      font-weight: 600;
+      background: linear-gradient(135deg, #f97316, #fb923c);
+      color: #0f172a;
+      box-shadow: 0 14px 30px rgba(249, 115, 22, 0.5);
+      transition: transform 0.14s ease, box-shadow 0.14s ease, filter 0.14s ease;
+    }
+
+    .btn-primary span {
+      font-size: 16px;
+    }
+
+    .btn-primary:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.35);
+      filter: brightness(0.96);
+    }
+
+    .btn-secondary {
+      text-decoration: none;
+      font-size: 11px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    .btn-secondary strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .footnote {
+      margin-top: 14px;
+      font-size: 10px;
+      text-align: center;
+      color: rgba(148, 163, 184, 0.8);
+    }
+
+    @media (min-width: 640px) {
+      .card {
+        padding: 24px 20px 20px;
+      }
+
+      .details {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .note {
+        font-size: 13px;
+      }
+
+      .cta-row {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .btn-secondary {
+        text-align: right;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="invite-wrapper">
+    <main class="card" role="main">
+      <div class="tag">
+        <span class="tag-dot"></span>
+        <span id="badge-label"></span>
+      </div>
+
+      <h1 class="hero-title" id="hero-title"></h1>
+      <p class="hero-subtitle" id="hero-subtitle"></p>
+
+      <div class="divider"></div>
+
+      <section class="details" aria-label="Detalles del evento">
+        <article class="detail-item">
+          <div class="detail-icon">📅</div>
+          <div>
+            <div class="detail-text-main" id="date-title"></div>
+            <div class="detail-text-sub" id="date-subtitle"></div>
+          </div>
+        </article>
+
+        <article class="detail-item">
+          <div class="detail-icon">📍</div>
+          <div>
+            <div class="detail-text-main" id="place-title"></div>
+            <div class="detail-text-sub" id="place-subtitle"></div>
+          </div>
+        </article>
+
+        <article class="detail-item">
+          <div class="detail-icon">🎵</div>
+          <div>
+            <div class="detail-text-main" id="dress-title"></div>
+            <div class="detail-text-sub" id="dress-subtitle"></div>
+          </div>
+        </article>
+
+        <article class="detail-item">
+          <div class="detail-icon">🎁</div>
+          <div>
+            <div class="detail-text-main" id="gift-title"></div>
+            <div class="detail-text-sub" id="gift-subtitle"></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="host" aria-label="Anfitrión">
+        <div class="host-avatar" id="host-initial"></div>
+        <div>
+          <div class="host-label">Anfitrión</div>
+          <div class="host-name" id="host-name"></div>
+        </div>
+      </section>
+
+      <p class="note" id="note-text"></p>
+
+      <div class="cta-row">
+        <a
+          class="btn-primary"
+          id="whatsapp-btn"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>✔</span>
+          Confirmar por WhatsApp
+        </a>
+
+        <a
+          class="btn-secondary"
+          id="maps-link"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Ver ubicación en <strong>Google Maps</strong>
+        </a>
+      </div>
+
+      <p class="footnote" id="footnote"></p>
+    </main>
+  </div>
+</body>
+</html>
