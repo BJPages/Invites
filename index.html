@@ -8,18 +8,18 @@
 </head>
 <body>
   <main id="app" class="app hidden">
-    <section id="hero" class="hero">
+    <section id="heroSection" class="hero">
       <div class="overlay"></div>
 
       <div class="hero-content container">
-        <p id="eventTag" class="event-tag"></p>
-        <h1 id="title" class="title"></h1>
-        <p id="subtitle" class="subtitle"></p>
+        <p id="eventTag" class="event-tag hidden"></p>
+        <h1 id="title" class="title hidden"></h1>
+        <p id="subtitle" class="subtitle hidden"></p>
 
-        <div class="hero-actions">
+        <div id="heroActions" class="hero-actions hidden">
           <a
             id="locationBtn"
-            class="btn btn-primary"
+            class="btn btn-primary hidden"
             href="#"
             target="_blank"
             rel="noopener noreferrer"
@@ -27,14 +27,14 @@
             Ver ubicación
           </a>
 
-          <button id="musicBtn" class="btn btn-secondary" type="button">
+          <button id="musicBtn" class="btn btn-secondary hidden" type="button">
             Reproducir música
           </button>
         </div>
       </div>
     </section>
 
-    <section class="countdown-section">
+    <section id="countdownSection" class="countdown-section hidden">
       <div class="container">
         <h2 class="section-title">Faltan</h2>
 
@@ -59,19 +59,12 @@
       </div>
     </section>
 
-    <section class="details-section">
+    <section id="detailsSection" class="details-section hidden">
       <div class="container narrow">
         <h2 class="section-title">Detalles</h2>
-        <p id="eventDateText" class="detail-line"></p>
-        <p id="eventPlace" class="detail-line"></p>
-        <p id="eventDescription" class="detail-description"></p>
-      </div>
-    </section>
-
-    <section class="gallery-section">
-      <div class="container">
-        <h2 class="section-title">Galería</h2>
-        <div id="gallery" class="gallery"></div>
+        <p id="eventDateText" class="detail-line hidden"></p>
+        <p id="eventPlace" class="detail-line hidden"></p>
+        <p id="eventDescription" class="detail-description hidden"></p>
       </div>
     </section>
 
@@ -82,7 +75,50 @@
       </div>
     </section>
 
-    <section class="rsvp-section">
+    <section id="gallerySection" class="gallery-section hidden">
+      <div class="container">
+        <h2 class="section-title">Galería</h2>
+        <div id="gallery" class="gallery"></div>
+      </div>
+    </section>
+
+    <section id="giftRegistrySection" class="gift-section hidden">
+      <div class="container narrow">
+        <h2 class="section-title">Mesa de regalos</h2>
+        <div id="giftRegistryList" class="gift-list"></div>
+      </div>
+    </section>
+
+    <section id="mapSection" class="map-section hidden">
+      <div class="container narrow">
+        <h2 class="section-title">Ubicación</h2>
+
+        <div id="mapButtonWrapper" class="map-button-wrapper hidden">
+          <a
+            id="mapOpenBtn"
+            class="btn btn-primary"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Abrir mapa
+          </a>
+        </div>
+
+        <div id="mapEmbedWrapper" class="map-embed-wrapper hidden">
+          <iframe
+            id="mapEmbed"
+            class="map-embed"
+            src=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="rsvpSection" class="rsvp-section hidden">
       <div class="container narrow">
         <h2 class="section-title">Confirmar asistencia</h2>
 
@@ -99,7 +135,7 @@
           </button>
         </form>
 
-        <p id="rsvpHelp" class="rsvp-help"></p>
+        <p id="rsvpHelp" class="rsvp-help hidden"></p>
         <p id="rsvpMessage" class="rsvp-message"></p>
       </div>
     </section>
