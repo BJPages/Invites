@@ -8,16 +8,16 @@
   "place": "Hacienda Los Olivos, Puebla",
   "description": "Acompáñanos a celebrar nuestro amor en una noche llena de alegría, familia y momentos inolvidables.",
   "locationUrl": "https://maps.google.com",
+  "mapDisplay": "button",
   "assetsPath": "assets/boda001",
   "heroImage": "hero.jpg",
-  "gallery": [
-    "gallery-1.jpg",
-    "gallery-2.jpg",
-    "gallery-3.jpg"
-  ],
+  "gallery": ["gallery-1.jpg", "gallery-2.jpg", "gallery-3.jpg"],
   "music": {
     "enabled": true,
     "file": "music.mp3"
+  },
+  "countdown": {
+    "enabled": true
   },
   "theme": {
     "bg": "#fff8f4",
@@ -46,6 +46,16 @@
       "description": "Cena, música y celebración."
     }
   ],
+  "giftRegistry": {
+    "liverpool": {
+      "url": "https://www.liverpool.com.mx",
+      "label": "Liverpool"
+    },
+    "palacio": {
+      "url": "https://www.elpalaciodehierro.com",
+      "label": "Palacio de Hierro"
+    }
+  },
   "rsvp": {
     "phone": "522226763338",
     "messageTemplate": "Hola, soy {name}. {attendance} a {eventTitle}, el {eventDateText} en {place}."
