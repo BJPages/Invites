@@ -1,5 +1,5 @@
 {
-  "template": "wedding",
+  "layout": "classic",
   "eventTypeLabel": "Boda",
   "title": "Ana & Luis",
   "subtitle": "Nos encantará compartir contigo este día tan especial.",
@@ -12,10 +12,42 @@
   "heroImage": "hero.jpg",
   "gallery": [
     "gallery-1.jpg",
-    "gallery-2.jpg"
+    "gallery-2.jpg",
+    "gallery-3.jpg"
   ],
   "music": {
     "enabled": true,
     "file": "music.mp3"
+  },
+  "theme": {
+    "bg": "#fff8f4",
+    "surface": "#fffdfc",
+    "text": "#352d29",
+    "muted": "#766964",
+    "primary": "#c08b74",
+    "primaryContrast": "#ffffff",
+    "overlay": "rgba(53, 31, 22, 0.34)",
+    "heroText": "#ffffff"
+  },
+  "schedule": [
+    {
+      "time": "6:00 PM",
+      "title": "Ceremonia",
+      "description": "Recepción de invitados y ceremonia principal."
+    },
+    {
+      "time": "7:30 PM",
+      "title": "Cóctel",
+      "description": "Brindis y fotografías."
+    },
+    {
+      "time": "9:00 PM",
+      "title": "Cena y fiesta",
+      "description": "Cena, música y celebración."
+    }
+  ],
+  "rsvp": {
+    "phone": "522226763338",
+    "messageTemplate": "Hola, soy {name}. {attendance} a {eventTitle}, el {eventDateText} en {place}."
   }
 }
