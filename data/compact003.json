@@ -1,0 +1,28 @@
+{
+  "layout": "compact",
+  "layoutVariant": "compact-3",
+  "eventTypeLabel": "Cumpleaños",
+  "title": "Emma cumple 7",
+  "subtitle": "Celebremos juntos una aventura increíble.",
+  "eventDateText": "22 de septiembre de 2026 · 5:00 PM",
+  "place": "Terraza infantil Mi Fiesta",
+  "description": "Una tarde especial con amigos, pastel y muchas sorpresas.",
+  "mapDisplay": "embed",
+  "mapEmbedUrl": "https://www.google.com/maps?q=Puebla&output=embed",
+  "assetsPath": "assets/compact003",
+  "heroImage": "hero.jpg",
+  "theme": {
+    "bg": "#f7fbff",
+    "surface": "#ffffff",
+    "text": "#24364d",
+    "muted": "#697a90",
+    "primary": "#4dabf7",
+    "primaryContrast": "#ffffff",
+    "overlay": "rgba(17, 52, 93, 0.30)",
+    "heroText": "#ffffff"
+  },
+  "rsvp": {
+    "phone": "522226763338",
+    "messageTemplate": "Hola, soy {name}. {attendance} a {eventTitle}."
+  }
+}
