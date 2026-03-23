@@ -1,0 +1,43 @@
+{
+  "layout": "compact",
+  "layoutVariant": "compact-1",
+  "eventTypeLabel": "Cumpleaños",
+  "title": "Sofi cumple 5",
+  "subtitle": "Te esperamos para una tarde mágica llena de diversión.",
+  "eventDateISO": "2026-07-18T16:00:00",
+  "eventDateText": "18 de julio de 2026 · 4:00 PM",
+  "place": "Salón Arcoíris, Puebla",
+  "description": "Habrá juegos, pastel, sorpresas y mucha diversión.",
+  "locationUrl": "https://maps.google.com",
+  "mapDisplay": "button",
+  "assetsPath": "assets/compact001",
+  "heroImage": "hero.jpg",
+  "gallery": [],
+  "music": {
+    "enabled": true,
+    "file": "music.mp3"
+  },
+  "countdown": {
+    "enabled": true
+  },
+  "theme": {
+    "bg": "#fff8ff",
+    "surface": "#ffffff",
+    "text": "#442b56",
+    "muted": "#7c6791",
+    "primary": "#ff5ca8",
+    "primaryContrast": "#ffffff",
+    "overlay": "rgba(88, 31, 87, 0.28)",
+    "heroText": "#ffffff"
+  },
+  "giftRegistry": {
+    "liverpool": {
+      "url": "https://www.liverpool.com.mx",
+      "label": "Liverpool"
+    }
+  },
+  "rsvp": {
+    "phone": "522226763338",
+    "messageTemplate": "Hola, soy {name}. {attendance} al {eventTitle}, el {eventDateText}."
+  }
+}
