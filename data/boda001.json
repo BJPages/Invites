@@ -34,30 +34,17 @@
       "time": "6:00 PM",
       "title": "Ceremonia",
       "description": "Recepción de invitados y ceremonia principal."
-    },
-    {
-      "time": "7:30 PM",
-      "title": "Cóctel",
-      "description": "Brindis y fotografías."
-    },
-    {
-      "time": "9:00 PM",
-      "title": "Cena y fiesta",
-      "description": "Cena, música y celebración."
     }
   ],
   "giftRegistry": {
     "liverpool": {
       "url": "https://www.liverpool.com.mx",
       "label": "Liverpool"
-    },
-    "palacio": {
-      "url": "https://www.elpalaciodehierro.com",
-      "label": "Palacio de Hierro"
     }
   },
   "rsvp": {
     "phone": "522226763338",
     "messageTemplate": "Hola, soy {name}. {attendance} a {eventTitle}, el {eventDateText} en {place}."
-  }
+  },
+  "customScript": "custom.js"
 }
