@@ -8,14 +8,10 @@
   "place": "Terraza Central, Puebla",
   "description": "Te esperamos para vivir una experiencia elegante y memorable.",
   "locationUrl": "https://maps.google.com",
+  "mapDisplay": "button",
   "assetsPath": "assets/evento001",
   "heroImage": "hero.jpg",
-  "gallery": [
-    "gallery-1.jpg",
-    "gallery-2.jpg",
-    "gallery-3.jpg",
-    "gallery-4.jpg"
-  ],
+  "gallery": ["gallery-1.jpg", "gallery-2.jpg", "gallery-3.jpg", "gallery-4.jpg"],
   "music": {
     "enabled": true,
     "file": "music.mp3"
