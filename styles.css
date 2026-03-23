@@ -9,7 +9,6 @@
   --secondary-border: rgba(255, 255, 255, 0.35);
   --hero-text: #ffffff;
   --overlay: rgba(0, 0, 0, 0.35);
-  --card: rgba(255, 255, 255, 0.82);
   --shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
   --radius: 18px;
   --max-width: 1100px;
@@ -127,6 +126,10 @@ body {
   text-decoration: none;
   font-weight: 700;
   transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .btn:hover {
@@ -149,7 +152,9 @@ body {
 .details-section,
 .gallery-section,
 .schedule-section,
-.rsvp-section {
+.rsvp-section,
+.gift-section,
+.map-section {
   padding: 64px 0;
 }
 
@@ -243,6 +248,26 @@ body {
   color: var(--muted);
 }
 
+.gift-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.map-button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.map-embed {
+  width: 100%;
+  min-height: 360px;
+  border: 0;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
 .rsvp-form {
   display: grid;
   gap: 14px;
@@ -273,7 +298,7 @@ body {
   font-weight: 700;
 }
 
-/* ===== LAYOUT 1: CLASSIC ===== */
+/* LAYOUTS */
 body.layout-classic .gallery {
   grid-template-columns: repeat(3, 1fr);
 }
@@ -282,7 +307,6 @@ body.layout-classic .gallery img {
   height: 320px;
 }
 
-/* ===== LAYOUT 2: SPLIT ===== */
 body.layout-split .hero {
   min-height: 78vh;
 }
@@ -316,9 +340,8 @@ body.layout-split .gallery img:not(:first-child) {
   height: 242px;
 }
 
-/* ===== LAYOUT 3: TIMELINE ===== */
 body.layout-timeline .countdown-section {
-  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.02));
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.02));
 }
 
 body.layout-timeline .gallery {
@@ -360,7 +383,6 @@ body.layout-timeline .schedule-item::before {
   background: var(--primary);
 }
 
-/* ===== LAYOUT 4: MINIMAL ===== */
 body.layout-minimal .hero {
   min-height: 72vh;
 }
@@ -385,7 +407,95 @@ body.layout-minimal .schedule-item {
   border-radius: 12px;
 }
 
-/* ===== RESPONSIVE ===== */
+/* COMPACT */
+body.layout-compact .hero {
+  min-height: auto;
+  padding: 32px 0;
+}
+
+body.layout-compact .hero-content {
+  padding: 36px 0;
+}
+
+body.layout-compact .countdown-section,
+body.layout-compact .details-section,
+body.layout-compact .gallery-section,
+body.layout-compact .schedule-section,
+body.layout-compact .rsvp-section,
+body.layout-compact .gift-section,
+body.layout-compact .map-section {
+  padding: 28px 0;
+}
+
+body.layout-compact .section-title {
+  font-size: 1.45rem;
+  margin-bottom: 16px;
+}
+
+body.layout-compact .title {
+  font-size: clamp(2rem, 7vw, 3.2rem);
+}
+
+body.layout-compact .subtitle {
+  font-size: 1rem;
+}
+
+body.layout-compact .countdown {
+  gap: 10px;
+}
+
+body.layout-compact .count-box {
+  padding: 16px 10px;
+  border-radius: 14px;
+}
+
+body.layout-compact .count-box span {
+  font-size: 1.8rem;
+}
+
+body.layout-compact .gallery {
+  grid-template-columns: 1fr;
+}
+
+body.layout-compact .gallery img {
+  height: 220px;
+}
+
+/* compact variants */
+body.compact-variant-1 .hero {
+  min-height: 100vh;
+}
+
+body.compact-variant-1 .hero-content {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+body.compact-variant-2 .hero {
+  min-height: 72vh;
+  align-items: end;
+}
+
+body.compact-variant-2 .hero-content {
+  background: rgba(0, 0, 0, 0.18);
+  padding: 24px;
+  border-radius: 18px;
+  margin-bottom: 20px;
+}
+
+body.compact-variant-3 .hero {
+  min-height: 84vh;
+}
+
+body.compact-variant-3 .hero .overlay {
+  background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.55));
+}
+
+body.compact-variant-3 .hero-actions {
+  flex-direction: column;
+}
+
+/* responsive */
 @media (max-width: 900px) {
   .countdown {
     grid-template-columns: repeat(2, 1fr);
@@ -439,5 +549,9 @@ body.layout-minimal .schedule-item {
   body.layout-classic .gallery img,
   body.layout-timeline .gallery img {
     height: 260px;
+  }
+
+  .map-embed {
+    min-height: 280px;
   }
 }
