@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invitación</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main id="app" class="app hidden">
+    <section id="hero" class="hero">
+      <div class="overlay"></div>
+      <div class="hero-content container">
+        <p id="eventTag" class="event-tag"></p>
+        <h1 id="title" class="title"></h1>
+        <p id="subtitle" class="subtitle"></p>
+
+        <div class="hero-actions">
+          <a id="locationBtn" class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">Ver ubicación</a>
+          <button id="musicBtn" class="btn btn-secondary" type="button">Reproducir música</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="countdown-section">
+      <div class="container">
+        <h2 class="section-title">Faltan</h2>
+        <div id="countdown" class="countdown">
+          <div class="count-box">
+            <span id="days">0</span>
+            <small>Días</small>
+          </div>
+          <div class="count-box">
+            <span id="hours">0</span>
+            <small>Horas</small>
+          </div>
+          <div class="count-box">
+            <span id="minutes">0</span>
+            <small>Minutos</small>
+          </div>
+          <div class="count-box">
+            <span id="seconds">0</span>
+            <small>Segundos</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="details-section">
+      <div class="container narrow">
+        <h2 class="section-title">Detalles</h2>
+        <p id="eventDateText" class="detail-line"></p>
+        <p id="eventPlace" class="detail-line"></p>
+        <p id="eventDescription" class="detail-description"></p>
+      </div>
+    </section>
+
+    <section class="gallery-section">
+      <div class="container">
+        <h2 class="section-title">Galería</h2>
+        <div id="gallery" class="gallery"></div>
+      </div>
+    </section>
+
+    <section class="rsvp-section">
+      <div class="container narrow">
+        <h2 class="section-title">Confirmar asistencia</h2>
+        <form id="rsvpForm" class="rsvp-form">
+          <input id="guestName" type="text" placeholder="Tu nombre" />
+          <select id="attendance">
+            <option value="yes">Sí asistiré</option>
+            <option value="no">No podré asistir</option>
+          </select>
+          <button type="submit" class="btn btn-primary">Enviar confirmación</button>
+        </form>
+        <p id="rsvpMessage" class="rsvp-message"></p>
+      </div>
+    </section>
+  </main>
+
+  <section id="statusScreen" class="status-screen">
+    <div class="status-box">
+      <h1 id="statusTitle">Cargando invitación...</h1>
+      <p id="statusText">Por favor espera un momento.</p>
+    </div>
+  </section>
+
+  <audio id="musicPlayer" loop></audio>
+
+  <script src="./script.js"></script>
+</body>
+</html>
