@@ -1,0 +1,97 @@
+{
+  "layout": "compact",
+  "layoutVariant": "compact-1",
+
+  "eventTypeLabel": "Boda",
+  "title": "Ana & Luis",
+  "subtitle": "Nos encantará compartir contigo este día tan especial.",
+
+  "eventDateISO": "2026-12-12T18:00:00",
+  "eventDateText": "12 de diciembre de 2026 · 6:00 PM",
+
+  "place": "Hacienda Los Olivos, Puebla",
+  "description": "Acompáñanos a celebrar nuestro amor en una noche llena de alegría, familia y momentos inolvidables.",
+
+  "assetsPath": "assets/master-demo",
+
+  "heroImage": "hero.jpg",
+
+  "hero": {
+    "image": "hero.jpg",
+    "position": "center center",
+    "size": "cover",
+    "repeat": "no-repeat",
+    "height": "100vh"
+  },
+
+  "locationUrl": "https://maps.google.com/?q=Puebla",
+  "mapDisplay": "embed",
+  "mapEmbedUrl": "https://www.google.com/maps?q=Puebla&output=embed",
+
+  "gallery": [
+    "gallery-1.jpg",
+    "gallery-2.jpg",
+    "gallery-3.jpg",
+    "gallery-4.jpg"
+  ],
+
+  "music": {
+    "enabled": true,
+    "file": "music.mp3"
+  },
+
+  "countdown": {
+    "enabled": true
+  },
+
+  "theme": {
+    "bg": "#fff8f4",
+    "surface": "#fffdfc",
+    "text": "#352d29",
+    "muted": "#766964",
+    "primary": "#c08b74",
+    "primaryContrast": "#ffffff",
+    "overlay": "rgba(53, 31, 22, 0.34)",
+    "heroText": "#ffffff"
+  },
+
+  "schedule": [
+    {
+      "time": "6:00 PM",
+      "title": "Ceremonia",
+      "description": "Recepción de invitados y ceremonia principal."
+    },
+    {
+      "time": "7:30 PM",
+      "title": "Cóctel",
+      "description": "Brindis y fotografías."
+    },
+    {
+      "time": "9:00 PM",
+      "title": "Cena y fiesta",
+      "description": "Cena, música y celebración."
+    }
+  ],
+
+  "giftRegistry": {
+    "liverpool": {
+      "url": "https://www.liverpool.com.mx",
+      "label": "Liverpool"
+    },
+    "palacio": {
+      "url": "https://www.elpalaciodehierro.com",
+      "label": "Palacio de Hierro"
+    },
+    "amazon": {
+      "url": "https://www.amazon.com.mx",
+      "label": "Amazon"
+    }
+  },
+
+  "rsvp": {
+    "phone": "522226763338",
+    "messageTemplate": "Hola, soy {name}. {attendance} a {eventTitle}, el {eventDateText} en {place}."
+  },
+
+  "customScript": "custom.js"
+}
