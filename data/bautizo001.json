@@ -7,13 +7,11 @@
   "eventDateText": "20 de septiembre de 2026 · 12:00 PM",
   "place": "Parroquia San José, Puebla",
   "description": "Nos encantará compartir contigo este día lleno de fe y alegría.",
-  "locationUrl": "https://maps.google.com",
+  "mapDisplay": "embed",
+  "mapEmbedUrl": "https://www.google.com/maps?q=Puebla&output=embed",
   "assetsPath": "assets/bautizo001",
   "heroImage": "hero.jpg",
-  "gallery": [
-    "gallery-1.jpg",
-    "gallery-2.jpg"
-  ],
+  "gallery": ["gallery-1.jpg", "gallery-2.jpg"],
   "music": {
     "enabled": true,
     "file": "music.mp3"
