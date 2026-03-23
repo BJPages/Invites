@@ -1,0 +1,33 @@
+{
+  "layout": "compact",
+  "layoutVariant": "compact-2",
+  "eventTypeLabel": "Cumpleaños",
+  "title": "Leo cumple 3",
+  "subtitle": "Acompáñanos a celebrar un día lleno de color y alegría.",
+  "eventDateISO": "2026-05-03T13:00:00",
+  "eventDateText": "3 de mayo de 2026 · 1:00 PM",
+  "place": "Jardín de fiestas Peques",
+  "assetsPath": "assets/compact002",
+  "heroImage": "hero.jpg",
+  "music": {
+    "enabled": true,
+    "file": "music.mp3"
+  },
+  "countdown": {
+    "enabled": true
+  },
+  "theme": {
+    "bg": "#fffdf5",
+    "surface": "#ffffff",
+    "text": "#4b3f20",
+    "muted": "#8d7e51",
+    "primary": "#ffb703",
+    "primaryContrast": "#3b2f10",
+    "overlay": "rgba(56, 34, 0, 0.22)",
+    "heroText": "#ffffff"
+  },
+  "rsvp": {
+    "phone": "522226763338",
+    "messageTemplate": "Hola, soy {name}. {attendance} a {eventTitle}."
+  }
+}
