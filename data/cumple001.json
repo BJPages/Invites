@@ -1,0 +1,20 @@
+{
+  "template": "birthday",
+  "eventTypeLabel": "Cumpleaños",
+  "title": "Cumple de Carlos",
+  "subtitle": "Ven a celebrar conmigo una noche llena de música, pastel y diversión.",
+  "eventDateISO": "2026-08-05T17:00:00",
+  "eventDateText": "5 de agosto de 2026 · 5:00 PM",
+  "place": "Salón Fiesta Kids, Puebla",
+  "description": "Prepárate para una tarde increíble con juegos, sorpresas y muchas risas.",
+  "locationUrl": "https://maps.google.com",
+  "assetsPath": "assets/cumple001",
+  "heroImage": "hero.jpg",
+  "gallery": [
+    "gallery-1.jpg"
+  ],
+  "music": {
+    "enabled": true,
+    "file": "music.mp3"
+  }
+}

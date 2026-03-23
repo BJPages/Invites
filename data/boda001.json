@@ -1,0 +1,21 @@
+{
+  "template": "wedding",
+  "eventTypeLabel": "Boda",
+  "title": "Ana & Luis",
+  "subtitle": "Nos encantará compartir contigo este día tan especial.",
+  "eventDateISO": "2026-06-12T18:00:00",
+  "eventDateText": "12 de junio de 2026 · 6:00 PM",
+  "place": "Hacienda Los Olivos, Puebla",
+  "description": "Acompáñanos a celebrar nuestro amor en una noche llena de alegría, familia y momentos inolvidables.",
+  "locationUrl": "https://maps.google.com",
+  "assetsPath": "assets/boda001",
+  "heroImage": "hero.jpg",
+  "gallery": [
+    "gallery-1.jpg",
+    "gallery-2.jpg"
+  ],
+  "music": {
+    "enabled": true,
+    "file": "music.mp3"
+  }
+}
