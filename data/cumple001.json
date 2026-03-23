@@ -1,5 +1,5 @@
 {
-  "template": "birthday",
+  "layout": "split",
   "eventTypeLabel": "Cumpleaños",
   "title": "Cumple de Carlos",
   "subtitle": "Ven a celebrar conmigo una noche llena de música, pastel y diversión.",
@@ -11,10 +11,43 @@
   "assetsPath": "assets/cumple001",
   "heroImage": "hero.jpg",
   "gallery": [
-    "gallery-1.jpg"
+    "gallery-1.jpg",
+    "gallery-2.jpg",
+    "gallery-3.jpg"
   ],
   "music": {
     "enabled": true,
     "file": "music.mp3"
+  },
+  "theme": {
+    "bg": "#fff7fb",
+    "surface": "#ffffff",
+    "text": "#302436",
+    "muted": "#74667e",
+    "primary": "#df4f93",
+    "primaryContrast": "#ffffff",
+    "overlay": "rgba(31, 8, 35, 0.36)",
+    "heroText": "#ffffff"
+  },
+  "schedule": [
+    {
+      "time": "5:00 PM",
+      "title": "Bienvenida",
+      "description": "Llegada de invitados."
+    },
+    {
+      "time": "6:00 PM",
+      "title": "Juegos y dinámica",
+      "description": "Diversión para todos."
+    },
+    {
+      "time": "7:30 PM",
+      "title": "Pastel",
+      "description": "Momento del pastel y fotos."
+    }
+  ],
+  "rsvp": {
+    "phone": "522226763338",
+    "messageTemplate": "Hola, soy {name}. {attendance} al evento {eventTitle}. Nos vemos el {eventDateText} en {place}."
   }
 }
