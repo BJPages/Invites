@@ -70,6 +70,10 @@
       const config = await response.json();
       validateConfig(config);
 
+      if (!handleAccess(config)) {
+        return;
+      }
+
       currentConfig = config;
       window.InvitesConfig = config;
 
@@ -111,6 +115,35 @@
     if (!config.heroImage && !config.hero?.image) {
       throw new Error("Falta el campo requerido: heroImage o hero.image");
     }
+  }
+
+  function handleAccess(config) {
+    if (!config.access) {
+      return true;
+    }
+
+    const expectedPassword = String(config.access.password || "");
+    const promptTitle = config.access.title || "Acceso restringido";
+    const promptMessage = config.access.message || "Ingresa la clave para continuar.";
+
+    if (!expectedPassword) {
+      showError("Configuración inválida", "La invitación privada no tiene password definido.");
+      return false;
+    }
+
+    const provided = window.prompt(`${promptTitle}\n\n${promptMessage}`, "");
+
+    if (provided === null) {
+      showError("Acceso cancelado", "No se ingresó ninguna clave.");
+      return false;
+    }
+
+    if (String(provided) !== expectedPassword) {
+      showError("Acceso denegado", "La clave es incorrecta.");
+      return false;
+    }
+
+    return true;
   }
 
   function render(config) {
