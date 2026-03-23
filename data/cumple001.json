@@ -8,16 +8,16 @@
   "place": "Salón Fiesta Kids, Puebla",
   "description": "Prepárate para una tarde increíble con juegos, sorpresas y muchas risas.",
   "locationUrl": "https://maps.google.com",
+  "mapDisplay": "button",
   "assetsPath": "assets/cumple001",
   "heroImage": "hero.jpg",
-  "gallery": [
-    "gallery-1.jpg",
-    "gallery-2.jpg",
-    "gallery-3.jpg"
-  ],
+  "gallery": ["gallery-1.jpg", "gallery-2.jpg", "gallery-3.jpg"],
   "music": {
     "enabled": true,
     "file": "music.mp3"
+  },
+  "countdown": {
+    "enabled": true
   },
   "theme": {
     "bg": "#fff7fb",
