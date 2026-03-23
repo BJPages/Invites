@@ -71,11 +71,13 @@
       validateConfig(config);
 
       currentConfig = config;
+      window.InvitesConfig = config;
 
       render(config);
       initCountdown(config);
       initMusic(config);
       initWhatsAppHelp(config);
+      await loadCustomScript(config);
 
       hideStatus();
     } catch (error) {
@@ -98,16 +100,23 @@
   }
 
   function validateConfig(config) {
-    const required = ["layout", "title", "assetsPath", "heroImage"];
+    const required = ["layout", "title", "assetsPath"];
+
     for (const key of required) {
       if (!config[key]) {
         throw new Error(`Falta el campo requerido: ${key}`);
       }
     }
+
+    if (!config.heroImage && !config.hero?.image) {
+      throw new Error("Falta el campo requerido: heroImage o hero.image");
+    }
   }
 
   function render(config) {
     resetBodyClasses();
+    resetHeroStyles();
+
     applyLayout(config);
     applyTheme(config.theme || {});
     renderHero(config);
@@ -121,6 +130,14 @@
 
   function resetBodyClasses() {
     document.body.className = "";
+  }
+
+  function resetHeroStyles() {
+    heroSection.style.backgroundImage = "";
+    heroSection.style.backgroundPosition = "";
+    heroSection.style.backgroundSize = "";
+    heroSection.style.backgroundRepeat = "";
+    heroSection.style.minHeight = "";
   }
 
   function applyLayout(config) {
@@ -151,7 +168,16 @@
   }
 
   function renderHero(config) {
-    heroSection.style.backgroundImage = `url('${joinPath(config.assetsPath, config.heroImage)}')`;
+    const heroImage = config.hero?.image || config.heroImage;
+
+    heroSection.style.backgroundImage = `url('${joinPath(config.assetsPath, heroImage)}')`;
+    heroSection.style.backgroundPosition = config.hero?.position || "center center";
+    heroSection.style.backgroundSize = config.hero?.size || "cover";
+    heroSection.style.backgroundRepeat = config.hero?.repeat || "no-repeat";
+
+    if (config.hero?.height) {
+      heroSection.style.minHeight = config.hero.height;
+    }
 
     toggleText(eventTag, config.eventTypeLabel);
     toggleText(title, config.title);
@@ -210,10 +236,10 @@
       }
 
       if (item.title) {
-        const t = document.createElement("div");
-        t.className = "schedule-title";
-        t.textContent = item.title;
-        box.appendChild(t);
+        const scheduleTitle = document.createElement("div");
+        scheduleTitle.className = "schedule-title";
+        scheduleTitle.textContent = item.title;
+        box.appendChild(scheduleTitle);
       }
 
       if (item.description) {
@@ -223,10 +249,12 @@
         box.appendChild(desc);
       }
 
-      scheduleList.appendChild(box);
+      if (box.children.length > 0) {
+        scheduleList.appendChild(box);
+      }
     });
 
-    toggleSection(scheduleSection, true);
+    toggleSection(scheduleSection, scheduleList.children.length > 0);
   }
 
   function renderGallery(config) {
@@ -266,13 +294,14 @@
     Object.values(registry).forEach((item) => {
       if (!item || !item.url || !item.label) return;
 
-      const a = document.createElement("a");
-      a.className = "btn btn-primary";
-      a.href = item.url;
-      a.target = "_blank";
-      a.rel = "noopener noreferrer";
-      a.textContent = item.label;
-      giftRegistryList.appendChild(a);
+      const link = document.createElement("a");
+      link.className = "btn btn-primary";
+      link.href = item.url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = item.label;
+
+      giftRegistryList.appendChild(link);
     });
 
     toggleSection(giftRegistrySection, giftRegistryList.children.length > 0);
@@ -306,6 +335,7 @@
 
     if (!hasRsvp) {
       rsvpHelp.classList.add("hidden");
+      rsvpMessage.textContent = "";
       return;
     }
 
@@ -433,6 +463,34 @@
     rsvpMessage.textContent = "Se abrió WhatsApp para enviar tu confirmación.";
   });
 
+  async function loadCustomScript(config) {
+    if (!config.customScript) return;
+
+    const scriptPath = joinPath(config.assetsPath, config.customScript);
+
+    return new Promise((resolve, reject) => {
+      const existing = document.querySelector(
+        `script[data-custom-script="${scriptPath}"]`
+      );
+
+      if (existing) {
+        resolve();
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.src = scriptPath;
+      script.defer = true;
+      script.dataset.customScript = scriptPath;
+
+      script.onload = () => resolve();
+      script.onerror = () =>
+        reject(new Error(`No se pudo cargar el script custom: ${scriptPath}`));
+
+      document.body.appendChild(script);
+    });
+  }
+
   function buildWhatsAppMessage(template, data) {
     return template
       .replaceAll("{name}", data.name || "")
@@ -463,14 +521,18 @@
       el.classList.remove("hidden");
       return true;
     }
+
     el.textContent = "";
     el.classList.add("hidden");
     return false;
   }
 
   function toggleSection(section, show) {
-    if (show) section.classList.remove("hidden");
-    else section.classList.add("hidden");
+    if (show) {
+      section.classList.remove("hidden");
+    } else {
+      section.classList.add("hidden");
+    }
   }
 
   function setStatus(titleText, descriptionText) {
