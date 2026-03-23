@@ -1,0 +1,49 @@
+{
+  "layout": "minimal",
+  "eventTypeLabel": "Evento",
+  "title": "Opening Night",
+  "subtitle": "Una noche para celebrar, conectar y disfrutar.",
+  "eventDateISO": "2026-11-14T20:00:00",
+  "eventDateText": "14 de noviembre de 2026 · 8:00 PM",
+  "place": "Terraza Central, Puebla",
+  "description": "Te esperamos para vivir una experiencia elegante y memorable.",
+  "locationUrl": "https://maps.google.com",
+  "assetsPath": "assets/evento001",
+  "heroImage": "hero.jpg",
+  "gallery": [
+    "gallery-1.jpg",
+    "gallery-2.jpg",
+    "gallery-3.jpg",
+    "gallery-4.jpg"
+  ],
+  "music": {
+    "enabled": true,
+    "file": "music.mp3"
+  },
+  "theme": {
+    "bg": "#f5f5f7",
+    "surface": "#ffffff",
+    "text": "#20232a",
+    "muted": "#6a6f78",
+    "primary": "#111827",
+    "primaryContrast": "#ffffff",
+    "overlay": "rgba(0, 0, 0, 0.42)",
+    "heroText": "#ffffff"
+  },
+  "schedule": [
+    {
+      "time": "8:00 PM",
+      "title": "Recepción",
+      "description": "Bienvenida y primer brindis."
+    },
+    {
+      "time": "9:00 PM",
+      "title": "Presentación",
+      "description": "Inicio del evento principal."
+    }
+  ],
+  "rsvp": {
+    "phone": "522226763338",
+    "messageTemplate": "Hola, soy {name}. {attendance} a {eventTitle}."
+  }
+}
