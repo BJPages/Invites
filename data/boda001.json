@@ -46,5 +46,11 @@
     "phone": "522226763338",
     "messageTemplate": "Hola, soy {name}. {attendance} a {eventTitle}, el {eventDateText} en {place}."
   },
-  "customScript": "custom.js"
+  "customScript": "custom.js",
+
+  "access": {
+    "password": "1234",
+    "title": "Invitación privada",
+    "message": "Ingresa la clave para ver esta invitación."
+  }
 }
