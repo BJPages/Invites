@@ -2,17 +2,17 @@
   "layout": "compact",
   "layoutVariant": "compact-1",
 
-  "eventTypeLabel": "Boda",
-  "title": "Ana & Luis",
-  "subtitle": "Nos encantará compartir contigo este día tan especial.",
+  "eventTypeLabel": "Tipo de evento",
+  "title": "Título del evento",
+  "subtitle": "Subtítulo del evento",
 
   "eventDateISO": "2026-12-12T18:00:00",
   "eventDateText": "12 de diciembre de 2026 · 6:00 PM",
 
-  "place": "Hacienda Los Olivos, Puebla",
-  "description": "Acompáñanos a celebrar nuestro amor en una noche llena de alegría, familia y momentos inolvidables.",
+  "place": "Lugar del evento",
+  "description": "Descripción del evento",
 
-  "assetsPath": "assets/master-demo",
+  "assetsPath": "assets/REPLACE_ME",
 
   "heroImage": "hero.jpg",
 
@@ -91,6 +91,12 @@
   "rsvp": {
     "phone": "522226763338",
     "messageTemplate": "Hola, soy {name}. {attendance} a {eventTitle}, el {eventDateText} en {place}."
+  },
+
+  "access": {
+    "password": "1234",
+    "title": "Invitación privada",
+    "message": "Ingresa la clave para ver esta invitación."
   },
 
   "customScript": "custom.js"
