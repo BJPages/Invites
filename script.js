@@ -4,26 +4,42 @@
   const statusScreen = document.getElementById("statusScreen");
   const app = document.getElementById("app");
 
-  const hero = document.getElementById("hero");
+  const heroSection = document.getElementById("heroSection");
   const eventTag = document.getElementById("eventTag");
   const title = document.getElementById("title");
   const subtitle = document.getElementById("subtitle");
-  const eventDateText = document.getElementById("eventDateText");
-  const eventPlace = document.getElementById("eventPlace");
-  const eventDescription = document.getElementById("eventDescription");
+  const heroActions = document.getElementById("heroActions");
   const locationBtn = document.getElementById("locationBtn");
-  const gallery = document.getElementById("gallery");
   const musicBtn = document.getElementById("musicBtn");
   const musicPlayer = document.getElementById("musicPlayer");
 
+  const countdownSection = document.getElementById("countdownSection");
   const daysEl = document.getElementById("days");
   const hoursEl = document.getElementById("hours");
   const minutesEl = document.getElementById("minutes");
   const secondsEl = document.getElementById("seconds");
 
+  const detailsSection = document.getElementById("detailsSection");
+  const eventDateText = document.getElementById("eventDateText");
+  const eventPlace = document.getElementById("eventPlace");
+  const eventDescription = document.getElementById("eventDescription");
+
   const scheduleSection = document.getElementById("scheduleSection");
   const scheduleList = document.getElementById("scheduleList");
 
+  const gallerySection = document.getElementById("gallerySection");
+  const gallery = document.getElementById("gallery");
+
+  const giftRegistrySection = document.getElementById("giftRegistrySection");
+  const giftRegistryList = document.getElementById("giftRegistryList");
+
+  const mapSection = document.getElementById("mapSection");
+  const mapButtonWrapper = document.getElementById("mapButtonWrapper");
+  const mapOpenBtn = document.getElementById("mapOpenBtn");
+  const mapEmbedWrapper = document.getElementById("mapEmbedWrapper");
+  const mapEmbed = document.getElementById("mapEmbed");
+
+  const rsvpSection = document.getElementById("rsvpSection");
   const rsvpForm = document.getElementById("rsvpForm");
   const guestName = document.getElementById("guestName");
   const attendance = document.getElementById("attendance");
@@ -31,6 +47,7 @@
   const rsvpMessage = document.getElementById("rsvpMessage");
 
   let countdownTimer = null;
+  let currentConfig = null;
 
   init();
 
@@ -46,7 +63,6 @@
       setStatus("Cargando invitación...", "Espera un momento por favor.");
 
       const response = await fetch(`data/${id}.json`, { cache: "no-store" });
-
       if (!response.ok) {
         throw new Error("No se encontró la invitación.");
       }
@@ -54,8 +70,10 @@
       const config = await response.json();
       validateConfig(config);
 
+      currentConfig = config;
+
       render(config);
-      initCountdown(config.eventDateISO);
+      initCountdown(config);
       initMusic(config);
       initWhatsAppHelp(config);
 
@@ -66,37 +84,21 @@
   }
 
   function getInvitationId() {
-    let id = null;
-
     const params = new URLSearchParams(window.location.search);
-    id = params.get("id");
+    let id = params.get("id");
 
     if (!id) {
       let path = window.location.pathname;
       path = path.replace("/Invites/", "");
       path = path.replace(/^\/|\/$/g, "");
-      if (path) {
-        id = path;
-      }
+      if (path) id = path;
     }
 
     return id;
   }
 
   function validateConfig(config) {
-    const required = [
-      "layout",
-      "eventTypeLabel",
-      "title",
-      "subtitle",
-      "eventDateISO",
-      "eventDateText",
-      "place",
-      "description",
-      "assetsPath",
-      "heroImage"
-    ];
-
+    const required = ["layout", "title", "assetsPath", "heroImage"];
     for (const key of required) {
       if (!config[key]) {
         throw new Error(`Falta el campo requerido: ${key}`);
@@ -106,32 +108,29 @@
 
   function render(config) {
     resetBodyClasses();
-    document.body.classList.add(`layout-${config.layout || "classic"}`);
-
+    applyLayout(config);
     applyTheme(config.theme || {});
-
-    eventTag.textContent = config.eventTypeLabel || "";
-    title.textContent = config.title || "";
-    subtitle.textContent = config.subtitle || "";
-    eventDateText.textContent = config.eventDateText || "";
-    eventPlace.textContent = config.place || "";
-    eventDescription.textContent = config.description || "";
-
-    hero.style.backgroundImage = `url('${joinPath(config.assetsPath, config.heroImage)}')`;
-
-    if (config.locationUrl) {
-      locationBtn.href = config.locationUrl;
-      locationBtn.style.display = "";
-    } else {
-      locationBtn.style.display = "none";
-    }
-
-    renderGallery(config);
+    renderHero(config);
+    renderDetails(config);
     renderSchedule(config);
+    renderGallery(config);
+    renderGiftRegistry(config);
+    renderMap(config);
+    renderRsvp(config);
   }
 
   function resetBodyClasses() {
     document.body.className = "";
+  }
+
+  function applyLayout(config) {
+    const layout = config.layout || "classic";
+    document.body.classList.add(`layout-${layout}`);
+
+    if (layout === "compact") {
+      const variant = config.layoutVariant || "compact-1";
+      document.body.classList.add(variant);
+    }
   }
 
   function applyTheme(theme) {
@@ -151,13 +150,91 @@
     }
   }
 
+  function renderHero(config) {
+    heroSection.style.backgroundImage = `url('${joinPath(config.assetsPath, config.heroImage)}')`;
+
+    toggleText(eventTag, config.eventTypeLabel);
+    toggleText(title, config.title);
+    toggleText(subtitle, config.subtitle);
+
+    let hasAction = false;
+
+    if (config.locationUrl && config.mapDisplay === "button") {
+      locationBtn.href = config.locationUrl;
+      locationBtn.classList.remove("hidden");
+      hasAction = true;
+    } else {
+      locationBtn.classList.add("hidden");
+    }
+
+    if (config.music && config.music.enabled === true && config.music.file) {
+      musicBtn.classList.remove("hidden");
+      hasAction = true;
+    } else {
+      musicBtn.classList.add("hidden");
+    }
+
+    if (hasAction) {
+      heroActions.classList.remove("hidden");
+    } else {
+      heroActions.classList.add("hidden");
+    }
+  }
+
+  function renderDetails(config) {
+    const hasDate = toggleText(eventDateText, config.eventDateText);
+    const hasPlace = toggleText(eventPlace, config.place);
+    const hasDescription = toggleText(eventDescription, config.description);
+
+    toggleSection(detailsSection, hasDate || hasPlace || hasDescription);
+  }
+
+  function renderSchedule(config) {
+    scheduleList.innerHTML = "";
+    const items = Array.isArray(config.schedule) ? config.schedule : [];
+
+    if (!items.length) {
+      toggleSection(scheduleSection, false);
+      return;
+    }
+
+    items.forEach((item) => {
+      const box = document.createElement("div");
+      box.className = "schedule-item";
+
+      if (item.time) {
+        const time = document.createElement("div");
+        time.className = "schedule-time";
+        time.textContent = item.time;
+        box.appendChild(time);
+      }
+
+      if (item.title) {
+        const t = document.createElement("div");
+        t.className = "schedule-title";
+        t.textContent = item.title;
+        box.appendChild(t);
+      }
+
+      if (item.description) {
+        const desc = document.createElement("div");
+        desc.className = "schedule-desc";
+        desc.textContent = item.description;
+        box.appendChild(desc);
+      }
+
+      scheduleList.appendChild(box);
+    });
+
+    toggleSection(scheduleSection, true);
+  }
+
   function renderGallery(config) {
     gallery.innerHTML = "";
-
     const items = Array.isArray(config.gallery) ? config.gallery : [];
 
-    if (items.length === 0) {
-      gallery.innerHTML = "<p>No hay imágenes disponibles.</p>";
+    if (!items.length) {
+      toggleSection(gallerySection, false);
       return;
     }
 
@@ -166,57 +243,96 @@
       img.src = joinPath(config.assetsPath, fileName);
       img.alt = config.title || "Invitación";
       img.addEventListener("error", () => {
-        img.style.display = "none";
+        img.remove();
+        if (!gallery.children.length) {
+          toggleSection(gallerySection, false);
+        }
       });
       gallery.appendChild(img);
     });
+
+    toggleSection(gallerySection, true);
   }
 
-  function renderSchedule(config) {
-    scheduleList.innerHTML = "";
+  function renderGiftRegistry(config) {
+    giftRegistryList.innerHTML = "";
+    const registry = config.giftRegistry;
 
-    if (!Array.isArray(config.schedule) || config.schedule.length === 0) {
-      scheduleSection.classList.add("hidden");
+    if (!registry || typeof registry !== "object" || !Object.keys(registry).length) {
+      toggleSection(giftRegistrySection, false);
       return;
     }
 
-    scheduleSection.classList.remove("hidden");
+    Object.values(registry).forEach((item) => {
+      if (!item || !item.url || !item.label) return;
 
-    config.schedule.forEach((item) => {
-      const box = document.createElement("div");
-      box.className = "schedule-item";
-
-      const time = document.createElement("div");
-      time.className = "schedule-time";
-      time.textContent = item.time || "";
-
-      const title = document.createElement("div");
-      title.className = "schedule-title";
-      title.textContent = item.title || "";
-
-      const desc = document.createElement("div");
-      desc.className = "schedule-desc";
-      desc.textContent = item.description || "";
-
-      box.appendChild(time);
-      box.appendChild(title);
-      box.appendChild(desc);
-
-      scheduleList.appendChild(box);
+      const a = document.createElement("a");
+      a.className = "btn btn-primary";
+      a.href = item.url;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.textContent = item.label;
+      giftRegistryList.appendChild(a);
     });
+
+    toggleSection(giftRegistrySection, giftRegistryList.children.length > 0);
   }
 
-  function initCountdown(dateISO) {
+  function renderMap(config) {
+    mapOpenBtn.href = "#";
+    mapEmbed.src = "";
+
+    mapButtonWrapper.classList.add("hidden");
+    mapEmbedWrapper.classList.add("hidden");
+    toggleSection(mapSection, false);
+
+    if (config.mapDisplay === "embed" && config.mapEmbedUrl) {
+      mapEmbed.src = config.mapEmbedUrl;
+      mapEmbedWrapper.classList.remove("hidden");
+      toggleSection(mapSection, true);
+      return;
+    }
+
+    if (config.mapDisplay === "button" && config.locationUrl) {
+      mapOpenBtn.href = config.locationUrl;
+      mapButtonWrapper.classList.remove("hidden");
+      toggleSection(mapSection, true);
+    }
+  }
+
+  function renderRsvp(config) {
+    const hasRsvp = !!(config.rsvp && config.rsvp.phone);
+    toggleSection(rsvpSection, hasRsvp);
+
+    if (!hasRsvp) {
+      rsvpHelp.classList.add("hidden");
+      return;
+    }
+
+    const pretty = formatPhoneForDisplay(config.rsvp.phone);
+    rsvpHelp.textContent = `Tu confirmación será enviada por WhatsApp al ${pretty}.`;
+    rsvpHelp.classList.remove("hidden");
+  }
+
+  function initCountdown(config) {
     if (countdownTimer) {
       clearInterval(countdownTimer);
     }
 
-    const target = new Date(dateISO).getTime();
+    const enabled = config.countdown?.enabled !== false && !!config.eventDateISO;
 
-    if (Number.isNaN(target)) {
-      setCountdownValues(0, 0, 0, 0);
+    if (!enabled) {
+      toggleSection(countdownSection, false);
       return;
     }
+
+    const target = new Date(config.eventDateISO).getTime();
+    if (Number.isNaN(target)) {
+      toggleSection(countdownSection, false);
+      return;
+    }
+
+    toggleSection(countdownSection, true);
 
     const tick = () => {
       const now = Date.now();
@@ -252,7 +368,6 @@
     musicPlayer.removeAttribute("src");
     musicPlayer.load();
 
-    musicBtn.style.display = "none";
     musicBtn.textContent = "Reproducir música";
     musicBtn.onclick = null;
 
@@ -261,7 +376,6 @@
     }
 
     musicPlayer.src = joinPath(config.assetsPath, config.music.file);
-    musicBtn.style.display = "";
 
     musicBtn.onclick = async () => {
       if (musicPlayer.paused) {
@@ -279,46 +393,44 @@
   }
 
   function initWhatsAppHelp(config) {
-    const phone = config.rsvp?.phone || "522226763338";
-    const pretty = formatPhoneForDisplay(phone);
+    if (!config.rsvp || !config.rsvp.phone) return;
+    const pretty = formatPhoneForDisplay(config.rsvp.phone);
     rsvpHelp.textContent = `Tu confirmación será enviada por WhatsApp al ${pretty}.`;
+    rsvpHelp.classList.remove("hidden");
   }
 
   rsvpForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
+    if (!currentConfig?.rsvp?.phone) {
+      rsvpMessage.textContent = "La confirmación no está disponible para esta invitación.";
+      return;
+    }
+
     const name = guestName.value.trim();
     const reply = attendance.value;
-    const id = getInvitationId();
 
     if (!name) {
       rsvpMessage.textContent = "Por favor escribe tu nombre.";
       return;
     }
 
-    fetch(`data/${id}.json`, { cache: "no-store" })
-      .then((response) => response.json())
-      .then((config) => {
-        const phone = normalizePhone(config.rsvp?.phone || "522226763338");
-        const template =
-          config.rsvp?.messageTemplate ||
-          "Hola, soy {name}. {attendance} a {eventTitle}.";
-        const message = buildWhatsAppMessage(template, {
-          name,
-          attendance: reply,
-          eventTitle: config.title || "la invitación",
-          eventDateText: config.eventDateText || "",
-          place: config.place || ""
-        });
+    const phone = normalizePhone(currentConfig.rsvp.phone);
+    const template =
+      currentConfig.rsvp.messageTemplate ||
+      "Hola, soy {name}. {attendance} a {eventTitle}.";
 
-        const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-        window.open(url, "_blank");
+    const message = buildWhatsAppMessage(template, {
+      name,
+      attendance: reply,
+      eventTitle: currentConfig.title || "la invitación",
+      eventDateText: currentConfig.eventDateText || "",
+      place: currentConfig.place || ""
+    });
 
-        rsvpMessage.textContent = "Se abrió WhatsApp para enviar tu confirmación.";
-      })
-      .catch(() => {
-        rsvpMessage.textContent = "No fue posible abrir WhatsApp en este momento.";
-      });
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+    rsvpMessage.textContent = "Se abrió WhatsApp para enviar tu confirmación.";
   });
 
   function buildWhatsAppMessage(template, data) {
@@ -336,17 +448,29 @@
 
   function formatPhoneForDisplay(phone) {
     const digits = normalizePhone(phone);
-
-    if (digits === "522226763338") {
-      return "222 676 3338";
-    }
-
+    if (digits === "522226763338") return "222 676 3338";
     return digits;
   }
 
   function joinPath(base, fileName) {
     const normalizedBase = base.endsWith("/") ? base : `${base}/`;
     return `${normalizedBase}${fileName}`;
+  }
+
+  function toggleText(el, value) {
+    if (value) {
+      el.textContent = value;
+      el.classList.remove("hidden");
+      return true;
+    }
+    el.textContent = "";
+    el.classList.add("hidden");
+    return false;
+  }
+
+  function toggleSection(section, show) {
+    if (show) section.classList.remove("hidden");
+    else section.classList.add("hidden");
   }
 
   function setStatus(titleText, descriptionText) {
