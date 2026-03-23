@@ -1,0 +1,47 @@
+{
+  "layout": "timeline",
+  "eventTypeLabel": "Bautizo",
+  "title": "Bautizo de Mateo",
+  "subtitle": "Acompáñanos a celebrar este momento tan especial.",
+  "eventDateISO": "2026-09-20T12:00:00",
+  "eventDateText": "20 de septiembre de 2026 · 12:00 PM",
+  "place": "Parroquia San José, Puebla",
+  "description": "Nos encantará compartir contigo este día lleno de fe y alegría.",
+  "locationUrl": "https://maps.google.com",
+  "assetsPath": "assets/bautizo001",
+  "heroImage": "hero.jpg",
+  "gallery": [
+    "gallery-1.jpg",
+    "gallery-2.jpg"
+  ],
+  "music": {
+    "enabled": true,
+    "file": "music.mp3"
+  },
+  "theme": {
+    "bg": "#f4f9ff",
+    "surface": "#ffffff",
+    "text": "#2c3742",
+    "muted": "#6c7a86",
+    "primary": "#7aa9d6",
+    "primaryContrast": "#ffffff",
+    "overlay": "rgba(17, 35, 58, 0.26)",
+    "heroText": "#ffffff"
+  },
+  "schedule": [
+    {
+      "time": "12:00 PM",
+      "title": "Ceremonia",
+      "description": "Inicio de la ceremonia religiosa."
+    },
+    {
+      "time": "1:30 PM",
+      "title": "Comida",
+      "description": "Recepción con familiares y amigos."
+    }
+  ],
+  "rsvp": {
+    "phone": "522226763338",
+    "messageTemplate": "Hola, soy {name}. {attendance} al {eventTitle}. Gracias."
+  }
+}
