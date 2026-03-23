@@ -48,6 +48,7 @@
 
   let countdownTimer = null;
   let currentConfig = null;
+  let statusActionButton = null;
 
   init();
 
@@ -61,6 +62,7 @@
 
     try {
       setStatus("Cargando invitación...", "Espera un momento por favor.");
+      removeStatusActionButton();
 
       const response = await fetch(`data/${id}.json`, { cache: "no-store" });
       if (!response.ok) {
@@ -70,22 +72,40 @@
       const config = await response.json();
       validateConfig(config);
 
-      if (!handleAccess(config)) {
+      const accessResult = handleAccess(config);
+      if (!accessResult.allowed) {
         return;
       }
 
       currentConfig = config;
       window.InvitesConfig = config;
 
-      render(config);
-      initCountdown(config);
-      initMusic(config);
-      initWhatsAppHelp(config);
-      await loadCustomScript(config);
+      const mustUseOpenGate = hasMusic(config) && !config.access;
 
-      hideStatus();
+      if (mustUseOpenGate) {
+        showOpenInvitationGate(config);
+        return;
+      }
+
+      await finalizeInvitationLoad(config, {
+        attemptAutoplay: accessResult.autoplayGranted
+      });
     } catch (error) {
       showError("No fue posible cargar la invitación", error.message);
+    }
+  }
+
+  async function finalizeInvitationLoad(config, options = {}) {
+    render(config);
+    initCountdown(config);
+    initMusic(config);
+    initWhatsAppHelp(config);
+    await loadCustomScript(config);
+
+    hideStatus();
+
+    if (options.attemptAutoplay) {
+      await tryAutoplayMusic(config);
     }
   }
 
@@ -119,7 +139,7 @@
 
   function handleAccess(config) {
     if (!config.access) {
-      return true;
+      return { allowed: true, autoplayGranted: false };
     }
 
     const expectedPassword = String(config.access.password || "");
@@ -128,22 +148,101 @@
 
     if (!expectedPassword) {
       showError("Configuración inválida", "La invitación privada no tiene password definido.");
-      return false;
+      return { allowed: false, autoplayGranted: false };
     }
 
     const provided = window.prompt(`${promptTitle}\n\n${promptMessage}`, "");
 
     if (provided === null) {
       showError("Acceso cancelado", "No se ingresó ninguna clave.");
-      return false;
+      return { allowed: false, autoplayGranted: false };
     }
 
     if (String(provided) !== expectedPassword) {
       showError("Acceso denegado", "La clave es incorrecta.");
-      return false;
+      return { allowed: false, autoplayGranted: false };
     }
 
-    return true;
+    return {
+      allowed: true,
+      autoplayGranted: hasMusic(config)
+    };
+  }
+
+  function hasMusic(config) {
+    return !!(config.music && config.music.enabled === true && config.music.file);
+  }
+
+  function showOpenInvitationGate(config) {
+    const titleText =
+      config.openGate?.title ||
+      "Abrir invitación";
+
+    const messageText =
+      config.openGate?.message ||
+      "Toca el botón para abrir la invitación y reproducir la música.";
+
+    setStatus(titleText, messageText);
+
+    createStatusActionButton("Abrir invitación", async () => {
+      try {
+        removeStatusActionButton();
+        setStatus("Abriendo invitación...", "Espera un momento por favor.");
+
+        await finalizeInvitationLoad(config, {
+          attemptAutoplay: true
+        });
+      } catch (error) {
+        showError("No fue posible abrir la invitación", error.message);
+      }
+    });
+  }
+
+  function createStatusActionButton(label, onClick) {
+    removeStatusActionButton();
+
+    statusActionButton = document.createElement("button");
+    statusActionButton.type = "button";
+    statusActionButton.textContent = label;
+    statusActionButton.style.marginTop = "18px";
+    statusActionButton.style.padding = "14px 22px";
+    statusActionButton.style.border = "none";
+    statusActionButton.style.borderRadius = "999px";
+    statusActionButton.style.cursor = "pointer";
+    statusActionButton.style.fontWeight = "700";
+    statusActionButton.style.background = "var(--primary)";
+    statusActionButton.style.color = "var(--primary-contrast)";
+    statusActionButton.onclick = onClick;
+
+    const box = statusScreen.querySelector(".status-box");
+    if (box) {
+      box.appendChild(statusActionButton);
+    }
+  }
+
+  function removeStatusActionButton() {
+    if (statusActionButton) {
+      statusActionButton.remove();
+      statusActionButton = null;
+    }
+  }
+
+  async function tryAutoplayMusic(config) {
+    if (!hasMusic(config)) return false;
+
+    try {
+      if (!musicPlayer.src) {
+        musicPlayer.src = joinPath(config.assetsPath, config.music.file);
+      }
+
+      await musicPlayer.play();
+      musicBtn.textContent = "Pausar música";
+      return true;
+    } catch (error) {
+      console.error("No se pudo iniciar autoplay:", error);
+      musicBtn.textContent = "Reproducir música";
+      return false;
+    }
   }
 
   function render(config) {
@@ -226,7 +325,7 @@
       locationBtn.classList.add("hidden");
     }
 
-    if (config.music && config.music.enabled === true && config.music.file) {
+    if (hasMusic(config)) {
       musicBtn.classList.remove("hidden");
       hasAction = true;
     } else {
@@ -434,7 +533,7 @@
     musicBtn.textContent = "Reproducir música";
     musicBtn.onclick = null;
 
-    if (!config.music || config.music.enabled !== true || !config.music.file) {
+    if (!hasMusic(config)) {
       return;
     }
 
@@ -574,6 +673,7 @@
   }
 
   function hideStatus() {
+    removeStatusActionButton();
     app.classList.remove("hidden");
     statusScreen.classList.add("hidden");
     statusScreen.style.display = "none";
@@ -583,6 +683,7 @@
     app.classList.add("hidden");
     statusScreen.classList.remove("hidden");
     statusScreen.style.display = "grid";
+    removeStatusActionButton();
     setStatus(titleText, descriptionText);
   }
 })();
