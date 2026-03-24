@@ -161,13 +161,13 @@ body {
 .rsvp-section,
 .gift-section,
 .map-section {
-  padding: 64px 0;
+  padding: 20px 0;
 }
 
 .section-title {
-  margin: 0 0 24px;
+  margin: 0 0 14px;
   text-align: center;
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
 }
 
 .countdown {
@@ -415,12 +415,43 @@ body.layout-minimal .schedule-item {
 
 /* COMPACT */
 body.layout-compact .hero {
-  min-height: auto;
-  padding: 32px 0;
+  min-height: 100svh;
+  padding: 0;
+  align-items: center;
 }
 
 body.layout-compact .hero-content {
-  padding: 36px 0;
+  padding: 18px 0;
+  width: min(100% - 20px, 680px);
+}
+
+body.layout-compact .event-tag {
+  margin: 0 0 6px;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+}
+
+body.layout-compact .title {
+  font-size: clamp(1.9rem, 7vw, 3rem);
+  line-height: 1.02;
+  margin-bottom: 4px;
+}
+
+body.layout-compact .subtitle {
+  font-size: 0.95rem;
+  margin-top: 6px;
+  margin-bottom: 0;
+  max-width: 540px;
+}
+
+body.layout-compact .hero-actions {
+  margin-top: 12px;
+  gap: 8px;
+}
+
+body.layout-compact .btn {
+  padding: 10px 16px;
+  font-size: 0.95rem;
 }
 
 body.layout-compact .countdown-section,
@@ -430,41 +461,85 @@ body.layout-compact .schedule-section,
 body.layout-compact .rsvp-section,
 body.layout-compact .gift-section,
 body.layout-compact .map-section {
-  padding: 28px 0;
+  padding: 8px 0;
 }
 
 body.layout-compact .section-title {
-  font-size: 1.45rem;
-  margin-bottom: 16px;
-}
-
-body.layout-compact .title {
-  font-size: clamp(2rem, 7vw, 3.2rem);
-}
-
-body.layout-compact .subtitle {
-  font-size: 1rem;
+  display: none;
 }
 
 body.layout-compact .countdown {
-  gap: 10px;
+  gap: 6px;
 }
 
 body.layout-compact .count-box {
-  padding: 16px 10px;
-  border-radius: 14px;
+  padding: 10px 6px;
+  border-radius: 10px;
 }
 
 body.layout-compact .count-box span {
-  font-size: 1.8rem;
+  font-size: 1.3rem;
+}
+
+body.layout-compact .count-box small {
+  font-size: 0.68rem;
+  margin-top: 2px;
+}
+
+body.layout-compact .detail-line,
+body.layout-compact .detail-description {
+  margin: 4px 0;
+  font-size: 0.95rem;
+}
+
+body.layout-compact .detail-description {
+  line-height: 1.3;
 }
 
 body.layout-compact .gallery {
   grid-template-columns: 1fr;
+  gap: 8px;
 }
 
 body.layout-compact .gallery img {
-  height: 220px;
+  height: 160px;
+  min-height: 160px;
+  border-radius: 12px;
+}
+
+body.layout-compact .schedule-list {
+  gap: 8px;
+}
+
+body.layout-compact .schedule-item {
+  padding: 10px 12px;
+  border-radius: 12px;
+}
+
+body.layout-compact .gift-list {
+  gap: 8px;
+}
+
+body.layout-compact .map-embed {
+  min-height: 200px;
+  border-radius: 12px;
+}
+
+body.layout-compact .rsvp-form {
+  gap: 8px;
+}
+
+body.layout-compact .rsvp-form input,
+body.layout-compact .rsvp-form select {
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  border-radius: 10px;
+}
+
+body.layout-compact .rsvp-help,
+body.layout-compact .rsvp-message {
+  margin-top: 8px;
+  font-size: 0.9rem;
 }
 
 /* compact variants */
@@ -559,5 +634,92 @@ body.compact-variant-3 .hero-actions {
 
   .map-embed {
     min-height: 280px;
+  }
+}
+
+@media (max-width: 560px) {
+  body.layout-compact .hero {
+    min-height: 100svh;
+  }
+
+  body.layout-compact .hero-content {
+    padding: 10px 0;
+    width: min(100% - 14px, 100%);
+  }
+
+  body.layout-compact .title {
+    font-size: clamp(1.6rem, 8vw, 2.4rem);
+  }
+
+  body.layout-compact .subtitle {
+    font-size: 0.86rem;
+    line-height: 1.2;
+  }
+
+  body.layout-compact .event-tag {
+    font-size: 0.66rem;
+  }
+
+  body.layout-compact .countdown-section,
+  body.layout-compact .details-section,
+  body.layout-compact .gallery-section,
+  body.layout-compact .schedule-section,
+  body.layout-compact .rsvp-section,
+  body.layout-compact .gift-section,
+  body.layout-compact .map-section {
+    padding: 4px 0;
+  }
+
+  body.layout-compact .countdown {
+    gap: 4px;
+  }
+
+  body.layout-compact .count-box {
+    padding: 8px 4px;
+  }
+
+  body.layout-compact .count-box span {
+    font-size: 1.1rem;
+  }
+
+  body.layout-compact .count-box small {
+    font-size: 0.62rem;
+  }
+
+  body.layout-compact .detail-line,
+  body.layout-compact .detail-description {
+    margin: 2px 0;
+    font-size: 0.85rem;
+    line-height: 1.2;
+  }
+
+  body.layout-compact .hero-actions {
+    margin-top: 8px;
+  }
+
+  body.layout-compact .btn {
+    width: auto;
+    min-width: 0;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  body.layout-compact .gallery img {
+    height: 120px;
+    min-height: 120px;
+  }
+
+  body.layout-compact .schedule-item {
+    padding: 8px 10px;
+  }
+
+  body.layout-compact .map-embed {
+    min-height: 160px;
+  }
+
+  body.layout-compact .rsvp-form input,
+  body.layout-compact .rsvp-form select {
+    padding: 8px 10px;
+    font-size: 0.85rem;
   }
 }
