@@ -300,44 +300,36 @@
   }
 
   function renderHero(config) {
-    const heroImage = config.hero?.image || config.heroImage;
+  const heroImage = config.hero?.image || config.heroImage;
 
-    heroSection.style.backgroundImage = `url('${joinPath(config.assetsPath, heroImage)}')`;
-    heroSection.style.backgroundPosition = config.hero?.position || "center center";
-    heroSection.style.backgroundSize = config.hero?.size || "cover";
-    heroSection.style.backgroundRepeat = config.hero?.repeat || "no-repeat";
+  heroSection.style.backgroundImage = `url('${joinPath(config.assetsPath, heroImage)}')`;
+  heroSection.style.backgroundPosition = config.hero?.position || "center center";
+  heroSection.style.backgroundSize = config.hero?.size || "cover";
+  heroSection.style.backgroundRepeat = config.hero?.repeat || "no-repeat";
 
-    if (config.hero?.height) {
-      heroSection.style.minHeight = config.hero.height;
-    }
-
-    toggleText(eventTag, config.eventTypeLabel);
-    toggleText(title, config.title);
-    toggleText(subtitle, config.subtitle);
-
-    let hasAction = false;
-
-    if (config.locationUrl && config.mapDisplay === "button") {
-      locationBtn.href = config.locationUrl;
-      locationBtn.classList.remove("hidden");
-      hasAction = true;
-    } else {
-      locationBtn.classList.add("hidden");
-    }
-
-    if (hasMusic(config)) {
-      musicBtn.classList.remove("hidden");
-      hasAction = true;
-    } else {
-      musicBtn.classList.add("hidden");
-    }
-
-    if (hasAction) {
-      heroActions.classList.remove("hidden");
-    } else {
-      heroActions.classList.add("hidden");
-    }
+  if (config.hero?.height) {
+    heroSection.style.minHeight = config.hero.height;
   }
+
+  toggleText(eventTag, config.eventTypeLabel);
+  toggleText(title, config.title);
+  toggleText(subtitle, config.subtitle);
+
+  locationBtn.classList.add("hidden");
+
+  const showMusicButton = hasMusic(config);
+  if (showMusicButton) {
+    musicBtn.classList.remove("hidden");
+  } else {
+    musicBtn.classList.add("hidden");
+  }
+
+  if (showMusicButton) {
+    heroActions.classList.remove("hidden");
+  } else {
+    heroActions.classList.add("hidden");
+  }
+}
 
   function renderDetails(config) {
     const hasDate = toggleText(eventDateText, config.eventDateText);
