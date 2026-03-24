@@ -418,7 +418,6 @@ body.layout-minimal .schedule-item {
 }
 
 /* COMPACT + MODAL */
-/* reemplaza TODO desde "/* COMPACT */" hasta el final del archivo por esto */
 
 body.layout-compact {
   background: transparent;
@@ -500,7 +499,6 @@ body.layout-compact .btn {
   width: auto;
 }
 
-/* Secciones montadas dentro del hero */
 body.layout-compact .countdown-section,
 body.layout-compact .details-section,
 body.layout-compact .schedule-section,
@@ -532,30 +530,6 @@ body.layout-compact .section-title {
   display: none;
 }
 
-/* Posiciones base compact */
-body.layout-compact .countdown-section {
-  top: 45svh;
-}
-
-body.layout-compact .details-section {
-  top: 55svh;
-}
-
-body.layout-compact .schedule-section,
-body.layout-compact .gallery-section {
-  top: 66svh;
-}
-
-body.layout-compact .gift-section,
-body.layout-compact .map-section {
-  top: 72svh;
-}
-
-body.layout-compact .rsvp-section {
-  top: 80svh;
-}
-
-/* Paneles translúcidos */
 body.layout-compact .details-section .container.narrow,
 body.layout-compact .schedule-section .container.narrow,
 body.layout-compact .gift-section .container.narrow,
@@ -693,7 +667,7 @@ body.layout-compact .rsvp-message {
   color: var(--hero-text);
 }
 
-/* Variantes compact */
+/* Compact visual variants only */
 body.layout-compact.compact-1 .hero-content,
 body.layout-compact.compact-variant-1 .hero-content {
   justify-content: flex-start;
@@ -703,35 +677,6 @@ body.layout-compact.compact-2 .hero-content,
 body.layout-compact.compact-variant-2 .hero-content {
   justify-content: center;
   padding-top: 5svh;
-}
-
-body.layout-compact.compact-2 .countdown-section,
-body.layout-compact.compact-variant-2 .countdown-section {
-  top: 50svh;
-}
-
-body.layout-compact.compact-2 .details-section,
-body.layout-compact.compact-variant-2 .details-section {
-  top: 60svh;
-}
-
-body.layout-compact.compact-2 .schedule-section,
-body.layout-compact.compact-2 .gallery-section,
-body.layout-compact.compact-variant-2 .schedule-section,
-body.layout-compact.compact-variant-2 .gallery-section {
-  top: 69svh;
-}
-
-body.layout-compact.compact-2 .gift-section,
-body.layout-compact.compact-2 .map-section,
-body.layout-compact.compact-variant-2 .gift-section,
-body.layout-compact.compact-variant-2 .map-section {
-  top: 75svh;
-}
-
-body.layout-compact.compact-2 .rsvp-section,
-body.layout-compact.compact-variant-2 .rsvp-section {
-  top: 83svh;
 }
 
 body.layout-compact.compact-3 .hero-content,
@@ -745,41 +690,12 @@ body.layout-compact.compact-variant-3 .title {
   font-size: clamp(1.45rem, 7vw, 2.5rem);
 }
 
-body.layout-compact.compact-3 .countdown-section,
-body.layout-compact.compact-variant-3 .countdown-section {
-  top: 42svh;
-}
-
-body.layout-compact.compact-3 .details-section,
-body.layout-compact.compact-variant-3 .details-section {
-  top: 52svh;
-}
-
-body.layout-compact.compact-3 .schedule-section,
-body.layout-compact.compact-3 .gallery-section,
-body.layout-compact.compact-variant-3 .schedule-section,
-body.layout-compact.compact-variant-3 .gallery-section {
-  top: 63svh;
-}
-
-body.layout-compact.compact-3 .gift-section,
-body.layout-compact.compact-3 .map-section,
-body.layout-compact.compact-variant-3 .gift-section,
-body.layout-compact.compact-variant-3 .map-section {
-  top: 70svh;
-}
-
-body.layout-compact.compact-3 .rsvp-section,
-body.layout-compact.compact-variant-3 .rsvp-section {
-  top: 79svh;
-}
-
 body.layout-compact.compact-3 .hero-actions,
 body.layout-compact.compact-variant-3 .hero-actions {
   flex-direction: column;
 }
 
-/* Modal de mapa */
+/* Map modal */
 .map-modal {
   position: fixed;
   inset: 0;
@@ -835,78 +751,6 @@ body.layout-compact.compact-variant-3 .hero-actions {
   border: 0;
 }
 
-/* Responsive general no-compact */
-@media (max-width: 900px) {
-  .countdown {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  body.layout-classic .gallery,
-  body.layout-timeline .gallery,
-  body.layout-minimal .gallery {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  body.layout-split .details-section .container.narrow {
-    grid-template-columns: 1fr;
-  }
-
-  body.layout-split .gallery {
-    grid-template-columns: 1fr;
-  }
-
-  body.layout-split .gallery img:first-child,
-  body.layout-split .gallery img:not(:first-child) {
-    min-height: 280px;
-    height: 280px;
-  }
-}
-
-@media (max-width: 560px) {
-  .hero {
-    min-height: 80vh;
-  }
-
-  .hero-actions {
-    flex-direction: column;
-  }
-
-  .btn {
-    width: 100%;
-  }
-
-  .countdown {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  body.layout-classic .gallery,
-  body.layout-timeline .gallery,
-  body.layout-minimal .gallery {
-    grid-template-columns: 1fr;
-  }
-
-  body.layout-minimal .gallery img,
-  body.layout-classic .gallery img,
-  body.layout-timeline .gallery img {
-    height: 260px;
-  }
-
-  .map-embed {
-    min-height: 280px;
-  }
-
-  .map-modal-dialog {
-    width: min(100% - 12px, 100%);
-    margin: 2vh auto;
-    border-radius: 14px;
-  }
-
-  .map-modal-frame {
-    height: 62vh;
-  }
-}
-
-/* Compact móvil */
 @media (max-width: 560px) {
   body.layout-compact .hero {
     min-height: 100svh;
@@ -935,28 +779,6 @@ body.layout-compact.compact-variant-3 .hero-actions {
     padding: 7px 10px;
     font-size: 0.76rem;
     width: auto;
-  }
-
-  body.layout-compact .countdown-section {
-    top: 44svh;
-  }
-
-  body.layout-compact .details-section {
-    top: 54svh;
-  }
-
-  body.layout-compact .schedule-section,
-  body.layout-compact .gallery-section {
-    top: 64svh;
-  }
-
-  body.layout-compact .gift-section,
-  body.layout-compact .map-section {
-    top: 71svh;
-  }
-
-  body.layout-compact .rsvp-section {
-    top: 79svh;
   }
 
   body.layout-compact .details-section .container.narrow,
@@ -1007,61 +829,13 @@ body.layout-compact.compact-variant-3 .hero-actions {
     font-size: 0.64rem;
   }
 
-  body.layout-compact.compact-2 .countdown-section,
-  body.layout-compact.compact-variant-2 .countdown-section {
-    top: 48svh;
+  .map-modal-dialog {
+    width: min(100% - 12px, 100%);
+    margin: 2vh auto;
+    border-radius: 14px;
   }
 
-  body.layout-compact.compact-2 .details-section,
-  body.layout-compact.compact-variant-2 .details-section {
-    top: 58svh;
-  }
-
-  body.layout-compact.compact-2 .schedule-section,
-  body.layout-compact.compact-2 .gallery-section,
-  body.layout-compact.compact-variant-2 .schedule-section,
-  body.layout-compact.compact-variant-2 .gallery-section {
-    top: 67svh;
-  }
-
-  body.layout-compact.compact-2 .gift-section,
-  body.layout-compact.compact-2 .map-section,
-  body.layout-compact.compact-variant-2 .gift-section,
-  body.layout-compact.compact-variant-2 .map-section {
-    top: 73svh;
-  }
-
-  body.layout-compact.compact-2 .rsvp-section,
-  body.layout-compact.compact-variant-2 .rsvp-section {
-    top: 81svh;
-  }
-
-  body.layout-compact.compact-3 .countdown-section,
-  body.layout-compact.compact-variant-3 .countdown-section {
-    top: 42svh;
-  }
-
-  body.layout-compact.compact-3 .details-section,
-  body.layout-compact.compact-variant-3 .details-section {
-    top: 52svh;
-  }
-
-  body.layout-compact.compact-3 .schedule-section,
-  body.layout-compact.compact-3 .gallery-section,
-  body.layout-compact.compact-variant-3 .schedule-section,
-  body.layout-compact.compact-variant-3 .gallery-section {
-    top: 61svh;
-  }
-
-  body.layout-compact.compact-3 .gift-section,
-  body.layout-compact.compact-3 .map-section,
-  body.layout-compact.compact-variant-3 .gift-section,
-  body.layout-compact.compact-variant-3 .map-section {
-    top: 68svh;
-  }
-
-  body.layout-compact.compact-3 .rsvp-section,
-  body.layout-compact.compact-variant-3 .rsvp-section {
-    top: 77svh;
+  .map-modal-frame {
+    height: 62vh;
   }
 }
