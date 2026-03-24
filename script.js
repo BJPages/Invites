@@ -698,6 +698,17 @@
   }
 
   function joinPath(base, fileName) {
+    if (!fileName) return "";
+  
+    // 👉 SI YA ES URL, úsala directo
+    if (
+      fileName.startsWith("http://") ||
+      fileName.startsWith("https://") ||
+      fileName.startsWith("//")
+    ) {
+      return fileName;
+    }
+  
     const normalizedBase = base.endsWith("/") ? base : `${base}/`;
     return `${normalizedBase}${fileName}`;
   }
