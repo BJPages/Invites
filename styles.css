@@ -13,6 +13,8 @@
   --radius: 18px;
   --max-width: 1100px;
   --narrow-width: 760px;
+  --font-body: Arial, Helvetica, sans-serif;
+  --font-title: Arial, Helvetica, sans-serif;
 }
 
 * {
@@ -26,10 +28,14 @@ body {
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
   background: var(--bg);
   color: var(--text);
   line-height: 1.5;
+}
+.title,
+.section-title {
+  font-family: var(--font-title);
 }
 
 .hidden {
