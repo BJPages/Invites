@@ -291,6 +291,8 @@
     setCssVar("--primary-contrast", theme.primaryContrast);
     setCssVar("--overlay", theme.overlay);
     setCssVar("--hero-text", theme.heroText);
+    setCssVar("--font-body", theme.fontFamily);
+    setCssVar("--font-title", theme.titleFontFamily || theme.fontFamily);
   }
 
   function setCssVar(name, value) {
