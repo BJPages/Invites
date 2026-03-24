@@ -417,170 +417,425 @@ body.layout-minimal .schedule-item {
   border-radius: 12px;
 }
 
-/* COMPACT */
+/* COMPACT + MODAL */
+/* reemplaza TODO desde "/* COMPACT */" hasta el final del archivo por esto */
+
+body.layout-compact {
+  background: transparent;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+body.layout-compact #app {
+  position: relative;
+}
+
 body.layout-compact .hero {
+  position: relative;
   min-height: 100svh;
+  height: 100svh;
   padding: 0;
-  align-items: center;
+  overflow: hidden;
+  align-items: stretch;
+  justify-content: center;
+}
+
+body.layout-compact .overlay {
+  background: var(--overlay);
 }
 
 body.layout-compact .hero-content {
-  padding: 18px 0;
-  width: min(100% - 20px, 680px);
+  position: relative;
+  z-index: 5;
+  min-height: 100svh;
+  height: 100svh;
+  width: min(100% - 14px, 720px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 10px;
+  pointer-events: none;
+}
+
+body.layout-compact .hero-content > * {
+  pointer-events: auto;
 }
 
 body.layout-compact .event-tag {
-  margin: 0 0 6px;
-  font-size: 0.72rem;
+  margin: 0 0 2px;
+  font-size: 0.62rem;
   letter-spacing: 0.12em;
 }
 
 body.layout-compact .title {
-  font-size: clamp(1.9rem, 7vw, 3rem);
-  line-height: 1.02;
-  margin-bottom: 4px;
+  margin: 0;
+  font-size: clamp(1.6rem, 7vw, 2.8rem);
+  line-height: 1;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.22);
 }
 
 body.layout-compact .subtitle {
-  font-size: 0.95rem;
-  margin-top: 6px;
-  margin-bottom: 0;
-  max-width: 540px;
+  margin: 4px auto 0;
+  max-width: 92%;
+  font-size: 0.82rem;
+  line-height: 1.15;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.22);
 }
 
 body.layout-compact .hero-actions {
-  margin-top: 12px;
+  margin-top: 8px;
   gap: 8px;
 }
 
 body.layout-compact .btn {
-  padding: 10px 16px;
-  font-size: 0.95rem;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  border-radius: 999px;
+  width: auto;
 }
 
+/* Secciones montadas dentro del hero */
 body.layout-compact .countdown-section,
 body.layout-compact .details-section,
-body.layout-compact .gallery-section,
 body.layout-compact .schedule-section,
-body.layout-compact .rsvp-section,
+body.layout-compact .gallery-section,
 body.layout-compact .gift-section,
-body.layout-compact .map-section {
-  padding: 8px 0;
+body.layout-compact .map-section,
+body.layout-compact .rsvp-section {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 6;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+}
+
+body.layout-compact .countdown-section .container,
+body.layout-compact .details-section .container,
+body.layout-compact .schedule-section .container,
+body.layout-compact .gallery-section .container,
+body.layout-compact .gift-section .container,
+body.layout-compact .map-section .container,
+body.layout-compact .rsvp-section .container {
+  width: min(100% - 14px, 720px);
+  margin: 0 auto;
 }
 
 body.layout-compact .section-title {
   display: none;
 }
 
-body.layout-compact .countdown {
-  gap: 6px;
+/* Posiciones base compact */
+body.layout-compact .countdown-section {
+  top: 45svh;
 }
 
-body.layout-compact .count-box {
-  padding: 10px 6px;
-  border-radius: 10px;
+body.layout-compact .details-section {
+  top: 55svh;
 }
 
-body.layout-compact .count-box span {
-  font-size: 1.3rem;
+body.layout-compact .schedule-section,
+body.layout-compact .gallery-section {
+  top: 66svh;
 }
 
-body.layout-compact .count-box small {
-  font-size: 0.68rem;
-  margin-top: 2px;
+body.layout-compact .gift-section,
+body.layout-compact .map-section {
+  top: 72svh;
+}
+
+body.layout-compact .rsvp-section {
+  top: 80svh;
+}
+
+/* Paneles translúcidos */
+body.layout-compact .details-section .container.narrow,
+body.layout-compact .schedule-section .container.narrow,
+body.layout-compact .gift-section .container.narrow,
+body.layout-compact .map-section .container.narrow,
+body.layout-compact .rsvp-section .container.narrow {
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 8px 10px;
 }
 
 body.layout-compact .detail-line,
 body.layout-compact .detail-description {
-  margin: 4px 0;
-  font-size: 0.95rem;
+  margin: 2px 0;
+  color: var(--hero-text);
+  text-align: center;
+}
+
+body.layout-compact .detail-line {
+  font-size: 0.82rem;
+  font-weight: 700;
 }
 
 body.layout-compact .detail-description {
-  line-height: 1.3;
+  font-size: 0.72rem;
+  line-height: 1.15;
 }
 
-body.layout-compact .gallery {
-  grid-template-columns: 1fr;
-  gap: 8px;
+body.layout-compact .countdown {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
 }
 
-body.layout-compact .gallery img {
-  height: 160px;
-  min-height: 160px;
-  border-radius: 12px;
+body.layout-compact .count-box {
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 6px 2px;
+}
+
+body.layout-compact .count-box span {
+  font-size: 0.95rem;
+  color: var(--hero-text);
+}
+
+body.layout-compact .count-box small {
+  margin-top: 2px;
+  font-size: 0.54rem;
+  color: rgba(255, 255, 255, 0.95);
 }
 
 body.layout-compact .schedule-list {
-  gap: 8px;
+  gap: 4px;
 }
 
 body.layout-compact .schedule-item {
-  padding: 10px 12px;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: none;
+  border-radius: 10px;
+  padding: 6px 8px;
+}
+
+body.layout-compact .schedule-time,
+body.layout-compact .schedule-title,
+body.layout-compact .schedule-desc {
+  color: var(--hero-text);
+}
+
+body.layout-compact .schedule-time {
+  font-size: 0.7rem;
+}
+
+body.layout-compact .schedule-title {
+  font-size: 0.76rem;
+}
+
+body.layout-compact .schedule-desc {
+  font-size: 0.68rem;
+}
+
+body.layout-compact .gallery {
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+body.layout-compact .gallery img {
+  height: 76px;
+  min-height: 76px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 body.layout-compact .gift-list {
-  gap: 8px;
+  gap: 6px;
+}
+
+body.layout-compact .gift-list .btn {
+  min-width: 0;
+}
+
+body.layout-compact .map-button-wrapper {
+  display: flex;
+  justify-content: center;
 }
 
 body.layout-compact .map-embed {
-  min-height: 200px;
-  border-radius: 12px;
+  min-height: 110px;
+  border-radius: 10px;
 }
 
 body.layout-compact .rsvp-form {
-  gap: 8px;
+  gap: 6px;
 }
 
 body.layout-compact .rsvp-form input,
 body.layout-compact .rsvp-form select {
-  padding: 10px 12px;
-  font-size: 0.95rem;
-  border-radius: 10px;
+  padding: 7px 8px;
+  font-size: 0.78rem;
+  border-radius: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.92);
 }
 
 body.layout-compact .rsvp-help,
 body.layout-compact .rsvp-message {
-  margin-top: 8px;
-  font-size: 0.9rem;
+  margin-top: 5px;
+  font-size: 0.68rem;
+  color: var(--hero-text);
 }
 
-/* compact variants */
-body.compact-variant-1 .hero {
-  min-height: 100vh;
+/* Variantes compact */
+body.layout-compact.compact-1 .hero-content,
+body.layout-compact.compact-variant-1 .hero-content {
+  justify-content: flex-start;
 }
 
-body.compact-variant-1 .hero-content {
-  padding-top: 80px;
-  padding-bottom: 80px;
+body.layout-compact.compact-2 .hero-content,
+body.layout-compact.compact-variant-2 .hero-content {
+  justify-content: center;
+  padding-top: 5svh;
 }
 
-body.compact-variant-2 .hero {
-  min-height: 72vh;
-  align-items: end;
+body.layout-compact.compact-2 .countdown-section,
+body.layout-compact.compact-variant-2 .countdown-section {
+  top: 50svh;
 }
 
-body.compact-variant-2 .hero-content {
-  background: rgba(0, 0, 0, 0.18);
-  padding: 24px;
-  border-radius: 18px;
-  margin-bottom: 20px;
+body.layout-compact.compact-2 .details-section,
+body.layout-compact.compact-variant-2 .details-section {
+  top: 60svh;
 }
 
-body.compact-variant-3 .hero {
-  min-height: 84vh;
+body.layout-compact.compact-2 .schedule-section,
+body.layout-compact.compact-2 .gallery-section,
+body.layout-compact.compact-variant-2 .schedule-section,
+body.layout-compact.compact-variant-2 .gallery-section {
+  top: 69svh;
 }
 
-body.compact-variant-3 .hero .overlay {
-  background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.55));
+body.layout-compact.compact-2 .gift-section,
+body.layout-compact.compact-2 .map-section,
+body.layout-compact.compact-variant-2 .gift-section,
+body.layout-compact.compact-variant-2 .map-section {
+  top: 75svh;
 }
 
-body.compact-variant-3 .hero-actions {
+body.layout-compact.compact-2 .rsvp-section,
+body.layout-compact.compact-variant-2 .rsvp-section {
+  top: 83svh;
+}
+
+body.layout-compact.compact-3 .hero-content,
+body.layout-compact.compact-variant-3 .hero-content {
+  justify-content: flex-start;
+  padding-top: 4svh;
+}
+
+body.layout-compact.compact-3 .title,
+body.layout-compact.compact-variant-3 .title {
+  font-size: clamp(1.45rem, 7vw, 2.5rem);
+}
+
+body.layout-compact.compact-3 .countdown-section,
+body.layout-compact.compact-variant-3 .countdown-section {
+  top: 42svh;
+}
+
+body.layout-compact.compact-3 .details-section,
+body.layout-compact.compact-variant-3 .details-section {
+  top: 52svh;
+}
+
+body.layout-compact.compact-3 .schedule-section,
+body.layout-compact.compact-3 .gallery-section,
+body.layout-compact.compact-variant-3 .schedule-section,
+body.layout-compact.compact-variant-3 .gallery-section {
+  top: 63svh;
+}
+
+body.layout-compact.compact-3 .gift-section,
+body.layout-compact.compact-3 .map-section,
+body.layout-compact.compact-variant-3 .gift-section,
+body.layout-compact.compact-variant-3 .map-section {
+  top: 70svh;
+}
+
+body.layout-compact.compact-3 .rsvp-section,
+body.layout-compact.compact-variant-3 .rsvp-section {
+  top: 79svh;
+}
+
+body.layout-compact.compact-3 .hero-actions,
+body.layout-compact.compact-variant-3 .hero-actions {
   flex-direction: column;
 }
 
-/* responsive */
+/* Modal de mapa */
+.map-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+}
+
+.map-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.62);
+}
+
+.map-modal-dialog {
+  position: relative;
+  z-index: 2;
+  width: min(100% - 24px, 900px);
+  margin: 5vh auto;
+  background: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+}
+
+.map-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.map-modal-header h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.map-modal-close {
+  border: none;
+  background: transparent;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.map-modal-body {
+  padding: 0;
+}
+
+.map-modal-frame {
+  display: block;
+  width: 100%;
+  height: 70vh;
+  border: 0;
+}
+
+/* Responsive general no-compact */
 @media (max-width: 900px) {
   .countdown {
     grid-template-columns: repeat(2, 1fr);
@@ -639,377 +894,19 @@ body.compact-variant-3 .hero-actions {
   .map-embed {
     min-height: 280px;
   }
-}
 
-@media (max-width: 560px) {
-  body.layout-compact .hero {
-    min-height: 100svh;
+  .map-modal-dialog {
+    width: min(100% - 12px, 100%);
+    margin: 2vh auto;
+    border-radius: 14px;
   }
 
-  body.layout-compact .hero-content {
-    padding: 10px 0;
-    width: min(100% - 14px, 100%);
-  }
-
-  body.layout-compact .title {
-    font-size: clamp(1.6rem, 8vw, 2.4rem);
-  }
-
-  body.layout-compact .subtitle {
-    font-size: 0.86rem;
-    line-height: 1.2;
-  }
-
-  body.layout-compact .event-tag {
-    font-size: 0.66rem;
-  }
-
-  body.layout-compact .countdown-section,
-  body.layout-compact .details-section,
-  body.layout-compact .gallery-section,
-  body.layout-compact .schedule-section,
-  body.layout-compact .rsvp-section,
-  body.layout-compact .gift-section,
-  body.layout-compact .map-section {
-    padding: 4px 0;
-  }
-
-  body.layout-compact .countdown {
-    gap: 4px;
-  }
-
-  body.layout-compact .count-box {
-    padding: 8px 4px;
-  }
-
-  body.layout-compact .count-box span {
-    font-size: 1.1rem;
-  }
-
-  body.layout-compact .count-box small {
-    font-size: 0.62rem;
-  }
-
-  body.layout-compact .detail-line,
-  body.layout-compact .detail-description {
-    margin: 2px 0;
-    font-size: 0.85rem;
-    line-height: 1.2;
-  }
-
-  body.layout-compact .hero-actions {
-    margin-top: 8px;
-  }
-
-  body.layout-compact .btn {
-    width: auto;
-    min-width: 0;
-    padding: 8px 12px;
-    font-size: 0.85rem;
-  }
-
-  body.layout-compact .gallery img {
-    height: 120px;
-    min-height: 120px;
-  }
-
-  body.layout-compact .schedule-item {
-    padding: 8px 10px;
-  }
-
-  body.layout-compact .map-embed {
-    min-height: 160px;
-  }
-
-  body.layout-compact .rsvp-form input,
-  body.layout-compact .rsvp-form select {
-    padding: 8px 10px;
-    font-size: 0.85rem;
+  .map-modal-frame {
+    height: 62vh;
   }
 }
-/* ===== COMPACT REAL: TODO MONTADO SOBRE EL HERO ===== */
 
-body.layout-compact {
-  background: transparent;
-}
-
-body.layout-compact #app {
-  position: relative;
-}
-
-body.layout-compact .hero {
-  position: relative;
-  min-height: 100svh;
-  height: 100svh;
-  padding: 0;
-  overflow: hidden;
-  align-items: stretch;
-  justify-content: center;
-}
-
-body.layout-compact .overlay {
-  background: var(--overlay);
-}
-
-body.layout-compact .hero-content {
-  position: relative;
-  z-index: 5;
-  min-height: 100svh;
-  height: 100svh;
-  width: min(100% - 14px, 720px);
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding-top: 10px;
-  pointer-events: none;
-}
-
-body.layout-compact .hero-content > * {
-  pointer-events: auto;
-}
-
-body.layout-compact .event-tag {
-  margin: 0 0 2px;
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-}
-
-body.layout-compact .title {
-  margin: 0;
-  font-size: clamp(1.6rem, 7vw, 2.8rem);
-  line-height: 1;
-  text-align: center;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.22);
-}
-
-body.layout-compact .subtitle {
-  margin: 4px auto 0;
-  max-width: 92%;
-  font-size: 0.82rem;
-  line-height: 1.15;
-  text-align: center;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.22);
-}
-
-body.layout-compact .hero-actions {
-  margin-top: 8px;
-  gap: 8px;
-}
-
-body.layout-compact .btn {
-  padding: 8px 12px;
-  font-size: 0.8rem;
-  border-radius: 999px;
-}
-
-/* Sacamos las secciones del flujo y las montamos dentro del hero */
-body.layout-compact .countdown-section,
-body.layout-compact .details-section,
-body.layout-compact .schedule-section,
-body.layout-compact .gallery-section,
-body.layout-compact .gift-section,
-body.layout-compact .map-section,
-body.layout-compact .rsvp-section {
-  position: absolute;
-  left: 0;
-  right: 0;
-  z-index: 6;
-  padding: 0;
-  margin: 0;
-  background: transparent;
-}
-
-body.layout-compact .countdown-section .container,
-body.layout-compact .details-section .container,
-body.layout-compact .schedule-section .container,
-body.layout-compact .gallery-section .container,
-body.layout-compact .gift-section .container,
-body.layout-compact .map-section .container,
-body.layout-compact .rsvp-section .container {
-  width: min(100% - 14px, 720px);
-  margin: 0 auto;
-}
-
-body.layout-compact .section-title {
-  display: none;
-}
-
-/* Posiciones verticales dentro de la misma pantalla */
-body.layout-compact .countdown-section {
-  top: 46svh;
-}
-
-body.layout-compact .details-section {
-  top: 57svh;
-}
-
-body.layout-compact .schedule-section {
-  top: 67svh;
-}
-
-body.layout-compact .gallery-section {
-  top: 67svh;
-}
-
-body.layout-compact .gift-section {
-  top: 74svh;
-}
-
-body.layout-compact .map-section {
-  top: 74svh;
-}
-
-body.layout-compact .rsvp-section {
-  top: 82svh;
-}
-
-/* Panels translúcidos */
-body.layout-compact .details-section .container.narrow,
-body.layout-compact .schedule-section .container.narrow,
-body.layout-compact .gift-section .container.narrow,
-body.layout-compact .map-section .container.narrow,
-body.layout-compact .rsvp-section .container.narrow {
-  background: rgba(255,255,255,0.14);
-  border: 1px solid rgba(255,255,255,0.20);
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 8px 10px;
-}
-
-body.layout-compact .detail-line,
-body.layout-compact .detail-description {
-  margin: 2px 0;
-  color: var(--hero-text);
-  text-align: center;
-}
-
-body.layout-compact .detail-line {
-  font-size: 0.82rem;
-  font-weight: 700;
-}
-
-body.layout-compact .detail-description {
-  font-size: 0.72rem;
-  line-height: 1.15;
-}
-
-body.layout-compact .countdown {
-  grid-template-columns: repeat(4, 1fr);
-  gap: 4px;
-}
-
-body.layout-compact .count-box {
-  background: rgba(255,255,255,0.14);
-  border: 1px solid rgba(255,255,255,0.20);
-  border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 6px 2px;
-}
-
-body.layout-compact .count-box span {
-  font-size: 0.95rem;
-  color: var(--hero-text);
-}
-
-body.layout-compact .count-box small {
-  margin-top: 2px;
-  font-size: 0.54rem;
-  color: rgba(255,255,255,0.95);
-}
-
-body.layout-compact .schedule-list {
-  gap: 4px;
-}
-
-body.layout-compact .schedule-item {
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.18);
-  box-shadow: none;
-  border-radius: 10px;
-  padding: 6px 8px;
-}
-
-body.layout-compact .schedule-time,
-body.layout-compact .schedule-title,
-body.layout-compact .schedule-desc {
-  color: var(--hero-text);
-}
-
-body.layout-compact .schedule-time {
-  font-size: 0.7rem;
-}
-
-body.layout-compact .schedule-title {
-  font-size: 0.76rem;
-}
-
-body.layout-compact .schedule-desc {
-  font-size: 0.68rem;
-}
-
-body.layout-compact .gallery {
-  grid-template-columns: 1fr 1fr;
-  gap: 4px;
-}
-
-body.layout-compact .gallery img {
-  height: 76px;
-  min-height: 76px;
-  border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
-
-body.layout-compact .gift-list {
-  gap: 6px;
-}
-
-body.layout-compact .gift-list .btn {
-  min-width: 0;
-}
-
-body.layout-compact .map-button-wrapper {
-  display: flex;
-  justify-content: center;
-}
-
-body.layout-compact .map-embed {
-  min-height: 110px;
-  border-radius: 10px;
-}
-
-body.layout-compact .rsvp-form {
-  gap: 6px;
-}
-
-body.layout-compact .rsvp-form input,
-body.layout-compact .rsvp-form select {
-  padding: 7px 8px;
-  font-size: 0.78rem;
-  border-radius: 9px;
-  border: 1px solid rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.92);
-}
-
-body.layout-compact .rsvp-help,
-body.layout-compact .rsvp-message {
-  margin-top: 5px;
-  font-size: 0.68rem;
-  color: var(--hero-text);
-}
-
-/* Variante 1: contenido más centrado */
-body.layout-compact.compact-1 .hero-content,
-body.layout-compact.compact-variant-1 .hero-content {
-  justify-content: flex-start;
-}
-
-/* Móvil */
+/* Compact móvil */
 @media (max-width: 560px) {
   body.layout-compact .hero {
     min-height: 100svh;
@@ -1048,18 +945,12 @@ body.layout-compact.compact-variant-1 .hero-content {
     top: 54svh;
   }
 
-  body.layout-compact .schedule-section {
-    top: 64svh;
-  }
-
+  body.layout-compact .schedule-section,
   body.layout-compact .gallery-section {
     top: 64svh;
   }
 
-  body.layout-compact .gift-section {
-    top: 71svh;
-  }
-
+  body.layout-compact .gift-section,
   body.layout-compact .map-section {
     top: 71svh;
   }
@@ -1114,5 +1005,63 @@ body.layout-compact.compact-variant-1 .hero-content {
   body.layout-compact .rsvp-help,
   body.layout-compact .rsvp-message {
     font-size: 0.64rem;
+  }
+
+  body.layout-compact.compact-2 .countdown-section,
+  body.layout-compact.compact-variant-2 .countdown-section {
+    top: 48svh;
+  }
+
+  body.layout-compact.compact-2 .details-section,
+  body.layout-compact.compact-variant-2 .details-section {
+    top: 58svh;
+  }
+
+  body.layout-compact.compact-2 .schedule-section,
+  body.layout-compact.compact-2 .gallery-section,
+  body.layout-compact.compact-variant-2 .schedule-section,
+  body.layout-compact.compact-variant-2 .gallery-section {
+    top: 67svh;
+  }
+
+  body.layout-compact.compact-2 .gift-section,
+  body.layout-compact.compact-2 .map-section,
+  body.layout-compact.compact-variant-2 .gift-section,
+  body.layout-compact.compact-variant-2 .map-section {
+    top: 73svh;
+  }
+
+  body.layout-compact.compact-2 .rsvp-section,
+  body.layout-compact.compact-variant-2 .rsvp-section {
+    top: 81svh;
+  }
+
+  body.layout-compact.compact-3 .countdown-section,
+  body.layout-compact.compact-variant-3 .countdown-section {
+    top: 42svh;
+  }
+
+  body.layout-compact.compact-3 .details-section,
+  body.layout-compact.compact-variant-3 .details-section {
+    top: 52svh;
+  }
+
+  body.layout-compact.compact-3 .schedule-section,
+  body.layout-compact.compact-3 .gallery-section,
+  body.layout-compact.compact-variant-3 .schedule-section,
+  body.layout-compact.compact-variant-3 .gallery-section {
+    top: 61svh;
+  }
+
+  body.layout-compact.compact-3 .gift-section,
+  body.layout-compact.compact-3 .map-section,
+  body.layout-compact.compact-variant-3 .gift-section,
+  body.layout-compact.compact-variant-3 .map-section {
+    top: 68svh;
+  }
+
+  body.layout-compact.compact-3 .rsvp-section,
+  body.layout-compact.compact-variant-3 .rsvp-section {
+    top: 77svh;
   }
 }
