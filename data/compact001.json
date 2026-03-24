@@ -23,8 +23,8 @@
     "height": "100svh"
   },
 
-  "locationUrl": "https://maps.google.com",
-  "mapDisplay": "button",
+  "mapDisplay": "embed",
+  "mapEmbedUrl": "https://www.google.com/maps?q=Puebla&output=embed",
 
   "music": {
     "enabled": true,
