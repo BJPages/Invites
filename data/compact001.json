@@ -16,7 +16,7 @@
 
   "heroImage": "hero.png",
   "hero": {
-    "image": "hero.jpg",
+    "image": "hero.png",
     "position": "center center",
     "size": "cover",
     "repeat": "no-repeat",
