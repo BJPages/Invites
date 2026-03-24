@@ -9,7 +9,6 @@
   const title = document.getElementById("title");
   const subtitle = document.getElementById("subtitle");
   const heroActions = document.getElementById("heroActions");
-  const locationBtn = document.getElementById("locationBtn");
   const musicBtn = document.getElementById("musicBtn");
   const musicPlayer = document.getElementById("musicPlayer");
 
@@ -38,6 +37,12 @@
   const mapOpenBtn = document.getElementById("mapOpenBtn");
   const mapEmbedWrapper = document.getElementById("mapEmbedWrapper");
   const mapEmbed = document.getElementById("mapEmbed");
+
+  const mapModal = document.getElementById("mapModal");
+  const mapModalBackdrop = document.getElementById("mapModalBackdrop");
+  const mapModalClose = document.getElementById("mapModalClose");
+  const mapModalFrame = document.getElementById("mapModalFrame");
+  const mapModalTitle = document.getElementById("mapModalTitle");
 
   const rsvpSection = document.getElementById("rsvpSection");
   const rsvpForm = document.getElementById("rsvpForm");
@@ -100,6 +105,7 @@
     initCountdown(config);
     initMusic(config);
     initWhatsAppHelp(config);
+    initMapModal(config);
     await loadCustomScript(config);
 
     hideStatus();
@@ -173,11 +179,12 @@
     return !!(config.music && config.music.enabled === true && config.music.file);
   }
 
-  function showOpenInvitationGate(config) {
-    const titleText =
-      config.openGate?.title ||
-      "Abrir invitación";
+  function isCompactLayout(config) {
+    return config.layout === "compact";
+  }
 
+  function showOpenInvitationGate(config) {
+    const titleText = config.openGate?.title || "Abrir invitación";
     const messageText =
       config.openGate?.message ||
       "Toca el botón para abrir la invitación y reproducir la música.";
@@ -248,6 +255,7 @@
   function render(config) {
     resetBodyClasses();
     resetHeroStyles();
+    closeMapModal();
 
     applyLayout(config);
     applyTheme(config.theme || {});
@@ -270,6 +278,7 @@
     heroSection.style.backgroundSize = "";
     heroSection.style.backgroundRepeat = "";
     heroSection.style.minHeight = "";
+    heroSection.style.height = "";
   }
 
   function applyLayout(config) {
@@ -302,36 +311,31 @@
   }
 
   function renderHero(config) {
-  const heroImage = config.hero?.image || config.heroImage;
+    const heroImage = config.hero?.image || config.heroImage;
 
-  heroSection.style.backgroundImage = `url('${joinPath(config.assetsPath, heroImage)}')`;
-  heroSection.style.backgroundPosition = config.hero?.position || "center center";
-  heroSection.style.backgroundSize = config.hero?.size || "cover";
-  heroSection.style.backgroundRepeat = config.hero?.repeat || "no-repeat";
+    heroSection.style.backgroundImage = `url('${joinPath(config.assetsPath, heroImage)}')`;
+    heroSection.style.backgroundPosition = config.hero?.position || "center center";
+    heroSection.style.backgroundSize = config.hero?.size || "cover";
+    heroSection.style.backgroundRepeat = config.hero?.repeat || "no-repeat";
 
-  if (config.hero?.height) {
-    heroSection.style.minHeight = config.hero.height;
+    if (config.hero?.height) {
+      heroSection.style.minHeight = config.hero.height;
+      heroSection.style.height = config.hero.height;
+    }
+
+    toggleText(eventTag, config.eventTypeLabel);
+    toggleText(title, config.title);
+    toggleText(subtitle, config.subtitle);
+
+    const showMusicButton = hasMusic(config);
+    if (showMusicButton) {
+      musicBtn.classList.remove("hidden");
+      heroActions.classList.remove("hidden");
+    } else {
+      musicBtn.classList.add("hidden");
+      heroActions.classList.add("hidden");
+    }
   }
-
-  toggleText(eventTag, config.eventTypeLabel);
-  toggleText(title, config.title);
-  toggleText(subtitle, config.subtitle);
-
-  locationBtn.classList.add("hidden");
-
-  const showMusicButton = hasMusic(config);
-  if (showMusicButton) {
-    musicBtn.classList.remove("hidden");
-  } else {
-    musicBtn.classList.add("hidden");
-  }
-
-  if (showMusicButton) {
-    heroActions.classList.remove("hidden");
-  } else {
-    heroActions.classList.add("hidden");
-  }
-}
 
   function renderDetails(config) {
     const hasDate = toggleText(eventDateText, config.eventDateText);
@@ -435,11 +439,39 @@
 
   function renderMap(config) {
     mapOpenBtn.href = "#";
+    mapOpenBtn.textContent = config.mapButtonLabel || "Abrir mapa";
+    mapOpenBtn.onclick = null;
     mapEmbed.src = "";
 
     mapButtonWrapper.classList.add("hidden");
     mapEmbedWrapper.classList.add("hidden");
     toggleSection(mapSection, false);
+
+    const compact = isCompactLayout(config);
+
+    if (compact) {
+      if (config.mapDisplay === "embed" && config.mapEmbedUrl) {
+        mapOpenBtn.href = "#";
+        mapOpenBtn.textContent = config.mapButtonLabel || "Ver mapa";
+        mapOpenBtn.onclick = (event) => {
+          event.preventDefault();
+          openMapModal(config.mapEmbedUrl, config.mapTitle || "Ubicación");
+        };
+        mapButtonWrapper.classList.remove("hidden");
+        toggleSection(mapSection, true);
+        return;
+      }
+
+      if (config.locationUrl) {
+        mapOpenBtn.href = config.locationUrl;
+        mapOpenBtn.textContent = config.mapButtonLabel || "Abrir mapa";
+        mapOpenBtn.onclick = null;
+        mapButtonWrapper.classList.remove("hidden");
+        toggleSection(mapSection, true);
+      }
+
+      return;
+    }
 
     if (config.mapDisplay === "embed" && config.mapEmbedUrl) {
       mapEmbed.src = config.mapEmbedUrl;
@@ -450,6 +482,8 @@
 
     if (config.mapDisplay === "button" && config.locationUrl) {
       mapOpenBtn.href = config.locationUrl;
+      mapOpenBtn.textContent = config.mapButtonLabel || "Abrir mapa";
+      mapOpenBtn.onclick = null;
       mapButtonWrapper.classList.remove("hidden");
       toggleSection(mapSection, true);
     }
@@ -553,6 +587,33 @@
     const pretty = formatPhoneForDisplay(config.rsvp.phone);
     rsvpHelp.textContent = `Tu confirmación será enviada por WhatsApp al ${pretty}.`;
     rsvpHelp.classList.remove("hidden");
+  }
+
+  function initMapModal() {
+    mapModalClose.onclick = closeMapModal;
+    mapModalBackdrop.onclick = closeMapModal;
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !mapModal.classList.contains("hidden")) {
+        closeMapModal();
+      }
+    });
+  }
+
+  function openMapModal(src, titleText) {
+    if (!src) return;
+    mapModalTitle.textContent = titleText || "Ubicación";
+    mapModalFrame.src = src;
+    mapModal.classList.remove("hidden");
+    mapModal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+  }
+
+  function closeMapModal() {
+    mapModal.classList.add("hidden");
+    mapModal.setAttribute("aria-hidden", "true");
+    mapModalFrame.src = "";
+    document.body.classList.remove("modal-open");
   }
 
   rsvpForm.addEventListener("submit", (event) => {
