@@ -14,7 +14,7 @@
 
   "assetsPath": "assets/compact001",
 
-  "heroImage": "hero.jpg",
+  "heroImage": "hero.png",
   "hero": {
     "image": "hero.jpg",
     "position": "center center",
