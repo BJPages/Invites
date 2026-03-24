@@ -54,6 +54,7 @@
   let countdownTimer = null;
   let currentConfig = null;
   let statusActionButton = null;
+  let compactResizeHandler = null;
 
   init();
 
@@ -105,7 +106,8 @@
     initCountdown(config);
     initMusic(config);
     initWhatsAppHelp(config);
-    initMapModal(config);
+    initMapModal();
+    layoutCompactSections(config);
     await loadCustomScript(config);
 
     hideStatus();
@@ -593,11 +595,11 @@
     mapModalClose.onclick = closeMapModal;
     mapModalBackdrop.onclick = closeMapModal;
 
-    document.addEventListener("keydown", (event) => {
+    document.onkeydown = (event) => {
       if (event.key === "Escape" && !mapModal.classList.contains("hidden")) {
         closeMapModal();
       }
-    });
+    };
   }
 
   function openMapModal(src, titleText) {
@@ -614,6 +616,78 @@
     mapModal.setAttribute("aria-hidden", "true");
     mapModalFrame.src = "";
     document.body.classList.remove("modal-open");
+  }
+
+  function layoutCompactSections(config) {
+    if (!isCompactLayout(config)) return;
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        applyCompactFlowLayout(config);
+      });
+    });
+
+    if (compactResizeHandler) {
+      window.removeEventListener("resize", compactResizeHandler);
+    }
+
+    compactResizeHandler = () => {
+      applyCompactFlowLayout(config);
+    };
+
+    window.addEventListener("resize", compactResizeHandler);
+  }
+
+  function applyCompactFlowLayout(config) {
+    if (!isCompactLayout(config)) return;
+
+    const sections = [
+      countdownSection,
+      detailsSection,
+      scheduleSection,
+      gallerySection,
+      giftRegistrySection,
+      mapSection,
+      rsvpSection
+    ];
+
+    sections.forEach((section) => {
+      section.style.top = "";
+    });
+
+    const visibleSections = sections.filter(
+      (section) => !section.classList.contains("hidden")
+    );
+
+    if (!visibleSections.length) return;
+
+    const isMobile = window.innerWidth <= 560;
+    const variant = config.layoutVariant || "compact-1";
+
+    let startTopSvh = isMobile ? 26 : 32;
+    let gap = isMobile ? 6 : 8;
+
+    if (variant === "compact-2") {
+      startTopSvh = isMobile ? 30 : 36;
+    } else if (variant === "compact-3") {
+      startTopSvh = isMobile ? 24 : 30;
+      gap = isMobile ? 5 : 7;
+    }
+
+    let currentTopPx = svhToPx(startTopSvh);
+
+    visibleSections.forEach((section) => {
+      section.style.top = `${currentTopPx}px`;
+
+      const rect = section.getBoundingClientRect();
+      const height = rect.height;
+
+      currentTopPx += height + gap;
+    });
+  }
+
+  function svhToPx(value) {
+    return (window.innerHeight * value) / 100;
   }
 
   rsvpForm.addEventListener("submit", (event) => {
@@ -699,8 +773,7 @@
 
   function joinPath(base, fileName) {
     if (!fileName) return "";
-  
-    // 👉 SI YA ES URL, úsala directo
+
     if (
       fileName.startsWith("http://") ||
       fileName.startsWith("https://") ||
@@ -708,7 +781,7 @@
     ) {
       return fileName;
     }
-  
+
     const normalizedBase = base.endsWith("/") ? base : `${base}/`;
     return `${normalizedBase}${fileName}`;
   }
