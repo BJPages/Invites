@@ -17,16 +17,6 @@
         <p id="subtitle" class="subtitle hidden"></p>
 
         <div id="heroActions" class="hero-actions hidden">
-          <a
-            id="locationBtn"
-            class="btn btn-primary hidden"
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Ver ubicación
-          </a>
-
           <button id="musicBtn" class="btn btn-secondary hidden" type="button">
             Reproducir música
           </button>
@@ -145,6 +135,26 @@
     <div class="status-box">
       <h1 id="statusTitle">Cargando invitación...</h1>
       <p id="statusText">Espera un momento por favor.</p>
+    </div>
+  </section>
+
+  <section id="mapModal" class="map-modal hidden" aria-hidden="true">
+    <div id="mapModalBackdrop" class="map-modal-backdrop"></div>
+    <div class="map-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="mapModalTitle">
+      <div class="map-modal-header">
+        <h3 id="mapModalTitle">Ubicación</h3>
+        <button id="mapModalClose" class="map-modal-close" type="button" aria-label="Cerrar mapa">×</button>
+      </div>
+      <div class="map-modal-body">
+        <iframe
+          id="mapModalFrame"
+          class="map-modal-frame"
+          src=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
+      </div>
     </div>
   </section>
 
