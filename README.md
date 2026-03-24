@@ -1,19 +1,26 @@
-JSON Configuration Reference
+# JSON Configuration Reference
 
-Each invitation is controlled by a single JSON file inside the /data folder.
+Each invitation is controlled by a single JSON file inside the `/data` folder.
 This file defines the layout, text, images, music, map behavior, RSVP settings, optional access protection, and more.
 
-Minimal required structure
+## Minimal required structure
 
 At minimum, an invitation JSON should include:
 
+```json
 {
   "layout": "compact",
   "title": "My Event",
   "assetsPath": "assets/myInviteId",
   "heroImage": "hero.jpg"
 }
-Full example
+```
+
+---
+
+## Full example
+
+```json
 {
   "layout": "compact",
   "layoutVariant": "compact-1",
@@ -86,192 +93,110 @@ Full example
   },
   "customScript": "custom.js"
 }
-Parameter reference
-layout
+```
 
-Type: string
-Required: yes
+---
+
+## Parameter summary table
+
+| Parameter        | Type             | Required | Allowed / Expected Values                            | Description                                                                |
+| ---------------- | ---------------- | -------: | ---------------------------------------------------- | -------------------------------------------------------------------------- |
+| `layout`         | string           |      Yes | `classic`, `split`, `timeline`, `minimal`, `compact` | Main invitation layout.                                                    |
+| `layoutVariant`  | string           |       No | `compact-1`, `compact-2`, `compact-3`                | Compact layout distribution variant. Only used when `layout` is `compact`. |
+| `eventTypeLabel` | string           |       No | Any short label                                      | Small label shown above the main title.                                    |
+| `title`          | string           |      Yes | Any text                                             | Main invitation title.                                                     |
+| `subtitle`       | string           |       No | Any text                                             | Secondary descriptive line below the title.                                |
+| `eventDateISO`   | string           |       No | ISO datetime, e.g. `2026-07-18T16:00:00`             | Machine-readable date used by countdown.                                   |
+| `eventDateText`  | string           |       No | Any readable date text                               | Human-readable date shown in the invitation.                               |
+| `place`          | string           |       No | Any text                                             | Event location text.                                                       |
+| `description`    | string           |       No | Any text                                             | Extra event description.                                                   |
+| `assetsPath`     | string           |      Yes | Relative folder path, e.g. `assets/xyHd0aS`          | Folder containing all invite-specific assets.                              |
+| `heroImage`      | string           |     Yes* | Any image filename                                   | Fallback hero background image. Required if `hero.image` is missing.       |
+| `hero`           | object           |       No | See hero table below                                 | Advanced hero background configuration.                                    |
+| `locationUrl`    | string           |       No | Any valid URL                                        | External map/location link.                                                |
+| `mapDisplay`     | string           |       No | `button`, `embed`                                    | Controls whether the map is shown as a button or embedded map.             |
+| `mapEmbedUrl`    | string           |       No | Any embeddable map URL                               | URL used by embedded map mode.                                             |
+| `mapButtonLabel` | string           |       No | Any text                                             | Custom label for the map button.                                           |
+| `mapTitle`       | string           |       No | Any text                                             | Title shown inside the map modal.                                          |
+| `gallery`        | array of strings |       No | Image filenames                                      | List of gallery image files inside `assetsPath`.                           |
+| `music`          | object           |       No | See music table below                                | Invitation music configuration.                                            |
+| `countdown`      | object           |       No | See countdown table below                            | Countdown visibility settings.                                             |
+| `theme`          | object           |       No | See theme table below                                | Color and font customization.                                              |
+| `schedule`       | array of objects |       No | See schedule table below                             | Event timeline entries.                                                    |
+| `giftRegistry`   | object           |       No | Store objects with `url` and `label`                 | Gift registry links.                                                       |
+| `rsvp`           | object           |       No | See RSVP table below                                 | WhatsApp confirmation settings.                                            |
+| `access`         | object           |       No | See access table below                               | Password protection for private invitations.                               |
+| `openGate`       | object           |       No | See open gate table below                            | Custom text for the music/open-invitation gate screen.                     |
+| `customScript`   | string           |       No | JavaScript filename, e.g. `custom.js`                | Optional invite-specific script loaded from `assetsPath`.                  |
+
+> `heroImage` is required only when `hero.image` is not provided.
+
+---
+
+## `layout`
+
+**Type:** `string`
+**Required:** Yes
 
 Defines the main invitation layout.
 
-Allowed values
-"classic"
-"split"
-"timeline"
-"minimal"
-"compact"
-Notes
-compact is designed for mobile-first, poster-style invitations.
-All compact layouts follow the same compact logic, only the distribution changes.
-layoutVariant
+### Allowed values
 
-Type: string
-Required: no
-Used only when: layout = "compact"
+* `"classic"`
+* `"split"`
+* `"timeline"`
+* `"minimal"`
+* `"compact"`
+
+### Notes
+
+* `compact` is designed for mobile-first, poster-style invitations.
+* All compact layouts follow the same compact rules; only the internal distribution changes.
+
+---
+
+## `layoutVariant`
+
+**Type:** `string`
+**Required:** No
+**Used only when:** `layout = "compact"`
 
 Defines the internal compact distribution style.
 
-Allowed values
-"compact-1"
-"compact-2"
-"compact-3"
-Notes
+### Allowed values
 
-If omitted, the default is:
+* `"compact-1"`
+* `"compact-2"`
+* `"compact-3"`
 
+### Default
+
+```json
 "layoutVariant": "compact-1"
-eventTypeLabel
+```
 
-Type: string
-Required: no
+---
 
-Small label shown above the title.
+## Hero configuration
 
-Example
-"eventTypeLabel": "Birthday"
-Typical values
-"Wedding"
-"Birthday"
-"Baptism"
-"Event"
-"Baby Shower"
-title
+### `hero` object
 
-Type: string
-Required: yes
+**Type:** `object`
+**Required:** No
 
-Main title of the invitation.
+Optional advanced background configuration for the hero section.
 
-Example
-"title": "Sofi turns 5"
-subtitle
+| Parameter       | Type   | Required | Allowed / Expected Values                                                                                         | Description                  |
+| --------------- | ------ | -------: | ----------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| `hero.image`    | string |       No | Image filename                                                                                                    | Overrides `heroImage`.       |
+| `hero.position` | string |       No | CSS background-position values such as `center center`, `center top`, `top center`, `left center`, `right center` | Controls image positioning.  |
+| `hero.size`     | string |       No | `cover`, `contain`                                                                                                | Controls background scaling. |
+| `hero.repeat`   | string |       No | `no-repeat`, `repeat`                                                                                             | Controls image repetition.   |
+| `hero.height`   | string |       No | CSS height values such as `100svh`, `92vh`                                                                        | Controls hero height.        |
 
-Type: string
-Required: no
+### Example
 
-Secondary text shown below the title.
-
-Example
-"subtitle": "Join us for a magical afternoon full of fun."
-eventDateISO
-
-Type: string
-Required: no
-Used for: countdown
-
-Machine-readable date used for the countdown.
-
-Format
-
-ISO date-time format:
-
-"eventDateISO": "2026-07-18T16:00:00"
-Notes
-If omitted, countdown is automatically hidden.
-Recommended when using countdown.enabled = true.
-eventDateText
-
-Type: string
-Required: no
-
-Human-readable event date shown in the invitation.
-
-Example
-"eventDateText": "July 18, 2026 · 4:00 PM"
-place
-
-Type: string
-Required: no
-
-Event location text.
-
-Example
-"place": "Salón Arcoíris, Puebla"
-description
-
-Type: string
-Required: no
-
-Additional event description.
-
-Example
-"description": "There will be games, cake, surprises, and lots of fun."
-assetsPath
-
-Type: string
-Required: yes
-
-Path to the folder containing the invitation assets.
-
-Example
-"assetsPath": "assets/xyHd0aS"
-Notes
-
-This folder may contain:
-
-hero.jpg
-gallery images
-music.mp3
-custom.js
-heroImage
-
-Type: string
-Required: yes, unless hero.image is provided
-
-Fallback hero background image filename.
-
-Example
-"heroImage": "hero.jpg"
-hero
-
-Type: object
-Required: no
-
-Optional advanced hero background configuration.
-
-Properties
-hero.image
-
-Type: string
-Overrides heroImage.
-
-"image": "hero.jpg"
-hero.position
-
-Type: string
-CSS background-position value.
-
-Common values
-"center center"
-"center top"
-"top center"
-"left center"
-"right center"
-hero.size
-
-Type: string
-CSS background-size value.
-
-Common values
-"cover"
-"contain"
-hero.repeat
-
-Type: string
-CSS background-repeat value.
-
-Common values
-"no-repeat"
-"repeat"
-hero.height
-
-Type: string
-Height of the hero section.
-
-Recommended values
-"100svh" for compact mobile full-screen
-"92vh" for standard layouts
-Example
+```json
 "hero": {
   "image": "hero.jpg",
   "position": "center center",
@@ -279,169 +204,144 @@ Example
   "repeat": "no-repeat",
   "height": "100svh"
 }
-locationUrl
+```
 
-Type: string
-Required: no
+### Recommended values
 
-External map or location URL.
+* Use `100svh` for compact, full-screen mobile invites.
+* Use `92vh` or similar for standard layouts.
 
-Example
-"locationUrl": "https://maps.google.com"
-mapDisplay
+---
 
-Type: string
-Required: no
+## Map configuration
 
-Controls how the map behaves.
+| Parameter        | Type   | Required | Allowed / Expected Values | Description                            |
+| ---------------- | ------ | -------: | ------------------------- | -------------------------------------- |
+| `locationUrl`    | string |       No | Any valid URL             | External location/map URL.             |
+| `mapDisplay`     | string |       No | `button`, `embed`         | Defines map behavior.                  |
+| `mapEmbedUrl`    | string |       No | Embeddable map URL        | Used when `mapDisplay` is `embed`.     |
+| `mapButtonLabel` | string |       No | Any text                  | Custom button label.                   |
+| `mapTitle`       | string |       No | Any text                  | Modal title for compact embedded maps. |
 
-Allowed values
-"button"
-"embed"
-Behavior
-In non-compact layouts:
-"button" → shows a button
-"embed" → shows embedded map iframe
-In compact layouts:
-"button" → shows integrated button
-"embed" → opens embedded map inside modal overlay
-mapEmbedUrl
+### Behavior by layout
 
-Type: string
-Required: only when using mapDisplay = "embed"
+#### Non-compact layouts
 
-URL for embedded map iframe.
+* `mapDisplay: "button"` → shows a button in the map section.
+* `mapDisplay: "embed"` → shows an embedded map iframe in the map section.
 
-Example
-"mapEmbedUrl": "https://www.google.com/maps?q=Puebla&output=embed"
-mapButtonLabel
+#### Compact layouts
 
-Type: string
-Required: no
+* `mapDisplay: "button"` → shows an integrated map button.
+* `mapDisplay: "embed"` → opens the embedded map inside a modal overlay, keeping the invite in a single mobile screen.
 
-Custom label for the map button.
+---
 
-Example
-"mapButtonLabel": "View Map"
-mapTitle
+## Gallery configuration
 
-Type: string
-Required: no
+### `gallery`
 
-Title used in the map modal header.
-
-Example
-"mapTitle": "Event Location"
-gallery
-
-Type: array of strings
-Required: no
+**Type:** `array of strings`
+**Required:** No
 
 List of gallery image filenames.
 
-Example
-"gallery": ["gallery-1.jpg", "gallery-2.jpg"]
-Notes
-If omitted or empty, gallery section is hidden automatically.
-Files must exist inside assetsPath.
-music
+### Example
 
-Type: object
-Required: no
+```json
+"gallery": ["gallery-1.jpg", "gallery-2.jpg"]
+```
+
+### Notes
+
+* If omitted or empty, the gallery section is hidden automatically.
+* Files must exist inside `assetsPath`.
+
+---
+
+## Music configuration
+
+### `music` object
+
+**Type:** `object`
+**Required:** No
 
 Controls invitation music.
 
-Properties
-music.enabled
+| Parameter       | Type    | Required | Allowed / Expected Values        | Description                     |
+| --------------- | ------- | -------: | -------------------------------- | ------------------------------- |
+| `music.enabled` | boolean |       No | `true`, `false`                  | Enables or disables music.      |
+| `music.file`    | string  |       No | Audio filename, e.g. `music.mp3` | Music file inside `assetsPath`. |
 
-Type: boolean
+### Example
 
-true → enables music
-false → disables music
-music.file
-
-Type: string
-Music filename inside assetsPath.
-
-Example
+```json
 "music": {
   "enabled": true,
   "file": "music.mp3"
 }
-Notes
-When music exists and there is no password, the system shows an “Open Invitation” gate first.
-When music exists and a password is required, the password interaction is used to attempt autoplay.
-countdown
+```
 
-Type: object
-Required: no
+### Notes
+
+* When music exists and there is no password, the system shows an **Open Invitation** gate first.
+* When music exists and a password is required, the password interaction is used to attempt autoplay.
+
+---
+
+## Countdown configuration
+
+### `countdown` object
+
+**Type:** `object`
+**Required:** No
 
 Controls countdown visibility.
 
-Properties
-countdown.enabled
+| Parameter           | Type    | Required | Allowed / Expected Values | Description                   |
+| ------------------- | ------- | -------: | ------------------------- | ----------------------------- |
+| `countdown.enabled` | boolean |       No | `true`, `false`           | Shows or hides the countdown. |
 
-Type: boolean
+### Example
 
-true → show countdown if eventDateISO exists
-false → hide countdown
-Example
+```json
 "countdown": {
   "enabled": true
 }
-Notes
+```
 
-If eventDateISO is missing, countdown is hidden automatically even if enabled.
+### Notes
 
-theme
+* If `eventDateISO` is missing, countdown is hidden automatically.
+* If omitted entirely, countdown is hidden unless the implementation defaults it on and `eventDateISO` exists; recommended practice is to declare it explicitly.
 
-Type: object
-Required: no
+---
+
+## Theme configuration
+
+### `theme` object
+
+**Type:** `object`
+**Required:** No
 
 Controls colors and fonts.
 
-Properties
-theme.bg
+| Parameter               | Type   | Required | Allowed / Expected Values         | Description                         |
+| ----------------------- | ------ | -------: | --------------------------------- | ----------------------------------- |
+| `theme.bg`              | string |       No | Any valid CSS color               | Page background color.              |
+| `theme.surface`         | string |       No | Any valid CSS color               | Card/panel background color.        |
+| `theme.text`            | string |       No | Any valid CSS color               | Primary text color.                 |
+| `theme.muted`           | string |       No | Any valid CSS color               | Secondary text color.               |
+| `theme.primary`         | string |       No | Any valid CSS color               | Primary accent color.               |
+| `theme.primaryContrast` | string |       No | Any valid CSS color               | Text color used on primary buttons. |
+| `theme.overlay`         | string |       No | Any valid CSS color or rgba value | Hero overlay color.                 |
+| `theme.heroText`        | string |       No | Any valid CSS color               | Text color used on hero content.    |
+| `theme.fontFamily`      | string |       No | Any valid CSS font-family value   | Body font family.                   |
+| `theme.titleFontFamily` | string |       No | Any valid CSS font-family value   | Title font family.                  |
 
-Page background color
+### Example
 
-theme.surface
-
-Card/panel background color
-
-theme.text
-
-Primary text color
-
-theme.muted
-
-Secondary text color
-
-theme.primary
-
-Primary accent color
-
-theme.primaryContrast
-
-Text color used on primary buttons
-
-theme.overlay
-
-Hero overlay color
-
-theme.heroText
-
-Text color used on hero content
-
-theme.fontFamily
-
-Body font family
-
-theme.titleFontFamily
-
-Title font family
-
-Example
+```json
 "theme": {
   "bg": "#fff8ff",
   "surface": "#ffffff",
@@ -454,31 +354,60 @@ Example
   "fontFamily": "'Trebuchet MS', Arial, sans-serif",
   "titleFontFamily": "'Trebuchet MS', Arial, sans-serif"
 }
-schedule
+```
 
-Type: array of objects
-Required: no
+---
+
+## Schedule configuration
+
+### `schedule`
+
+**Type:** `array of objects`
+**Required:** No
 
 Optional event timeline.
 
-Item structure
-{
-  "time": "4:00 PM",
-  "title": "Welcome",
-  "description": "Guest arrival and greetings."
-}
-Notes
+| Parameter                | Type   | Required | Allowed / Expected Values | Description                      |
+| ------------------------ | ------ | -------: | ------------------------- | -------------------------------- |
+| `schedule[].time`        | string |       No | Any text, e.g. `4:00 PM`  | Event time label.                |
+| `schedule[].title`       | string |       No | Any text                  | Main schedule item title.        |
+| `schedule[].description` | string |       No | Any text                  | Additional schedule description. |
+
+### Example
+
+```json
+"schedule": [
+  {
+    "time": "4:00 PM",
+    "title": "Welcome",
+    "description": "Guest arrival and greetings."
+  }
+]
+```
+
+### Notes
 
 If omitted or empty, the schedule section is hidden automatically.
 
-giftRegistry
+---
 
-Type: object
-Required: no
+## Gift registry configuration
+
+### `giftRegistry`
+
+**Type:** `object`
+**Required:** No
 
 Gift registry or store links.
 
-Example
+| Parameter                    | Type   | Required | Allowed / Expected Values | Description            |
+| ---------------------------- | ------ | -------: | ------------------------- | ---------------------- |
+| `giftRegistry.<store>.url`   | string |      Yes | Any valid URL             | Store or registry URL. |
+| `giftRegistry.<store>.label` | string |      Yes | Any text                  | Visible button label.  |
+
+### Example
+
+```json
 "giftRegistry": {
   "liverpool": {
     "url": "https://www.liverpool.com.mx",
@@ -489,193 +418,306 @@ Example
     "label": "Palacio de Hierro"
   }
 }
-Notes
-Keys such as liverpool or palacio are just internal labels.
-Only url and label are required per item.
-If omitted, the section is hidden automatically.
-rsvp
+```
 
-Type: object
-Required: no
+### Notes
+
+* The key names such as `liverpool` or `palacio` are internal identifiers only.
+* Only `url` and `label` are required per item.
+* If omitted, the section is hidden automatically.
+
+---
+
+## RSVP configuration
+
+### `rsvp` object
+
+**Type:** `object`
+**Required:** No
 
 WhatsApp confirmation settings.
 
-Properties
-rsvp.phone
+| Parameter              | Type   | Required | Allowed / Expected Values                              | Description                  |
+| ---------------------- | ------ | -------: | ------------------------------------------------------ | ---------------------------- |
+| `rsvp.phone`           | string |      Yes | International-format phone string, e.g. `522226763338` | WhatsApp destination number. |
+| `rsvp.messageTemplate` | string |       No | Any text with supported placeholders                   | WhatsApp message template.   |
 
-Type: string
-Phone number in international format without special characters recommended.
+### Supported placeholders
 
-Example
-"phone": "522226763338"
-rsvp.messageTemplate
+* `{name}`
+* `{attendance}`
+* `{eventTitle}`
+* `{eventDateText}`
+* `{place}`
 
-Type: string
-WhatsApp message template.
+### Example
 
-Supported placeholders
-{name}
-{attendance}
-{eventTitle}
-{eventDateText}
-{place}
-Example
-"messageTemplate": "Hello, this is {name}. {attendance} to {eventTitle}, on {eventDateText}."
-Notes
+```json
+"rsvp": {
+  "phone": "522226763338",
+  "messageTemplate": "Hello, this is {name}. {attendance} to {eventTitle}, on {eventDateText}."
+}
+```
 
-If rsvp is omitted, RSVP section is hidden automatically.
+### Notes
 
-access
+If `rsvp` is omitted, the RSVP section is hidden automatically.
 
-Type: object
-Required: no
+---
+
+## Access protection
+
+### `access` object
+
+**Type:** `object`
+**Required:** No
 
 Optional password protection.
 
-Behavior
-If access exists, password is required.
-If access does not exist, invitation opens normally.
-Properties
-access.password
+### Behavior
 
-Type: string
-Required password.
+* If `access` exists, a password is required.
+* If `access` does not exist, the invitation opens normally.
 
-access.title
+| Parameter         | Type   | Required | Allowed / Expected Values | Description        |
+| ----------------- | ------ | -------: | ------------------------- | ------------------ |
+| `access.password` | string |      Yes | Any string                | Required password. |
+| `access.title`    | string |       No | Any text                  | Prompt title.      |
+| `access.message`  | string |       No | Any text                  | Prompt message.    |
 
-Type: string
-Prompt title.
+### Example
 
-access.message
-
-Type: string
-Prompt message.
-
-Example
+```json
 "access": {
   "password": "1234",
   "title": "Private Invitation",
   "message": "Enter the password to view this invitation."
 }
-openGate
+```
 
-Type: object
-Required: no
+---
 
-Optional text customization for the “Open Invitation” screen shown before music autoplay.
+## Open gate configuration
 
-Properties
-openGate.title
+### `openGate` object
 
-Type: string
+**Type:** `object`
+**Required:** No
 
-openGate.message
+Optional custom text for the **Open Invitation** screen shown before music autoplay.
 
-Type: string
+| Parameter          | Type   | Required | Allowed / Expected Values | Description   |
+| ------------------ | ------ | -------: | ------------------------- | ------------- |
+| `openGate.title`   | string |       No | Any text                  | Gate title.   |
+| `openGate.message` | string |       No | Any text                  | Gate message. |
 
-Example
+### Example
+
+```json
 "openGate": {
   "title": "Open Invitation",
   "message": "Tap the button below to open the invitation and start the music."
 }
-customScript
+```
 
-Type: string
-Required: no
+---
 
-Optional custom JavaScript file inside assetsPath.
+## Custom JavaScript
 
-Example
+### `customScript`
+
+**Type:** `string`
+**Required:** No
+
+Optional invitation-specific JavaScript file inside `assetsPath`.
+
+### Example
+
+```json
 "customScript": "custom.js"
-Notes
-This lets you add invitation-specific behavior without changing the shared HTML.
-The script is loaded after the invitation is rendered.
-window.InvitesConfig is available to the custom script.
-Automatic hiding behavior
+```
 
-The system is designed to hide unused content automatically.
+### Notes
 
-If a property is missing, its section is hidden
+* This allows invitation-specific behavior without changing the shared HTML.
+* The script is loaded after the invitation is rendered.
+* `window.InvitesConfig` is available to the custom script.
+
+---
+
+## Automatic hiding behavior
+
+The system hides unused content automatically.
+
+### If a property is missing, its section is hidden
 
 This applies to:
 
-subtitle
-eventDateText
-place
-description
-gallery
-schedule
-giftRegistry
-music
-countdown
-rsvp
-locationUrl
-mapEmbedUrl
-Important exceptions
+* `subtitle`
+* `eventDateText`
+* `place`
+* `description`
+* `gallery`
+* `schedule`
+* `giftRegistry`
+* `music`
+* `countdown`
+* `rsvp`
+* `locationUrl`
+* `mapEmbedUrl`
+
+### Important exceptions
 
 These fields are still required:
 
-layout
-title
-assetsPath
-heroImage or hero.image
-Recommended compact usage
+* `layout`
+* `title`
+* `assetsPath`
+* `heroImage` **or** `hero.image`
 
-Compact layouts are meant to behave like mobile poster invitations.
+---
 
-Best compact setup
+## Recommended compact usage
+
+Compact layouts are meant to behave like **mobile poster invitations**.
+
+### Best compact setup
 
 Recommended fields:
 
-eventTypeLabel
-title
-subtitle
-eventDateText
-place
-hero
-music
-rsvp
-locationUrl or mapDisplay = "embed"
-theme
-Avoid overloading compact layouts
+* `eventTypeLabel`
+* `title`
+* `subtitle`
+* `eventDateText`
+* `place`
+* `hero`
+* `music`
+* `rsvp`
+* `locationUrl` or `mapDisplay = "embed"`
+* `theme`
+
+### Optional compact fields
+
+Use sparingly:
+
+* `description`
+* `countdown`
+
+### Avoid overloading compact layouts
 
 Using all of these at once may feel crowded:
 
-gallery
-schedule
-giftRegistry
-countdown
-embedded map
-RSVP
-long descriptions
+* `gallery`
+* `schedule`
+* `giftRegistry`
+* `countdown`
+* embedded map
+* RSVP
+* long descriptions
 
 Compact works best when the content is minimal and visually focused.
 
-Recommended asset structure
+---
+
+## Recommended asset structure
+
+```plaintext
 /assets/xyHd0aS/
   hero.jpg
   gallery-1.jpg
   gallery-2.jpg
   music.mp3
   custom.js
+```
 
 And the matching JSON:
 
+```json
 "assetsPath": "assets/xyHd0aS"
-Template workflow
+```
 
-Use master-template.json as a starting point.
+---
 
-Example workflow
-Copy master-template.json
-Rename it to a random invitation ID, for example:
+## Template workflow
+
+Use `master-template.json` as a starting point.
+
+### Example workflow
+
+1. Copy `master-template.json`
+2. Rename it to a random invitation ID, for example:
+
+```plaintext
 data/xyHd0aS.json
-Replace:
+```
+
+3. Replace:
+
+```json
 "assetsPath": "assets/REPLACE_ME"
+```
 
 with:
 
+```json
 "assetsPath": "assets/xyHd0aS"
-Create:
+```
+
+4. Create:
+
+```plaintext
 assets/xyHd0aS/
-Add the required assets
+```
+
+5. Add the required assets
+
+---
+
+## Practical examples
+
+### Standard non-compact map button
+
+```json
+{
+  "layout": "classic",
+  "title": "Ana & Luis",
+  "assetsPath": "assets/wed123",
+  "heroImage": "hero.jpg",
+  "locationUrl": "https://maps.google.com",
+  "mapDisplay": "button"
+}
+```
+
+### Compact layout with embedded map modal
+
+```json
+{
+  "layout": "compact",
+  "layoutVariant": "compact-1",
+  "title": "Sofi turns 5",
+  "assetsPath": "assets/abc123",
+  "heroImage": "hero.jpg",
+  "mapDisplay": "embed",
+  "mapEmbedUrl": "https://www.google.com/maps?q=Puebla&output=embed"
+}
+```
+
+### Private invitation with music
+
+```json
+{
+  "layout": "compact",
+  "title": "Private Event",
+  "assetsPath": "assets/private01",
+  "heroImage": "hero.jpg",
+  "music": {
+    "enabled": true,
+    "file": "music.mp3"
+  },
+  "access": {
+    "password": "1234",
+    "title": "Private Invitation",
+    "message": "Enter the password to continue."
+  }
+}
+```
