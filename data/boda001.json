@@ -27,7 +27,9 @@
     "primary": "#c08b74",
     "primaryContrast": "#ffffff",
     "overlay": "rgba(53, 31, 22, 0.34)",
-    "heroText": "#ffffff"
+    "heroText": "#ffffff",
+    "fontFamily": "'Trebuchet MS', Arial, sans-serif",
+    "titleFontFamily": "'Georgia', serif"
   },
   "schedule": [
     {
