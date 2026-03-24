@@ -10,8 +10,8 @@
   "locationUrl": "https://maps.google.com",
   "mapDisplay": "button",
   "assetsPath": "assets/boda001",
-  "heroImage": "hero.jpg",
-  "gallery": ["gallery-1.jpg", "gallery-2.jpg", "gallery-3.jpg"],
+  "heroImage": "hero.png",
+  "gallery": ["gallery-1.png", "gallery-2.png"],
   "music": {
     "enabled": true,
     "file": "music.mp3"
