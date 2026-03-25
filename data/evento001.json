@@ -41,5 +41,11 @@
   "rsvp": {
     "phone": "522226763338",
     "messageTemplate": "Hola, soy {name}. {attendance} a {eventTitle}."
+  },
+  
+  "availability": {
+    "expiresAt": "2026-07-24T23:59:59",
+    "title": "Esta invitación está desactivada",
+    "message": "Contacte al proveedor para acordar una extensión de tiempo."
   }
 }
