@@ -28,8 +28,8 @@
     "primaryContrast": "#ffffff",
     "overlay": "rgba(53, 31, 22, 0.34)",
     "heroText": "#ffffff",
-    "fontFamily": "'Trebuchet MS', Arial, sans-serif",
-    "titleFontFamily": "'Georgia', serif"
+    "fontFamily": "'Palatino Linotype', 'Book Antiqua', Palatino, Garamond, Georgia, serif",
+    "titleFontFamily": "'Baskerville', 'Palatino Linotype', 'Book Antiqua', Georgia, serif"
   },
   "schedule": [
     {
@@ -49,7 +49,6 @@
     "messageTemplate": "Hola, soy {name}. {attendance} a {eventTitle}, el {eventDateText} en {place}."
   },
   "customScript": "custom.js",
-
   "access": {
     "password": "1234",
     "title": "Invitación privada",
