@@ -7,24 +7,31 @@
   "eventDateText": "20 de septiembre de 2026 · 12:00 PM",
   "place": "Parroquia San José, Puebla",
   "description": "Nos encantará compartir contigo este día lleno de fe y alegría.",
-  "mapDisplay": "embed",
-  "mapEmbedUrl": "https://www.google.com/maps?q=Puebla&output=embed",
+  "locationUrl": "https://maps.google.com",
+  "mapDisplay": "button",
   "assetsPath": "assets/bautizo001",
-  "heroImage": "hero.jpg",
-  "gallery": ["gallery-1.jpg", "gallery-2.jpg"],
+  "heroImage": "https://unsplash.com/photos/71SPQWYi5bE/download?force=true&w=1800",
+  "gallery": [
+    "https://unsplash.com/photos/nNdjzaL_MY8/download?force=true&w=1400",
+    "https://unsplash.com/photos/fCG2Q1hf1YA/download?force=true&w=1400",
+    "https://unsplash.com/photos/vTY7DQv_Gb0/download?force=true&w=1400",
+    "https://unsplash.com/photos/p6ivkfWpf2g/download?force=true&w=1400"
+  ],
   "music": {
-    "enabled": true,
-    "file": "music.mp3"
+    "enabled": false,
+    "file": ""
   },
   "theme": {
-    "bg": "#f4f9ff",
+    "bg": "#f8fbff",
     "surface": "#ffffff",
-    "text": "#2c3742",
-    "muted": "#6c7a86",
-    "primary": "#7aa9d6",
+    "text": "#2b3643",
+    "muted": "#6f7b88",
+    "primary": "#8aaed1",
     "primaryContrast": "#ffffff",
-    "overlay": "rgba(17, 35, 58, 0.26)",
-    "heroText": "#ffffff"
+    "overlay": "rgba(24, 39, 58, 0.28)",
+    "heroText": "#ffffff",
+    "fontFamily": "'Palatino Linotype', 'Book Antiqua', Palatino, serif",
+    "titleFontFamily": "'Georgia', serif"
   },
   "schedule": [
     {
@@ -40,6 +47,6 @@
   ],
   "rsvp": {
     "phone": "522226763338",
-    "messageTemplate": "Hola, soy {name}. {attendance} al {eventTitle}. Gracias."
+    "messageTemplate": "Hola, soy {name}. {attendance} al {eventTitle}, el {eventDateText}."
   }
 }
