@@ -839,3 +839,139 @@ body.layout-compact.compact-variant-3 .hero-actions {
     height: 62vh;
   }
 }
+
+/* =========================================
+   COMPACT SPLIT (2 & 3)
+========================================= */
+
+body.layout-compact.compact-split .hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+}
+
+/* =========================
+   HERO SIDE
+========================= */
+
+body.layout-compact.compact-split .hero-content {
+  position: relative;
+  height: 100%;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* =========================
+   INFO COLUMN BASE
+========================= */
+
+body.layout-compact.compact-split .countdown-section,
+body.layout-compact.compact-split .details-section,
+body.layout-compact.compact-split .schedule-section,
+body.layout-compact.compact-split .gallery-section,
+body.layout-compact.compact-split .gift-section,
+body.layout-compact.compact-split .map-section,
+body.layout-compact.compact-split .rsvp-section {
+  position: relative;
+  top: auto !important;
+  left: auto;
+  right: auto;
+  width: 100%;
+  max-width: 320px;
+  margin: 6px 0;
+}
+
+/* Contenedor de info */
+body.layout-compact.compact-split #app {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* =========================
+   COMPACT-2
+   INFO LEFT / HERO RIGHT
+========================= */
+
+body.layout-compact.compact-2.compact-split #app {
+  grid-template-columns: 1fr 1fr;
+}
+
+body.layout-compact.compact-2.compact-split .hero {
+  grid-column: 2;
+}
+
+body.layout-compact.compact-2.compact-split .countdown-section,
+body.layout-compact.compact-2.compact-split .details-section,
+body.layout-compact.compact-2.compact-split .schedule-section,
+body.layout-compact.compact-2.compact-split .gallery-section,
+body.layout-compact.compact-2.compact-split .gift-section,
+body.layout-compact.compact-2.compact-split .map-section,
+body.layout-compact.compact-2.compact-split .rsvp-section {
+  grid-column: 1;
+  margin-left: 10px;
+}
+
+/* =========================
+   COMPACT-3
+   HERO LEFT / INFO RIGHT
+========================= */
+
+body.layout-compact.compact-3.compact-split #app {
+  grid-template-columns: 1fr 1fr;
+}
+
+body.layout-compact.compact-3.compact-split .hero {
+  grid-column: 1;
+}
+
+body.layout-compact.compact-3.compact-split .countdown-section,
+body.layout-compact.compact-3.compact-split .details-section,
+body.layout-compact.compact-3.compact-split .schedule-section,
+body.layout-compact.compact-3.compact-split .gallery-section,
+body.layout-compact.compact-3.compact-split .gift-section,
+body.layout-compact.compact-3.compact-split .map-section,
+body.layout-compact.compact-3.compact-split .rsvp-section {
+  grid-column: 2;
+  margin-right: 10px;
+}
+
+/* =========================
+   INFO STACK
+========================= */
+
+body.layout-compact.compact-split .details-section .container,
+body.layout-compact.compact-split .schedule-section .container,
+body.layout-compact.compact-split .gift-section .container,
+body.layout-compact.compact-split .map-section .container,
+body.layout-compact.compact-split .rsvp-section .container {
+  width: 100%;
+}
+
+/* =========================
+   MOBILE FALLBACK
+========================= */
+
+@media (max-width: 720px) {
+  body.layout-compact.compact-split .hero {
+    display: block;
+  }
+
+  body.layout-compact.compact-split #app {
+    display: block;
+  }
+
+  body.layout-compact.compact-split .countdown-section,
+  body.layout-compact.compact-split .details-section,
+  body.layout-compact.compact-split .schedule-section,
+  body.layout-compact.compact-split .gallery-section,
+  body.layout-compact.compact-split .gift-section,
+  body.layout-compact.compact-split .map-section,
+  body.layout-compact.compact-split .rsvp-section {
+    max-width: 100%;
+    margin: 0;
+    position: absolute;
+  }
+}
