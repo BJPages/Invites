@@ -10,11 +10,16 @@
   "locationUrl": "https://maps.google.com",
   "mapDisplay": "button",
   "assetsPath": "assets/evento001",
-  "heroImage": "hero.jpg",
-  "gallery": ["gallery-1.jpg", "gallery-2.jpg", "gallery-3.jpg", "gallery-4.jpg"],
+  "heroImage": "https://unsplash.com/photos/OE7iJaikYoM/download?force=true&w=1800",
+  "gallery": [
+    "https://unsplash.com/photos/z6IS0si9Pio/download?force=true&w=1400",
+    "https://unsplash.com/photos/hLGbHZYpGL8/download?force=true&w=1400",
+    "https://unsplash.com/photos/PwZ9Jcm5OAc/download?force=true&w=1400",
+    "https://unsplash.com/photos/VoMLp0mnHSg/download?force=true&w=1400"
+  ],
   "music": {
-    "enabled": true,
-    "file": "music.mp3"
+    "enabled": false,
+    "file": ""
   },
   "theme": {
     "bg": "#f5f5f7",
@@ -24,7 +29,9 @@
     "primary": "#111827",
     "primaryContrast": "#ffffff",
     "overlay": "rgba(0, 0, 0, 0.42)",
-    "heroText": "#ffffff"
+    "heroText": "#ffffff",
+    "fontFamily": "'Trebuchet MS', Arial, sans-serif",
+    "titleFontFamily": "'Georgia', serif"
   },
   "schedule": [
     {
