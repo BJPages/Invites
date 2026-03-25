@@ -13,9 +13,6 @@
     "enabled": true,
     "file": "https://cdn.freesound.org/previews/686/686217_4361321-lq.mp3"
   },
-  "countdown": {
-    "enabled": true
-  },
   "theme": {
     "bg": "#fffdf5",
     "surface": "#ffffff",
