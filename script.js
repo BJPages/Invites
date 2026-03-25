@@ -286,10 +286,16 @@
   function applyLayout(config) {
     const layout = config.layout || "classic";
     document.body.classList.add(`layout-${layout}`);
-
+  
     if (layout === "compact") {
       const variant = config.layoutVariant || "compact-1";
+  
       document.body.classList.add(variant);
+  
+      // 👉 NUEVO: activar split layout para 2 y 3
+      if (variant === "compact-2" || variant === "compact-3") {
+        document.body.classList.add("compact-split");
+      }
     }
   }
 
