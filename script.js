@@ -286,16 +286,10 @@
   function applyLayout(config) {
     const layout = config.layout || "classic";
     document.body.classList.add(`layout-${layout}`);
-  
+
     if (layout === "compact") {
       const variant = config.layoutVariant || "compact-1";
-  
       document.body.classList.add(variant);
-  
-      // 👉 NUEVO: activar split layout para 2 y 3
-      if (variant === "compact-2" || variant === "compact-3") {
-        document.body.classList.add("compact-split");
-      }
     }
   }
 
@@ -659,6 +653,11 @@
 
     sections.forEach((section) => {
       section.style.top = "";
+      section.style.left = "";
+      section.style.right = "";
+      section.style.width = "";
+      section.style.maxWidth = "";
+      section.style.transform = "";
     });
 
     const visibleSections = sections.filter(
@@ -673,17 +672,40 @@
     let startTopSvh = isMobile ? 26 : 32;
     let gap = isMobile ? 6 : 8;
 
+    let side = "center";
+
     if (variant === "compact-2") {
-      startTopSvh = isMobile ? 30 : 36;
-    } else if (variant === "compact-3") {
-      startTopSvh = isMobile ? 24 : 30;
+      startTopSvh = isMobile ? 18 : 20;
       gap = isMobile ? 5 : 7;
+      side = "left";
+    } else if (variant === "compact-3") {
+      startTopSvh = isMobile ? 18 : 20;
+      gap = isMobile ? 5 : 7;
+      side = "right";
     }
 
     let currentTopPx = svhToPx(startTopSvh);
 
     visibleSections.forEach((section) => {
       section.style.top = `${currentTopPx}px`;
+
+      if (side === "left") {
+        section.style.left = isMobile ? "10px" : "22px";
+        section.style.right = "auto";
+        section.style.width = isMobile ? "calc(50% - 16px)" : "min(34vw, 320px)";
+        section.style.maxWidth = "320px";
+      } else if (side === "right") {
+        section.style.right = isMobile ? "10px" : "22px";
+        section.style.left = "auto";
+        section.style.width = isMobile ? "calc(50% - 16px)" : "min(34vw, 320px)";
+        section.style.maxWidth = "320px";
+      } else {
+        section.style.left = "50%";
+        section.style.right = "auto";
+        section.style.width = isMobile ? "calc(100% - 20px)" : "min(100% - 28px, 720px)";
+        section.style.maxWidth = side === "center" ? "720px" : "320px";
+        section.style.transform = "translateX(-50%)";
+      }
 
       const rect = section.getBoundingClientRect();
       const height = rect.height;
