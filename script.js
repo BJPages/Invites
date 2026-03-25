@@ -78,6 +78,12 @@
       const config = await response.json();
       validateConfig(config);
 
+      const availabilityResult = validateAvailability(config);
+      if (!availabilityResult.allowed) {
+        showError(availabilityResult.title, availabilityResult.message);
+        return;
+      }
+
       const accessResult = handleAccess(config);
       if (!accessResult.allowed) {
         return;
@@ -143,6 +149,37 @@
     if (!config.heroImage && !config.hero?.image) {
       throw new Error("Falta el campo requerido: heroImage o hero.image");
     }
+  }
+
+  function validateAvailability(config) {
+    if (!config.availability || !config.availability.expiresAt) {
+      return { allowed: true };
+    }
+
+    const expiresAt = new Date(config.availability.expiresAt).getTime();
+
+    if (Number.isNaN(expiresAt)) {
+      return {
+        allowed: false,
+        title: "Configuración inválida",
+        message: "La fecha de expiración no tiene un formato válido."
+      };
+    }
+
+    const now = Date.now();
+
+    if (now > expiresAt) {
+      return {
+        allowed: false,
+        title:
+          config.availability.title || "Esta invitación está desactivada",
+        message:
+          config.availability.message ||
+          "Contacte al proveedor para acordar una extensión de tiempo."
+      };
+    }
+
+    return { allowed: true };
   }
 
   function handleAccess(config) {
@@ -671,7 +708,6 @@
 
     let startTopSvh = isMobile ? 26 : 32;
     let gap = isMobile ? 6 : 8;
-
     let side = "center";
 
     if (variant === "compact-2") {
@@ -703,7 +739,7 @@
         section.style.left = "50%";
         section.style.right = "auto";
         section.style.width = isMobile ? "calc(100% - 20px)" : "min(100% - 28px, 720px)";
-        section.style.maxWidth = side === "center" ? "720px" : "320px";
+        section.style.maxWidth = "720px";
         section.style.transform = "translateX(-50%)";
       }
 
