@@ -721,3 +721,32 @@ assets/xyHd0aS/
   }
 }
 ```
+## Availability / Expiration
+
+### `availability` object
+
+**Type:** `object`  
+**Required:** No
+
+Controls whether the invitation should remain active or be automatically disabled after a specific date and time.
+
+### Behavior
+
+- If `availability` is **not present**, the invitation remains active indefinitely.
+- If `availability.expiresAt` is present and the current date/time is **later** than that value, the invitation is disabled.
+- When disabled, the invitation content is not shown and a message is displayed instead.
+
+| Parameter | Type | Required | Allowed / Expected Values | Description |
+|---|---|---:|---|---|
+| `availability.expiresAt` | string | Yes | ISO datetime, e.g. `2026-07-25T23:59:59` | Expiration date and time. After this moment, the invitation is disabled. |
+| `availability.title` | string | No | Any text | Title shown when the invitation has expired. |
+| `availability.message` | string | No | Any text | Message shown when the invitation has expired. |
+
+### Example
+
+```json
+"availability": {
+  "expiresAt": "2026-07-25T23:59:59",
+  "title": "This invitation is disabled",
+  "message": "Please contact the provider to arrange a time extension."
+}
