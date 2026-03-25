@@ -507,8 +507,6 @@ body.layout-compact .gift-section,
 body.layout-compact .map-section,
 body.layout-compact .rsvp-section {
   position: absolute;
-  left: 0;
-  right: 0;
   z-index: 6;
   padding: 0;
   margin: 0;
@@ -522,8 +520,8 @@ body.layout-compact .gallery-section .container,
 body.layout-compact .gift-section .container,
 body.layout-compact .map-section .container,
 body.layout-compact .rsvp-section .container {
-  width: min(100% - 14px, 720px);
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
 }
 
 body.layout-compact .section-title {
@@ -667,35 +665,58 @@ body.layout-compact .rsvp-message {
   color: var(--hero-text);
 }
 
-/* Compact visual variants only */
+/* compact-1: centered */
 body.layout-compact.compact-1 .hero-content,
 body.layout-compact.compact-variant-1 .hero-content {
   justify-content: flex-start;
+  align-items: center;
+  text-align: center;
 }
 
+/* compact-2: header right / info left */
 body.layout-compact.compact-2 .hero-content,
 body.layout-compact.compact-variant-2 .hero-content {
-  justify-content: center;
-  padding-top: 5svh;
+  justify-content: flex-start;
+  align-items: flex-end;
+  text-align: right;
+  width: min(100% - 14px, 720px);
+  padding-right: 18px;
 }
 
+body.layout-compact.compact-2 .hero-actions,
+body.layout-compact.compact-variant-2 .hero-actions {
+  justify-content: flex-end;
+}
+
+body.layout-compact.compact-2 .subtitle,
+body.layout-compact.compact-variant-2 .subtitle {
+  margin-left: auto;
+  margin-right: 0;
+  max-width: 46%;
+}
+
+/* compact-3: header left / info right */
 body.layout-compact.compact-3 .hero-content,
 body.layout-compact.compact-variant-3 .hero-content {
   justify-content: flex-start;
-  padding-top: 4svh;
-}
-
-body.layout-compact.compact-3 .title,
-body.layout-compact.compact-variant-3 .title {
-  font-size: clamp(1.45rem, 7vw, 2.5rem);
+  align-items: flex-start;
+  text-align: left;
+  width: min(100% - 14px, 720px);
+  padding-left: 18px;
 }
 
 body.layout-compact.compact-3 .hero-actions,
 body.layout-compact.compact-variant-3 .hero-actions {
-  flex-direction: column;
+  justify-content: flex-start;
 }
 
-/* Map modal */
+body.layout-compact.compact-3 .subtitle,
+body.layout-compact.compact-variant-3 .subtitle {
+  margin-left: 0;
+  margin-right: auto;
+  max-width: 46%;
+}
+
 .map-modal {
   position: fixed;
   inset: 0;
@@ -829,6 +850,23 @@ body.layout-compact.compact-variant-3 .hero-actions {
     font-size: 0.64rem;
   }
 
+  body.layout-compact.compact-2 .hero-content,
+  body.layout-compact.compact-variant-2 .hero-content {
+    padding-right: 10px;
+  }
+
+  body.layout-compact.compact-2 .subtitle,
+  body.layout-compact.compact-variant-2 .subtitle,
+  body.layout-compact.compact-3 .subtitle,
+  body.layout-compact.compact-variant-3 .subtitle {
+    max-width: 48%;
+  }
+
+  body.layout-compact.compact-3 .hero-content,
+  body.layout-compact.compact-variant-3 .hero-content {
+    padding-left: 10px;
+  }
+
   .map-modal-dialog {
     width: min(100% - 12px, 100%);
     margin: 2vh auto;
@@ -837,141 +875,5 @@ body.layout-compact.compact-variant-3 .hero-actions {
 
   .map-modal-frame {
     height: 62vh;
-  }
-}
-
-/* =========================================
-   COMPACT SPLIT (2 & 3)
-========================================= */
-
-body.layout-compact.compact-split .hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: stretch;
-}
-
-/* =========================
-   HERO SIDE
-========================= */
-
-body.layout-compact.compact-split .hero-content {
-  position: relative;
-  height: 100%;
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 20px;
-}
-
-/* =========================
-   INFO COLUMN BASE
-========================= */
-
-body.layout-compact.compact-split .countdown-section,
-body.layout-compact.compact-split .details-section,
-body.layout-compact.compact-split .schedule-section,
-body.layout-compact.compact-split .gallery-section,
-body.layout-compact.compact-split .gift-section,
-body.layout-compact.compact-split .map-section,
-body.layout-compact.compact-split .rsvp-section {
-  position: relative;
-  top: auto !important;
-  left: auto;
-  right: auto;
-  width: 100%;
-  max-width: 320px;
-  margin: 6px 0;
-}
-
-/* Contenedor de info */
-body.layout-compact.compact-split #app {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-/* =========================
-   COMPACT-2
-   INFO LEFT / HERO RIGHT
-========================= */
-
-body.layout-compact.compact-2.compact-split #app {
-  grid-template-columns: 1fr 1fr;
-}
-
-body.layout-compact.compact-2.compact-split .hero {
-  grid-column: 2;
-}
-
-body.layout-compact.compact-2.compact-split .countdown-section,
-body.layout-compact.compact-2.compact-split .details-section,
-body.layout-compact.compact-2.compact-split .schedule-section,
-body.layout-compact.compact-2.compact-split .gallery-section,
-body.layout-compact.compact-2.compact-split .gift-section,
-body.layout-compact.compact-2.compact-split .map-section,
-body.layout-compact.compact-2.compact-split .rsvp-section {
-  grid-column: 1;
-  margin-left: 10px;
-}
-
-/* =========================
-   COMPACT-3
-   HERO LEFT / INFO RIGHT
-========================= */
-
-body.layout-compact.compact-3.compact-split #app {
-  grid-template-columns: 1fr 1fr;
-}
-
-body.layout-compact.compact-3.compact-split .hero {
-  grid-column: 1;
-}
-
-body.layout-compact.compact-3.compact-split .countdown-section,
-body.layout-compact.compact-3.compact-split .details-section,
-body.layout-compact.compact-3.compact-split .schedule-section,
-body.layout-compact.compact-3.compact-split .gallery-section,
-body.layout-compact.compact-3.compact-split .gift-section,
-body.layout-compact.compact-3.compact-split .map-section,
-body.layout-compact.compact-3.compact-split .rsvp-section {
-  grid-column: 2;
-  margin-right: 10px;
-}
-
-/* =========================
-   INFO STACK
-========================= */
-
-body.layout-compact.compact-split .details-section .container,
-body.layout-compact.compact-split .schedule-section .container,
-body.layout-compact.compact-split .gift-section .container,
-body.layout-compact.compact-split .map-section .container,
-body.layout-compact.compact-split .rsvp-section .container {
-  width: 100%;
-}
-
-/* =========================
-   MOBILE FALLBACK
-========================= */
-
-@media (max-width: 720px) {
-  body.layout-compact.compact-split .hero {
-    display: block;
-  }
-
-  body.layout-compact.compact-split #app {
-    display: block;
-  }
-
-  body.layout-compact.compact-split .countdown-section,
-  body.layout-compact.compact-split .details-section,
-  body.layout-compact.compact-split .schedule-section,
-  body.layout-compact.compact-split .gallery-section,
-  body.layout-compact.compact-split .gift-section,
-  body.layout-compact.compact-split .map-section,
-  body.layout-compact.compact-split .rsvp-section {
-    max-width: 100%;
-    margin: 0;
-    position: absolute;
   }
 }
