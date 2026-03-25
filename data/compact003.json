@@ -10,7 +10,11 @@
   "mapDisplay": "embed",
   "mapEmbedUrl": "https://www.google.com/maps?q=Puebla&output=embed",
   "assetsPath": "assets/compact003",
-  "heroImage": "hero.jpg",
+  "heroImage": "https://cdn.pixabay.com/photo/2023/04/08/21/10/ai-generated-7910139_1280.jpg",
+  "music": {
+    "enabled": true,
+    "file": "https://cdn.freesound.org/previews/686/686217_4361321-lq.mp3"
+  },
   "theme": {
     "bg": "#f7fbff",
     "surface": "#ffffff",
