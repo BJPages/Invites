@@ -34,8 +34,58 @@
   "schedule": [
     {
       "time": "6:00 PM",
-      "title": "Ceremonia",
-      "description": "Recepción de invitados y ceremonia principal."
+      "title": "Misa de acción de gracias",
+      "description": "Ceremonia religiosa para celebrar este día especial."
+    },
+    {
+      "time": "7:00 PM",
+      "title": "Apertura del salón",
+      "description": "Recepción de invitados y bienvenida con música ambiental."
+    },
+    {
+      "time": "7:30 PM",
+      "title": "Coctel de bienvenida",
+      "description": "Servicio de bebidas y snacks ligeros."
+    },
+    {
+      "time": "8:30 PM",
+      "title": "Ceremonia civil",
+      "description": "Ceremonia oficial y firma de actas."
+    },
+    {
+      "time": "9:00 PM",
+      "title": "Entrada de los novios",
+      "description": "Presentación oficial y primer brindis."
+    },
+    {
+      "time": "9:15 PM",
+      "title": "Cena",
+      "description": "Servicio de platillos principales."
+    },
+    {
+      "time": "10:00 PM",
+      "title": "Brindis",
+      "description": "Palabras especiales de familiares y amigos cercanos."
+    },
+    {
+      "time": "10:30 PM",
+      "title": "Primer baile",
+      "description": "Vals de los novios."
+    },
+    {
+      "time": "11:00 PM",
+      "title": "Fiesta",
+      "description": "Apertura de pista con DJ o música en vivo."
+    },
+    {
+      "time": "12:30 AM",
+      "title": "Pastel",
+      "description": "Corte de pastel y sesión de fotos."
+    },
+    {
+      "time": "1:00 AM",
+      "title": "Fin del evento",
+      "description": "Despedida de los invitados."
     }
   ],
   "giftRegistry": {
