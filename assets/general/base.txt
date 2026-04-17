@@ -1,1 +1,0 @@
-This is a global path to share images between proyects
