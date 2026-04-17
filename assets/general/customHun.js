@@ -65,7 +65,7 @@
     }
 
     if (detailsSection) {
-      detailsSection.style.top = "500px";
+      detailsSection.style.top = "70svh";
       detailsSection.style.fontFamily = FONT_FAMILY;
       detailsSection.style.fontWeight = "400";
       detailsSection.style.fontStyle = "normal";
