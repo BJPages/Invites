@@ -12,11 +12,11 @@
   "place": "Cada de Dooña Nora",
   "description": "Ven a vivir una aventura con mucho encanto, energía y diversión.",
 
-  "assetsPath": "assets/compact001",
+  "assetsPath": "",
 
-  "heroImage": "hero.png",
+  "heroImage": "https://static.posters.cz/image/1300/286276.jpg",
   "hero": {
-    "image": "hero.png",
+    "image": "https://static.posters.cz/image/1300/286276.jpg",
     "position": "center center",
     "size": "cover",
     "repeat": "no-repeat",
