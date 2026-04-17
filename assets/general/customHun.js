@@ -1,6 +1,9 @@
 (function () {
+  const FONT_NAME = "Fontdiner Swanky";
+  const FONT_FAMILY = '"Fontdiner Swanky", serif';
+
   function loadGoogleFont(fontName) {
-    const fontId = "gf-" + fontName.replace(/\s+/g, "-").toLowerCase();
+    const safeId = "gf-" + fontName.replace(/\s+/g, "-").toLowerCase();
 
     if (!document.querySelector('link[data-font-preconnect="googleapis"]')) {
       const preconnect1 = document.createElement("link");
@@ -19,9 +22,9 @@
       document.head.appendChild(preconnect2);
     }
 
-    if (!document.getElementById(fontId)) {
+    if (!document.getElementById(safeId)) {
       const link = document.createElement("link");
-      link.id = fontId;
+      link.id = safeId;
       link.rel = "stylesheet";
       link.href =
         "https://fonts.googleapis.com/css2?family=" +
@@ -31,64 +34,100 @@
     }
   }
 
-  function applyFont(selector, fontFamily) {
-    const elements = document.querySelectorAll(selector);
-    elements.forEach(function (el) {
-      el.style.fontFamily = fontFamily;
+  function setFont(selector) {
+    document.querySelectorAll(selector).forEach(function (el) {
+      el.style.fontFamily = FONT_FAMILY;
       el.style.fontWeight = "400";
       el.style.fontStyle = "normal";
     });
   }
 
-  function initInviteC0a87a01() {
-    loadGoogleFont("Fontdiner Swanky");
+  function applyInviteTexts() {
+    const title = document.querySelector(".title");
+    const subtitle = document.getElementById("subtitle");
+    const detailsSection = document.getElementById("detailsSection");
+    const eventPlace = document.getElementById("eventPlace");
+    const eventDateText = document.getElementById("eventDateText");
+    const eventDescription = document.getElementById("eventDescription");
 
-    const title = document.getElementsByClassName("title")[0];
     if (title) {
       title.style.marginTop = "100px";
       title.innerHTML = "Sofi cumple 7 <br>y <br>Carmin cumple 2";
-      title.style.fontFamily = '"Fontdiner Swanky", serif';
+      title.style.fontFamily = FONT_FAMILY;
       title.style.fontWeight = "400";
       title.style.fontStyle = "normal";
     }
 
-    const detailsSection = document.getElementById("detailsSection");
+    if (subtitle) {
+      subtitle.style.fontFamily = FONT_FAMILY;
+      subtitle.style.fontWeight = "400";
+      subtitle.style.fontStyle = "normal";
+    }
+
     if (detailsSection) {
-      detailsSection.style.top = "520px";
-      detailsSection.style.fontFamily = '"Fontdiner Swanky", serif';
+      detailsSection.style.top = "500px";
+      detailsSection.style.fontFamily = FONT_FAMILY;
       detailsSection.style.fontWeight = "400";
       detailsSection.style.fontStyle = "normal";
     }
 
-    const eventPlace = document.getElementById("eventPlace");
     if (eventPlace) {
       eventPlace.style.fontSize = "1.5rem";
-      eventPlace.style.fontFamily = '"Fontdiner Swanky", serif';
+      eventPlace.style.fontFamily = FONT_FAMILY;
+      eventPlace.style.fontWeight = "400";
+      eventPlace.style.fontStyle = "normal";
     }
 
-    const eventDateText = document.getElementById("eventDateText");
     if (eventDateText) {
       eventDateText.style.fontSize = "1rem";
-      eventDateText.style.fontFamily = '"Fontdiner Swanky", serif';
+      eventDateText.style.fontFamily = FONT_FAMILY;
+      eventDateText.style.fontWeight = "400";
+      eventDateText.style.fontStyle = "normal";
     }
 
-    const eventDescription = document.getElementById("eventDescription");
     if (eventDescription) {
       eventDescription.style.fontSize = "1rem";
-      eventDescription.style.fontFamily = '"Fontdiner Swanky", serif';
+      eventDescription.style.fontFamily = FONT_FAMILY;
+      eventDescription.style.fontWeight = "400";
+      eventDescription.style.fontStyle = "normal";
     }
 
-    // Si quieres aplicar la misma fuente a más textos de esta invitación,
-    // agrega aquí sus selectores:
-    applyFont(".title", '"Fontdiner Swanky", serif');
-    applyFont("#eventPlace", '"Fontdiner Swanky", serif');
-    applyFont("#eventDateText", '"Fontdiner Swanky", serif');
-    applyFont("#eventDescription", '"Fontdiner Swanky", serif');
+    setFont(".title");
+    setFont("#subtitle");
+    setFont("#detailsSection");
+    setFont("#eventPlace");
+    setFont("#eventDateText");
+    setFont("#eventDescription");
+  }
+
+  function runAfterBaseLayout() {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        applyInviteTexts();
+      });
+    });
+  }
+
+  function init() {
+    loadGoogleFont(FONT_NAME);
+    runAfterBaseLayout();
+
+    if (document.fonts && document.fonts.load) {
+      document.fonts.load('400 1em "' + FONT_NAME + '"').then(function () {
+        runAfterBaseLayout();
+      });
+    }
+
+    setTimeout(runAfterBaseLayout, 150);
+    setTimeout(runAfterBaseLayout, 400);
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initInviteC0a87a01);
+    document.addEventListener("DOMContentLoaded", init);
   } else {
-    initInviteC0a87a01();
+    init();
   }
+
+  window.addEventListener("load", runAfterBaseLayout);
+  window.addEventListener("resize", runAfterBaseLayout);
 })();
