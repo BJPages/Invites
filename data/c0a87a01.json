@@ -21,7 +21,7 @@
     "size": "cover",
     "repeat": "no-repeat",
     "height": "100svh"
-  }
+  },
   
   "music": {
     "enabled": true,
