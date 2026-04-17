@@ -46,6 +46,7 @@
     const title = document.querySelector(".title");
     const subtitle = document.getElementById("subtitle");
     const detailsSection = document.getElementById("detailsSection");
+    const eventTag = document.getElementById("eventTag");
     const eventPlace = document.getElementById("eventPlace");
     const eventDateText = document.getElementById("eventDateText");
     const eventDescription = document.getElementById("eventDescription");
@@ -69,6 +70,14 @@
       detailsSection.style.fontFamily = FONT_FAMILY;
       detailsSection.style.fontWeight = "400";
       detailsSection.style.fontStyle = "normal";
+    }
+
+    if (eventTag) {
+      eventTag.style.fontFamily = FONT_FAMILY;
+      eventTag.style.fontWeight = "400";
+      eventTag.style.fontStyle = "normal";
+      eventTag.style.fontSize = "clamp(1.4rem, 4.5vw, 2.4rem)";
+      eventTag.style.lineHeight = "1.1";
     }
 
     if (eventPlace) {
@@ -95,6 +104,7 @@
     setFont(".title");
     setFont("#subtitle");
     setFont("#detailsSection");
+    setFont("#eventTag");
     setFont("#eventPlace");
     setFont("#eventDateText");
     setFont("#eventDescription");
