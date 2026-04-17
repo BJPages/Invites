@@ -25,7 +25,7 @@
   
   "music": {
     "enabled": true,
-    "file": "music.mp3"
+    "file": "https://s3.ustatik.com/audio.com.audio/transcoding/26/05/1840366363940526-1840366363980531-1840366365653566.mp3?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=F0E8U41NBMMW3Y027UTJ%2F20260416%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260416T174743Z&X-Amz-SignedHeaders=host&X-Amz-Expires=518400&X-Amz-Signature=84c99de97bdf6aa31967a9380f7a508173a2aad36ac24427ce644e4ba933646d"
   },
 
   "countdown": {
