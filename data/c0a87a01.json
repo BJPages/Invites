@@ -4,13 +4,13 @@
 
   "eventTypeLabel": "Cumpleaños",
   "title": "Sofi cumple 7 y Carmin cumple 2",
-  "subtitle": "Te esperamos para una tarde mágica llena de diversión.",
+  "subtitle": "Dos pequeñas estrellas están listas para una celebración épica.",
 
   "eventDateISO": "2026-04-18T15:00:00",
   "eventDateText": "18 de abril de 2026 · 3:00 PM",
 
   "place": "Cada de Dooña Nora",
-  "description": "Habrá juegos, pastel, sorpresas y mucha diversión.",
+  "description": "Ven a vivir una aventura con mucho encanto, energía y diversión.",
 
   "assetsPath": "assets/compact001",
 
@@ -29,7 +29,7 @@
   },
 
   "countdown": {
-    "enabled": false
+    "enabled": true
   },
 
   "theme": {
