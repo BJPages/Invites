@@ -1,32 +1,36 @@
-// Esperamos a que el DOM esté listo o a que el motor cargue el JSON
 window.addEventListener('load', () => {
     const descriptionElement = document.getElementById('eventDescription');
-    
+    const titleElement = document.querySelector('h1') || document.querySelector('h2'); // Buscamos el título para copiar su color
+
     if (descriptionElement && descriptionElement.innerText.includes('[PADRINOS]')) {
         
-        // Estructura del div de honor
+        // 1. Extraemos el color dinámicamente
+        // Si el título tiene el color "primary", lo tomamos de ahí. 
+        // Si no, usamos un color de respaldo.
+        const activePrimaryColor = titleElement ? window.getComputedStyle(titleElement).color : '#8aaed1';
+        const activeTextColor = window.getComputedStyle(descriptionElement).color;
+
         const padrinosHTML = `
-            <div class="padrinos-container" style="margin-top: 25px; border-top: 1px solid #eee; padding-top: 20px;">
-                <h4 style="color: #A294B0; font-family: 'Georgia', serif; font-size: 1.2em; margin-bottom: 15px;">
+            <div class="padrinos-container" style="margin-top: 25px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 20px;">
+                <h4 style="color: ${activePrimaryColor}; font-family: inherit; font-size: 1.2em; margin-bottom: 15px;">
                     Mis Padrinos
                 </h4>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: center;">
                     <div>
-                        <span style="display: block; font-size: 0.8em; color: #6f7b88; text-transform: uppercase; letter-spacing: 1px;">Padrino</span>
-                        <strong style="color: #434A54; font-size: 1.1em;">Pendiente Nombre</strong>
+                        <span style="display: block; font-size: 0.8em; opacity: 0.7; color: ${activeTextColor}; text-transform: uppercase;">Padrino</span>
+                        <strong style="color: ${activeTextColor}; font-size: 1.1em;">Pendiente Nombre</strong>
                     </div>
                     <div>
-                        <span style="display: block; font-size: 0.8em; color: #6f7b88; text-transform: uppercase; letter-spacing: 1px;">Madrina</span>
-                        <strong style="color: #434A54; font-size: 1.1em;">Pendiente Nombre</strong>
+                        <span style="display: block; font-size: 0.8em; opacity: 0.7; color: ${activeTextColor}; text-transform: uppercase;">Madrina</span>
+                        <strong style="color: ${activeTextColor}; font-size: 1.1em;">Pendiente Nombre</strong>
                     </div>
                 </div>
-                <p style="margin-top: 20px; font-style: italic; font-size: 0.9em; color: #6f7b88; line-height: 1.4;">
+                <p style="margin-top: 20px; font-style: italic; font-size: 0.9em; opacity: 0.8; color: ${activeTextColor};">
                     "Gracias por aceptar este compromiso de amor y guiarme en el camino de la fe."
                 </p>
             </div>
         `;
 
-        // Reemplazamos el placeholder [PADRINOS] por el nuevo HTML
         descriptionElement.innerHTML = descriptionElement.innerHTML.replace('[PADRINOS]', padrinosHTML);
     }
 });
