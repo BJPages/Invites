@@ -2,20 +2,40 @@
     const applyFixes = () => {
         const isMobile = window.innerWidth < 600;
 
-        // 1. Corregimos el Grid del contador (La raíz del problema)
+        // 1. ANTI-SCROLL: Aseguramos que el contenedor principal no se desborde
+        document.documentElement.style.overflowX = 'hidden';
+        document.body.style.overflowX = 'hidden';
+
+        // 2. Corregimos el Grid del contador
         const countdown = document.querySelector('.countdown');
         if (countdown) {
-            countdown.style.gridTemplateColumns = isMobile ? 'repeat(4, minmax(60px, 1fr))' : 'repeat(4, minmax(90px, 1fr))';
-            countdown.style.gap = isMobile ? '6px' : '16px';
+            countdown.style.gridTemplateColumns = isMobile ? 'repeat(4, minmax(55px, 1fr))' : 'repeat(4, minmax(90px, 1fr))';
+            countdown.style.gap = isMobile ? '5px' : '16px';
+            countdown.style.width = '100%';
+            countdown.style.padding = isMobile ? '0 5px' : '0';
         }
 
-        // 2. Ajuste del tamaño de los números (Para que no se desborden)
-        const countNumbers = document.querySelectorAll('.count-box span');
-        countNumbers.forEach(num => {
-            num.style.fontSize = isMobile ? '1.3rem' : '2.5rem';
+        // 3. Ajuste del CountBox y sus Spans (0.7rem para el número)
+        const boxes = document.querySelectorAll('.count-box');
+        boxes.forEach(box => {
+            if (isMobile) {
+                box.style.padding = '8px 4px'; // Reducimos el padding interno para que la caja encoja
+                box.style.minWidth = '0';
+            }
+            
+            const num = box.querySelector('span');
+            if (num) {
+                num.style.fontSize = isMobile ? '0.7rem' : '2.5rem';
+            }
+            
+            const label = box.querySelector('small');
+            if (label && isMobile) {
+                label.style.fontSize = '0.5rem';
+                label.style.marginTop = '2px';
+            }
         });
 
-        // 3. Ajuste del tamaño del Event Tag
+        // 4. Ajuste del Event Tag
         const tag = document.getElementById('eventTag');
         if (tag) tag.style.fontSize = isMobile ? '1.8rem' : '2.5rem';
     };
@@ -23,7 +43,6 @@
     const injectPadrinos = () => {
         const desc = document.getElementById('eventDescription');
         if (desc && desc.innerText.includes('[PADRINOS]')) {
-            // Buscamos únicamente el h2 como pediste
             const titleElement = document.querySelector('h2');
             const color = titleElement ? window.getComputedStyle(titleElement).color : '#C38EA6';
 
@@ -41,7 +60,6 @@
         return false;
     };
 
-    // Ejecución inicial y reintentos para asegurar carga del motor
     applyFixes();
     
     let attempts = 0;
