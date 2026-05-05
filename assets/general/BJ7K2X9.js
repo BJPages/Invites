@@ -3,7 +3,7 @@
     const injectPadrinos = () => {
         const descriptionElement = document.getElementById('eventDescription');
         // Buscamos h1 o h2 para extraer el color "primary" del tema
-        const titleElement = document.querySelector('h1') || document.querySelector('h2');
+        const titleElement = document.querySelector('h2');
 
         if (descriptionElement && descriptionElement.innerText.includes('[PADRINOS]')) {
             
