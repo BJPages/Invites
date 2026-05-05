@@ -1,4 +1,51 @@
-window.addEventListener('load', () => {
+(function() {
+    document.getElementById('eventTag').style.fontSize = '2.5rem';
+    const injectPadrinos = () => {
+        const descriptionElement = document.getElementById('eventDescription');
+        // Buscamos h1 o h2 para extraer el color "primary" del tema
+        const titleElement = document.querySelector('h1') || document.querySelector('h2');
+
+        if (descriptionElement && descriptionElement.innerText.includes('[PADRINOS]')) {
+            
+            // Extraemos colores del estilo computado
+            const activePrimaryColor = titleElement ? window.getComputedStyle(titleElement).color : '#C38EA6';
+            const activeTextColor = window.getComputedStyle(descriptionElement).color;
+
+            const padrinosHTML = `
+                <div class="padrinos-container" style="margin-top: 25px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 20px;">
+                    <h4 style="color: ${activePrimaryColor}; font-family: inherit; font-size: 1.2em; margin-bottom: 15px;">
+                        Mis Padrinos
+                    </h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: center;">
+                        <div>
+                            <span style="display: block; font-size: 0.8em; opacity: 0.7; color: ${activeTextColor}; text-transform: uppercase;">Padrino</span>
+                            <strong style="color: ${activeTextColor}; font-size: 1.1em;">Pendiente Nombre</strong>
+                        </div>
+                        <div>
+                            <span style="display: block; font-size: 0.8em; opacity: 0.7; color: ${activeTextColor}; text-transform: uppercase;">Madrina</span>
+                            <strong style="color: ${activeTextColor}; font-size: 1.1em;">Pendiente Nombre</strong>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            descriptionElement.innerHTML = descriptionElement.innerHTML.replace('[PADRINOS]', padrinosHTML);
+            return true; // Éxito
+        }
+        return false;
+    };
+
+    // Intentamos ejecutarlo de inmediato
+    if (!injectPadrinos()) {
+        // Si no lo encuentra (porque el JSON sigue cargando), reintentamos cada 100ms
+        const retryInterval = setInterval(() => {
+            if (injectPadrinos()) clearInterval(retryInterval);
+        }, 100);
+        
+        // Cancelamos después de 5 segundos por seguridad
+        setTimeout(() => clearInterval(retryInterval), 5000);
+    }
+})();window.addEventListener('load', () => {
     const descriptionElement = document.getElementById('eventDescription');
     const titleElement = document.querySelector('h1') || document.querySelector('h2'); // Buscamos el título para copiar su color
 
