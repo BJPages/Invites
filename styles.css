@@ -25,10 +25,12 @@
   box-sizing: border-box;
 }
 
-html,
-body {
+/* ANTI-SCROLL LATERAL GLOBAL */
+html, body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -37,6 +39,7 @@ body {
   color: var(--text);
   line-height: 1.5;
 }
+
 .title,
 .section-title {
   font-family: var(--font-title);
@@ -98,11 +101,12 @@ body {
   padding: 60px 0;
 }
 
+/* EVENT TAG AJUSTADO */
 .event-tag {
   margin: 0 0 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  font-size: 0.85rem;
+  font-size: clamp(0.75rem, 4vw, 0.85rem);
   opacity: 0.9;
 }
 
@@ -174,32 +178,35 @@ body {
   font-size: clamp(1.4rem, 2.4vw, 2rem);
 }
 
+/* COUNTDOWN RESPONSIVO MEJORADO */
 .countdown {
   display: grid;
-  grid-template-columns: repeat(4, minmax(90px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px; /* Gap reducido para mobile */
 }
 
 .count-box {
   background: var(--surface);
   box-shadow: var(--shadow);
   border-radius: var(--radius);
-  padding: 24px 16px;
+  padding: clamp(10px, 4vw, 24px) 4px; /* Padding dinámico */
   text-align: center;
+  min-width: 0;
 }
 
 .count-box span {
   display: block;
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(0.7rem, 5vw, 3rem); /* Texto que encoje según tu petición */
   font-weight: 700;
 }
 
 .count-box small {
   display: block;
-  margin-top: 6px;
+  margin-top: 4px;
   color: var(--muted);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
+  font-size: clamp(0.5rem, 2vw, 0.8rem);
 }
 
 .detail-line,
@@ -417,8 +424,7 @@ body.layout-minimal .schedule-item {
   border-radius: 12px;
 }
 
-/* COMPACT + MODAL */
-
+/* COMPACT + MODAL (Ya incluye los ajustes para cuadros pequeños) */
 body.layout-compact {
   background: transparent;
 }
@@ -575,7 +581,7 @@ body.layout-compact .count-box {
 }
 
 body.layout-compact .count-box span {
-  font-size: 0.95rem;
+  font-size: 0.7rem; /* Número pequeño para layout compact */
   color: var(--hero-text);
 }
 
@@ -815,7 +821,7 @@ body.layout-compact.compact-variant-3 .subtitle {
   }
 
   body.layout-compact .count-box span {
-    font-size: 0.88rem;
+    font-size: 0.7rem; /* Valor fijo de 0.7 como pediste */
   }
 
   body.layout-compact .count-box small {
