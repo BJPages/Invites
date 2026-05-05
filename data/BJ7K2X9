@@ -1,0 +1,52 @@
+{
+  "layout": "timeline",
+  "eventTypeLabel": "Bautizo",
+  "title": "Bautizo de Angie Joselyn",
+  "subtitle": "Hoy recibo la luz de la fe y el amor de Dios en mi corazón.",
+  "eventDateISO": "2026-06-27T14:30:00",
+  "eventDateText": "27 de junio de 2026 · 2:30 PM",
+  "place": "Lugar por confirmar",
+  "description": "Nuestra pequeña recibe su primer sacramento y nos encantaría que nos acompañaras a celebrar este inicio de su vida cristiana.",
+  "locationUrl": "https://maps.google.com",
+  "mapDisplay": "button",
+  "assetsPath": "assets/bautizo001",
+  "heroImage": "https://unsplash.com/photos/71SPQWYi5bE/download?force=true&w=1800",
+  "gallery": [
+    "https://unsplash.com/photos/nNdjzaL_MY8/download?force=true&w=1400",
+    "https://unsplash.com/photos/fCG2Q1hf1YA/download?force=true&w=1400",
+    "https://unsplash.com/photos/vTY7DQv_Gb0/download?force=true&w=1400",
+    "https://unsplash.com/photos/p6ivkfWpf2g/download?force=true&w=1400"
+  ],
+  "music": {
+    "enabled": false,
+    "file": ""
+  },
+  "theme": {
+    "bg": "#FAF5FD",
+    "surface": "#ffffff",
+    "text": "#434A54",
+    "muted": "#6f7b88",
+    "primary": "#A294B0",
+    "primaryContrast": "#ffffff",
+    "overlay": "rgba(162, 148, 176, 0.28)",
+    "heroText": "#ffffff",
+    "fontFamily": "'Palatino Linotype', 'Book Antiqua', Palatino, serif",
+    "titleFontFamily": "'Georgia', serif"
+  },
+  "schedule": [
+    {
+      "time": "Por confirmar",
+      "title": "Ceremonia",
+      "description": "Lugar y hora por definir para la misa de bautizo."
+    },
+    {
+      "time": "2:30 PM",
+      "title": "Recepción",
+      "description": "Acompáñanos a celebrar con una comida en honor a Angie Joselyn."
+    }
+  ],
+  "rsvp": {
+    "phone": "522201757608",
+    "messageTemplate": "Hola, soy {name}. Confirmo mi asistencia al Bautizo de Angie Joselyn."
+  }
+}
