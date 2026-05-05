@@ -22,13 +22,13 @@
     "file": ""
   },
   "theme": {
-    "bg": "#FAF5FD",
+    "bg": "#FEF1FF",
     "surface": "#ffffff",
-    "text": "#434A54",
+    "text": "#6D2E40",
     "muted": "#6f7b88",
-    "primary": "#A294B0",
+    "primary": "#C38EA6",
     "primaryContrast": "#ffffff",
-    "overlay": "rgba(162, 148, 176, 0.28)",
+    "overlay": "rgba(109, 46, 64, 0.28)",
     "heroText": "#ffffff",
     "fontFamily": "'Palatino Linotype', 'Book Antiqua', Palatino, serif",
     "titleFontFamily": "'Georgia', serif"
@@ -49,13 +49,10 @@
     "phone": "522201757608",
     "messageTemplate": "Hola, soy {name}. Confirmo mi asistencia al Bautizo de Angie Joselyn."
   },
-
-    "customScript": "https://bjpages.github.io/Invites/assets/general/BJ7K2X9.js",
-  
+  "customScript": "https://bjpages.github.io/Invites/assets/general/BJ7K2X9.js",
   "availability": {
     "expiresAt": "2026-06-30T23:59:59",
     "title": "Esta invitación está desactivada",
     "message": "Contacte al proveedor para acordar una extensión de tiempo."
   }
 }
-
