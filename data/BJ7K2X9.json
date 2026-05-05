@@ -18,8 +18,8 @@
     "https://unsplash.com/photos/p6ivkfWpf2g/download?force=true&w=1400"
   ],
   "music": {
-    "enabled": false,
-    "file": ""
+    "enabled": true,
+    "file": "https://pub-bf4d56dadb734e72a4b39759296097cf.r2.dev/SongBE_WWIMF.mp3"
   },
   "theme": {
     "bg": "#FEF1FF",
