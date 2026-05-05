@@ -1,23 +1,31 @@
 (function() {
     const applyFixes = () => {
-        // 1. Corregimos el Grid del contador para que quepa en cualquier cel
+        const isMobile = window.innerWidth < 600;
+
+        // 1. Corregimos el Grid del contador (La raíz del problema)
         const countdown = document.querySelector('.countdown');
         if (countdown) {
-            // Cambiamos el minmax de 90px a algo que sí quepa (70px o menos)
-            countdown.style.gridTemplateColumns = 'repeat(4, minmax(65px, 1fr))';
-            countdown.style.gap = '8px'; // Reducimos el espacio entre cuadros
+            countdown.style.gridTemplateColumns = isMobile ? 'repeat(4, minmax(60px, 1fr))' : 'repeat(4, minmax(90px, 1fr))';
+            countdown.style.gap = isMobile ? '6px' : '16px';
         }
 
-        // 2. Ajuste del tamaño del Event Tag
+        // 2. Ajuste del tamaño de los números (Para que no se desborden)
+        const countNumbers = document.querySelectorAll('.count-box span');
+        countNumbers.forEach(num => {
+            num.style.fontSize = isMobile ? '1.3rem' : '2.5rem';
+        });
+
+        // 3. Ajuste del tamaño del Event Tag
         const tag = document.getElementById('eventTag');
-        if (tag) tag.style.fontSize = '2.5rem';
+        if (tag) tag.style.fontSize = isMobile ? '1.8rem' : '2.5rem';
     };
 
     const injectPadrinos = () => {
         const desc = document.getElementById('eventDescription');
         if (desc && desc.innerText.includes('[PADRINOS]')) {
-            const title = document.querySelector('h1, h2');
-            const color = title ? window.getComputedStyle(title).color : '#C38EA6';
+            // Buscamos únicamente el h2 como pediste
+            const titleElement = document.querySelector('h2');
+            const color = titleElement ? window.getComputedStyle(titleElement).color : '#C38EA6';
 
             const html = `
                 <div style="margin-top:25px; border-top:1px solid rgba(0,0,0,0.1); padding-top:20px; text-align:center;">
@@ -33,13 +41,15 @@
         return false;
     };
 
-    // Ejecución
+    // Ejecución inicial y reintentos para asegurar carga del motor
     applyFixes();
     
     let attempts = 0;
     const interval = setInterval(() => {
-        applyFixes(); // Re-aplicamos por si el motor sobreescribe
+        applyFixes(); 
         if (injectPadrinos() || attempts > 15) clearInterval(interval);
         attempts++;
     }, 200);
+
+    window.addEventListener('resize', applyFixes);
 })();
