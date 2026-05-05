@@ -1,12 +1,12 @@
 {
   "layout": "timeline",
   "eventTypeLabel": "Bautizo",
-  "title": "Bautizo de Angie Joselyn",
+  "title": "Angie Joselyn",
   "subtitle": "Hoy recibo la luz de la fe y el amor de Dios en mi corazón.",
   "eventDateISO": "2026-06-27T14:30:00",
   "eventDateText": "27 de junio de 2026 · 2:30 PM",
   "place": "Lugar por confirmar",
-  "description": "Nuestra pequeña recibe su primer sacramento y nos encantaría que nos acompañaras a celebrar este inicio de su vida cristiana.",
+  "description": "Nuestra pequeña recibe su primer sacramento y nos encantaría que nos acompañaras a celebrar este inicio de su vida cristiana. [PADRINOS]",
   "locationUrl": "https://maps.google.com",
   "mapDisplay": "button",
   "assetsPath": "assets/bautizo001",
@@ -36,12 +36,12 @@
   "schedule": [
     {
       "time": "Por confirmar",
-      "title": "Ceremonia",
+      "title": "Misa",
       "description": "Lugar y hora por definir para la misa de bautizo."
     },
     {
       "time": "2:30 PM",
-      "title": "Recepción",
+      "title": "Comida",
       "description": "Acompáñanos a celebrar con una comida en honor a Angie Joselyn."
     }
   ],
