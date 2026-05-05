@@ -1,5 +1,22 @@
 (function() {
-    document.getElementById('eventTag').style.fontSize = '2.5rem';
+    // 1. Ajuste de eventTag (lo que ya teníamos)
+    const tag = document.getElementById('eventTag');
+    if (tag) tag.style.fontSize = '2.5rem';
+
+    // 2. CORRECCIÓN PARA MOBILE (Cajas del contador)
+    const countBoxes = document.querySelectorAll('.count-box');
+    if (window.innerWidth < 600) { // Si es pantalla pequeña
+        countBoxes.forEach(box => {
+            box.style.minWidth = '60px'; // Reducimos el ancho mínimo
+            box.style.margin = '5px';     // Estrechamos el margen
+            box.style.padding = '10px';   // Ajustamos el padding interno
+            
+            // Si tienen un número grande adentro, bajamos un poco el tamaño
+            const num = box.querySelector('span') || box; 
+            if(num) num.style.fontSize = '1.2rem'; 
+        });
+    }
+    
     const injectPadrinos = () => {
         const descriptionElement = document.getElementById('eventDescription');
         // Buscamos h1 o h2 para extraer el color "primary" del tema
