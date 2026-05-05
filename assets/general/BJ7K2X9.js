@@ -1,83 +1,45 @@
 (function() {
-    document.getElementById('eventTag').style.fontSize = '2.5rem';
+    const applyFixes = () => {
+        // 1. Corregimos el Grid del contador para que quepa en cualquier cel
+        const countdown = document.querySelector('.countdown');
+        if (countdown) {
+            // Cambiamos el minmax de 90px a algo que sí quepa (70px o menos)
+            countdown.style.gridTemplateColumns = 'repeat(4, minmax(65px, 1fr))';
+            countdown.style.gap = '8px'; // Reducimos el espacio entre cuadros
+        }
+
+        // 2. Ajuste del tamaño del Event Tag
+        const tag = document.getElementById('eventTag');
+        if (tag) tag.style.fontSize = '2.5rem';
+    };
+
     const injectPadrinos = () => {
-        const descriptionElement = document.getElementById('eventDescription');
-        // Buscamos h1 o h2 para extraer el color "primary" del tema
-        const titleElement = document.querySelector('h2');
+        const desc = document.getElementById('eventDescription');
+        if (desc && desc.innerText.includes('[PADRINOS]')) {
+            const title = document.querySelector('h1, h2');
+            const color = title ? window.getComputedStyle(title).color : '#C38EA6';
 
-        if (descriptionElement && descriptionElement.innerText.includes('[PADRINOS]')) {
-            
-            // Extraemos colores del estilo computado
-            const activePrimaryColor = titleElement ? window.getComputedStyle(titleElement).color : '#C38EA6';
-            const activeTextColor = window.getComputedStyle(descriptionElement).color;
-
-            const padrinosHTML = `
-                <div class="padrinos-container" style="margin-top: 25px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 20px;">
-                    <h4 style="color: ${activePrimaryColor}; font-family: inherit; font-size: 1.2em; margin-bottom: 15px;">
-                        Mis Padrinos
-                    </h4>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: center;">
-                        <div>
-                            <span style="display: block; font-size: 0.8em; opacity: 0.7; color: ${activeTextColor}; text-transform: uppercase;">Padrino</span>
-                            <strong style="color: ${activeTextColor}; font-size: 1.1em;">Pendiente Nombre</strong>
-                        </div>
-                        <div>
-                            <span style="display: block; font-size: 0.8em; opacity: 0.7; color: ${activeTextColor}; text-transform: uppercase;">Madrina</span>
-                            <strong style="color: ${activeTextColor}; font-size: 1.1em;">Pendiente Nombre</strong>
-                        </div>
+            const html = `
+                <div style="margin-top:25px; border-top:1px solid rgba(0,0,0,0.1); padding-top:20px; text-align:center;">
+                    <h4 style="color:${color}; font-family:inherit; font-size:1.2em; margin-bottom:15px;">Mis Padrinos</h4>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                        <div><small style="display:block; opacity:0.7; text-transform:uppercase; font-size:0.7em;">Padrino</small><strong>Pendiente</strong></div>
+                        <div><small style="display:block; opacity:0.7; text-transform:uppercase; font-size:0.7em;">Madrina</small><strong>Pendiente</strong></div>
                     </div>
-                </div>
-            `;
-
-            descriptionElement.innerHTML = descriptionElement.innerHTML.replace('[PADRINOS]', padrinosHTML);
-            return true; // Éxito
+                </div>`;
+            desc.innerHTML = desc.innerHTML.replace('[PADRINOS]', html);
+            return true;
         }
         return false;
     };
 
-    // Intentamos ejecutarlo de inmediato
-    if (!injectPadrinos()) {
-        // Si no lo encuentra (porque el JSON sigue cargando), reintentamos cada 100ms
-        const retryInterval = setInterval(() => {
-            if (injectPadrinos()) clearInterval(retryInterval);
-        }, 100);
-        
-        // Cancelamos después de 5 segundos por seguridad
-        setTimeout(() => clearInterval(retryInterval), 5000);
-    }
-})();window.addEventListener('load', () => {
-    const descriptionElement = document.getElementById('eventDescription');
-    const titleElement = document.querySelector('h1') || document.querySelector('h2'); // Buscamos el título para copiar su color
-
-    if (descriptionElement && descriptionElement.innerText.includes('[PADRINOS]')) {
-        
-        // 1. Extraemos el color dinámicamente
-        // Si el título tiene el color "primary", lo tomamos de ahí. 
-        // Si no, usamos un color de respaldo.
-        const activePrimaryColor = titleElement ? window.getComputedStyle(titleElement).color : '#8aaed1';
-        const activeTextColor = window.getComputedStyle(descriptionElement).color;
-
-        const padrinosHTML = `
-            <div class="padrinos-container" style="margin-top: 25px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 20px;">
-                <h4 style="color: ${activePrimaryColor}; font-family: inherit; font-size: 1.2em; margin-bottom: 15px;">
-                    Mis Padrinos
-                </h4>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: center;">
-                    <div>
-                        <span style="display: block; font-size: 0.8em; opacity: 0.7; color: ${activeTextColor}; text-transform: uppercase;">Padrino</span>
-                        <strong style="color: ${activeTextColor}; font-size: 1.1em;">Pendiente Nombre</strong>
-                    </div>
-                    <div>
-                        <span style="display: block; font-size: 0.8em; opacity: 0.7; color: ${activeTextColor}; text-transform: uppercase;">Madrina</span>
-                        <strong style="color: ${activeTextColor}; font-size: 1.1em;">Pendiente Nombre</strong>
-                    </div>
-                </div>
-                <p style="margin-top: 20px; font-style: italic; font-size: 0.9em; opacity: 0.8; color: ${activeTextColor};">
-                    "Gracias por aceptar este compromiso de amor y guiarme en el camino de la fe."
-                </p>
-            </div>
-        `;
-
-        descriptionElement.innerHTML = descriptionElement.innerHTML.replace('[PADRINOS]', padrinosHTML);
-    }
-});
+    // Ejecución
+    applyFixes();
+    
+    let attempts = 0;
+    const interval = setInterval(() => {
+        applyFixes(); // Re-aplicamos por si el motor sobreescribe
+        if (injectPadrinos() || attempts > 15) clearInterval(interval);
+        attempts++;
+    }, 200);
+})();
