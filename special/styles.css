@@ -877,3 +877,46 @@ body.chaviza .music-toggle {
     text-align: center;
   }
 }
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 220px;
+  padding: 14px 28px;
+
+  border-radius: 999px;
+
+  text-decoration: none;
+
+  font-weight: 600;
+
+  transition: all .3s ease;
+}
+
+.primary-btn {
+  color: white;
+  background: linear-gradient(
+    135deg,
+    #7c3aed,
+    #ec4899
+  );
+}
+
+.secondary-btn {
+  color: white;
+
+  border: 1px solid rgba(255,255,255,.25);
+
+  background: rgba(
+    255,
+    255,
+    255,
+    .08
+  );
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+}
