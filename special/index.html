@@ -19,14 +19,14 @@
       <div class="selector-glow glow-b"></div>
 
       <div class="selector-content">
-        <p class="eyebrow">XV Años de Valeria Sarahí</p>
-        <h1>¿De qué lado vienes?</h1>
-        <p class="subtitle">Elige tu experiencia para entrar a la invitación</p>
+        <p class="eyebrow">XV Años de <span data-field="fullName"></span></p>
+        <h1 data-field="selectorTitle"></h1>
+        <p class="subtitle" data-field="selectorSubtitle"></p>
 
         <div class="choice-grid">
           <button class="choice-card choice-ruquitos" data-theme="ruquitos">
             <span class="choice-icon">♕</span>
-            <span class="choice-title">Ruquitos</span>
+            <span class="choice-title" data-field="ruquitosTitle"></span>
             <span class="choice-desc">Elegante · formal · tradicional</span>
           </button>
 
@@ -34,7 +34,7 @@
 
           <button class="choice-card choice-chaviza" data-theme="chaviza">
             <span class="choice-icon">⚔</span>
-            <span class="choice-title">Chaviza</span>
+            <span class="choice-title" data-field="chavizaTitle"></span>
             <span class="choice-desc">Anime · épico · legendario</span>
           </button>
         </div>
@@ -61,9 +61,12 @@
 
         <div class="hero-copy">
           <p class="eyebrow">XV Años de</p>
-          <h2><span>Valeria</span><em>Sarahí</em></h2>
-          <p class="date">19 de diciembre de 2026</p>
-          <p class="place">Zacatlán, Puebla</p>
+          <h2>
+            <span data-field="firstName"></span>
+            <em data-field="middleName"></em>
+          </h2>
+          <p class="date" data-field="fullDate"></p>
+          <p class="place" data-field="location"></p>
         </div>
 
         <div class="dress-card" aria-hidden="true"></div>
@@ -74,17 +77,41 @@
         <h3>Una noche mágica está por comenzar</h3>
 
         <div class="timeline">
-          <article><span>⛪</span><h4>Ceremonia</h4><p>5:00 PM</p></article>
-          <article><span>🥂</span><h4>Recepción</h4><p>6:30 PM</p></article>
-          <article><span>💃</span><h4>Vals</h4><p>8:00 PM</p></article>
-          <article><span>🍽️</span><h4>Cena</h4><p>8:30 PM</p></article>
-          <article><span>🎵</span><h4>Fiesta</h4><p>10:00 PM</p></article>
+          <article>
+            <span>⛪</span>
+            <h4>Ceremonia</h4>
+            <p data-field="ceremonyTime"></p>
+          </article>
+
+          <article>
+            <span>🥂</span>
+            <h4>Recepción</h4>
+            <p data-field="receptionTime"></p>
+          </article>
+
+          <article>
+            <span>💃</span>
+            <h4>Vals</h4>
+            <p data-field="waltzTime"></p>
+          </article>
+
+          <article>
+            <span>🍽️</span>
+            <h4>Cena</h4>
+            <p data-field="dinnerTime"></p>
+          </article>
+
+          <article>
+            <span>🎵</span>
+            <h4>Fiesta</h4>
+            <p data-field="partyTime"></p>
+          </article>
         </div>
       </section>
 
       <section class="location-card location-light">
-        <p class="eyebrow">Zacatlán, Puebla</p>
-        <h3>Un lugar mágico para una noche inolvidable</h3>
+        <p class="eyebrow" data-field="location"></p>
+        <h3 data-field="ruquitosLocationText"></h3>
         <p>Detalles completos de ubicación próximamente.</p>
       </section>
 
@@ -92,13 +119,16 @@
         <p class="eyebrow">Galería</p>
         <h3>Momentos para recordar</h3>
         <div class="gallery">
-          <div></div><div></div><div></div><div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
         </div>
       </section>
 
       <section id="r-rsvp" class="rsvp rsvp-light">
         <p class="eyebrow">Confirma tu asistencia</p>
-        <h3>Tu presencia hará este día aún más especial</h3>
+        <h3 data-field="rsvpFormal"></h3>
         <button>Confirmar aquí</button>
       </section>
     </section>
@@ -123,10 +153,13 @@
 
         <div class="anime-copy">
           <p class="eyebrow">XV Años de</p>
-          <h2><span>Valeria</span><em>Sarahí</em></h2>
-          <p class="jp-date">十九日 · 十二月 · 二〇二六</p>
-          <p class="date">19 de diciembre de 2026</p>
-          <p class="place">Zacatlán, Puebla</p>
+          <h2>
+            <span data-field="firstName"></span>
+            <em data-field="middleName"></em>
+          </h2>
+          <p class="jp-date" data-field="japaneseDate"></p>
+          <p class="date" data-field="fullDate"></p>
+          <p class="place" data-field="location"></p>
         </div>
       </header>
 
@@ -135,17 +168,41 @@
         <h3>Los capítulos de esta historia</h3>
 
         <div class="timeline anime-timeline">
-          <article><span>⛩️</span><h4>Primer capítulo</h4><p>5:00 PM</p></article>
-          <article><span>🌙</span><h4>El encuentro</h4><p>6:30 PM</p></article>
-          <article><span>🦋</span><h4>El vals</h4><p>8:00 PM</p></article>
-          <article><span>🍱</span><h4>La celebración</h4><p>8:30 PM</p></article>
-          <article><span>⚔️</span><h4>Fiesta final</h4><p>10:00 PM</p></article>
+          <article>
+            <span>⛩️</span>
+            <h4>Primer capítulo</h4>
+            <p data-field="ceremonyTime"></p>
+          </article>
+
+          <article>
+            <span>🌙</span>
+            <h4>El encuentro</h4>
+            <p data-field="receptionTime"></p>
+          </article>
+
+          <article>
+            <span>🦋</span>
+            <h4>El vals</h4>
+            <p data-field="waltzTime"></p>
+          </article>
+
+          <article>
+            <span>🍱</span>
+            <h4>La celebración</h4>
+            <p data-field="dinnerTime"></p>
+          </article>
+
+          <article>
+            <span>⚔️</span>
+            <h4>Fiesta final</h4>
+            <p data-field="partyTime"></p>
+          </article>
         </div>
       </section>
 
       <section class="location-card location-dark">
-        <p class="eyebrow">Zacatlán, Puebla</p>
-        <h3>Un destino legendario para una historia inolvidable</h3>
+        <p class="eyebrow" data-field="location"></p>
+        <h3 data-field="chavizaLocationText"></h3>
         <button>Explorar</button>
       </section>
 
@@ -153,13 +210,16 @@
         <p class="eyebrow">Galería</p>
         <h3>Fragmentos de la leyenda</h3>
         <div class="gallery anime-gallery">
-          <div></div><div></div><div></div><div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
         </div>
       </section>
 
       <section id="c-rsvp" class="rsvp rsvp-dark">
         <p class="eyebrow">¿Aceptas esta misión?</p>
-        <h3>Tu presencia será parte de esta leyenda</h3>
+        <h3 data-field="rsvpAnime"></h3>
         <div class="mission-buttons">
           <button>⚔ Aceptar</button>
           <button>No podré asistir</button>
