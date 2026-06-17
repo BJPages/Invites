@@ -26,7 +26,7 @@ const EVENT_DATA = {
   images: {
     ruquitosHero: '',
     chavizaHero: 'https://pub-cb21ede894ea4a9681d5a9533840d647.r2.dev/chaviza-hero.png',
-    ruquitosLocation: '',
+    ruquitosLocation: 'https://pub-cb21ede894ea4a9681d5a9533840d647.r2.dev/ruquitos-hero.png',
     animeLocation: '',
     gallery1: '',
     gallery2: '',
