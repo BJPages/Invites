@@ -623,3 +623,9 @@ button {
     align-items: center;
   }
 }
+
+#selector.hidden,
+#ruquitos.hidden,
+#chaviza.hidden {
+  display: none !important;
+}
