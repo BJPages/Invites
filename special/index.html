@@ -13,6 +13,13 @@
 </head>
 
 <body>
+  <audio id="bgMusic" preload="auto" loop></audio>
+
+  <button id="musicToggle" class="music-toggle hidden" type="button" aria-label="Pausar o reproducir musica">
+    <span class="music-icon" data-music-icon>♪</span>
+    <span data-music-label>Música</span>
+  </button>
+
   <main id="app">
     <section id="selector" class="selector-screen">
       <div class="selector-glow glow-a"></div>
@@ -24,18 +31,18 @@
         <p class="subtitle" data-field="selectorSubtitle"></p>
 
         <div class="choice-grid">
-          <button class="choice-card choice-ruquitos" data-theme="ruquitos">
+          <button class="choice-card choice-ruquitos" data-theme="ruquitos" type="button">
             <span class="choice-icon">♕</span>
             <span class="choice-title" data-field="ruquitosTitle"></span>
-            <span class="choice-desc">Elegante · formal · tradicional</span>
+            <span class="choice-desc" data-field="ruquitosDesc"></span>
           </button>
 
           <div class="vs">VS</div>
 
-          <button class="choice-card choice-chaviza" data-theme="chaviza">
+          <button class="choice-card choice-chaviza" data-theme="chaviza" type="button">
             <span class="choice-icon">⚔</span>
             <span class="choice-title" data-field="chavizaTitle"></span>
-            <span class="choice-desc">Anime · épico · legendario</span>
+            <span class="choice-desc" data-field="chavizaDesc"></span>
           </button>
         </div>
       </div>
@@ -50,7 +57,7 @@
           <a href="#r-galeria">Galería</a>
           <a href="#r-rsvp">Confirmar</a>
         </div>
-        <button class="switch-btn" data-back>Elegir lado</button>
+        <button class="switch-btn" data-back type="button">Elegir lado</button>
       </nav>
 
       <header id="r-inicio" class="hero hero-ruquitos">
@@ -69,67 +76,45 @@
           <p class="place" data-field="location"></p>
         </div>
 
-        <div class="dress-card" aria-hidden="true"></div>
+        <figure class="hero-image-card dress-card">
+          <img data-img="ruquitosHero" alt="Imagen principal de Valeria Sarahí" />
+        </figure>
       </header>
 
       <section id="r-evento" class="section section-light">
         <p class="eyebrow">El gran día</p>
-        <h3>Una noche mágica está por comenzar</h3>
+        <h3 data-field="formalScheduleTitle"></h3>
 
-        <div class="timeline">
-          <article>
-            <span>⛪</span>
-            <h4>Ceremonia</h4>
-            <p data-field="ceremonyTime"></p>
-          </article>
-
-          <article>
-            <span>🥂</span>
-            <h4>Recepción</h4>
-            <p data-field="receptionTime"></p>
-          </article>
-
-          <article>
-            <span>💃</span>
-            <h4>Vals</h4>
-            <p data-field="waltzTime"></p>
-          </article>
-
-          <article>
-            <span>🍽️</span>
-            <h4>Cena</h4>
-            <p data-field="dinnerTime"></p>
-          </article>
-
-          <article>
-            <span>🎵</span>
-            <h4>Fiesta</h4>
-            <p data-field="partyTime"></p>
-          </article>
-        </div>
+        <div class="timeline" data-schedule="formal"></div>
       </section>
 
       <section class="location-card location-light">
-        <p class="eyebrow" data-field="location"></p>
-        <h3 data-field="ruquitosLocationText"></h3>
-        <p>Detalles completos de ubicación próximamente.</p>
+        <div class="location-copy">
+          <p class="eyebrow" data-field="location"></p>
+          <h3 data-field="ruquitosLocationText"></h3>
+          <p data-field="locationDetails"></p>
+          <a class="link-button light-button" data-link="maps" target="_blank" rel="noopener">Ver ubicación</a>
+        </div>
+        <figure class="location-image">
+          <img data-img="ruquitosLocation" alt="Referencia visual de Zacatlán, Puebla" />
+        </figure>
       </section>
 
       <section id="r-galeria" class="section section-light">
         <p class="eyebrow">Galería</p>
-        <h3>Momentos para recordar</h3>
+        <h3 data-field="formalGalleryTitle"></h3>
         <div class="gallery">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+          <figure><img data-img="gallery1" alt="Foto 1 de Valeria Sarahí" /></figure>
+          <figure><img data-img="gallery2" alt="Foto 2 de Valeria Sarahí" /></figure>
+          <figure><img data-img="gallery3" alt="Foto 3 de Valeria Sarahí" /></figure>
+          <figure><img data-img="gallery4" alt="Foto 4 de Valeria Sarahí" /></figure>
         </div>
       </section>
 
       <section id="r-rsvp" class="rsvp rsvp-light">
         <p class="eyebrow">Confirma tu asistencia</p>
         <h3 data-field="rsvpFormal"></h3>
-        <button>Confirmar aquí</button>
+        <a class="rsvp-button" data-link="rsvpFormal" target="_blank" rel="noopener">Confirmar aquí</a>
       </section>
     </section>
 
@@ -142,7 +127,7 @@
           <a href="#c-galeria">Galería</a>
           <a href="#c-rsvp">Misión</a>
         </div>
-        <button class="switch-btn" data-back>Elegir lado</button>
+        <button class="switch-btn" data-back type="button">Elegir lado</button>
       </nav>
 
       <header id="c-inicio" class="hero hero-chaviza">
@@ -161,59 +146,39 @@
           <p class="date" data-field="fullDate"></p>
           <p class="place" data-field="location"></p>
         </div>
+
+        <figure class="anime-hero-image">
+          <img data-img="chavizaHero" alt="Arte anime inspirado para Valeria Sarahí" />
+        </figure>
       </header>
 
       <section id="c-evento" class="section section-dark">
         <p class="eyebrow">El gran día</p>
-        <h3>Los capítulos de esta historia</h3>
+        <h3 data-field="animeScheduleTitle"></h3>
 
-        <div class="timeline anime-timeline">
-          <article>
-            <span>⛩️</span>
-            <h4>Primer capítulo</h4>
-            <p data-field="ceremonyTime"></p>
-          </article>
-
-          <article>
-            <span>🌙</span>
-            <h4>El encuentro</h4>
-            <p data-field="receptionTime"></p>
-          </article>
-
-          <article>
-            <span>🦋</span>
-            <h4>El vals</h4>
-            <p data-field="waltzTime"></p>
-          </article>
-
-          <article>
-            <span>🍱</span>
-            <h4>La celebración</h4>
-            <p data-field="dinnerTime"></p>
-          </article>
-
-          <article>
-            <span>⚔️</span>
-            <h4>Fiesta final</h4>
-            <p data-field="partyTime"></p>
-          </article>
-        </div>
+        <div class="timeline anime-timeline" data-schedule="anime"></div>
       </section>
 
       <section class="location-card location-dark">
-        <p class="eyebrow" data-field="location"></p>
-        <h3 data-field="chavizaLocationText"></h3>
-        <button>Explorar</button>
+        <div class="location-copy">
+          <p class="eyebrow" data-field="location"></p>
+          <h3 data-field="chavizaLocationText"></h3>
+          <p data-field="animeLocationDetails"></p>
+          <a class="link-button dark-button" data-link="maps" target="_blank" rel="noopener">Explorar ubicación</a>
+        </div>
+        <figure class="location-image anime-location-image">
+          <img data-img="animeLocation" alt="Referencia anime de Zacatlán, Puebla" />
+        </figure>
       </section>
 
       <section id="c-galeria" class="section section-dark">
         <p class="eyebrow">Galería</p>
-        <h3>Fragmentos de la leyenda</h3>
+        <h3 data-field="animeGalleryTitle"></h3>
         <div class="gallery anime-gallery">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+          <figure><img data-img="gallery1" alt="Fragmento 1 de la leyenda" /></figure>
+          <figure><img data-img="gallery2" alt="Fragmento 2 de la leyenda" /></figure>
+          <figure><img data-img="gallery3" alt="Fragmento 3 de la leyenda" /></figure>
+          <figure><img data-img="gallery4" alt="Fragmento 4 de la leyenda" /></figure>
         </div>
       </section>
 
@@ -221,8 +186,8 @@
         <p class="eyebrow">¿Aceptas esta misión?</p>
         <h3 data-field="rsvpAnime"></h3>
         <div class="mission-buttons">
-          <button>⚔ Aceptar</button>
-          <button>No podré asistir</button>
+          <a class="rsvp-button" data-link="rsvpAnime" target="_blank" rel="noopener">⚔ Aceptar</a>
+          <button type="button">No podré asistir</button>
         </div>
       </section>
     </section>
