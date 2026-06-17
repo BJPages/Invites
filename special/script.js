@@ -15,7 +15,9 @@ const EVENT_DATA = {
   links: {
     maps: '#',
     rsvpFormal: '#',
-    rsvpAnime: '#'
+    rsvpAnime: '#',
+    rsvpAccept: '',
+    rsvpDecline: ''
   },
 
   // Cambia estos src cuando tengas las imágenes reales o generadas.
@@ -152,6 +154,15 @@ function renderEventData() {
   });
 
   document.title = `XV Años ${EVENT_DATA.fullName}`;
+  document
+  .querySelectorAll('[data-link]')
+  .forEach((link) => {
+    const key = link.dataset.link;
+
+    if (EVENT_DATA.links[key]) {
+      link.href = EVENT_DATA.links[key];
+    }
+  });
 }
 
 function renderSchedules() {
