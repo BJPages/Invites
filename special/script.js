@@ -25,7 +25,7 @@ const EVENT_DATA = {
   // o URLs externas de tu server/CDN.
   images: {
     ruquitosHero: '',
-    chavizaHero: '',
+    chavizaHero: 'https://pub-cb21ede894ea4a9681d5a9533840d647.r2.dev/image/chaviza-hero.png',
     ruquitosLocation: '',
     animeLocation: '',
     gallery1: '',
