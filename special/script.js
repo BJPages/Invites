@@ -24,9 +24,9 @@ const EVENT_DATA = {
   // Pueden ser rutas locales, por ejemplo: './assets/valeria-hero.jpg'
   // o URLs externas de tu server/CDN.
   images: {
-    ruquitosHero: '',
+    ruquitosHero: 'https://pub-cb21ede894ea4a9681d5a9533840d647.r2.dev/ruquitos-hero.png',
     chavizaHero: 'https://pub-cb21ede894ea4a9681d5a9533840d647.r2.dev/chaviza-hero.png',
-    ruquitosLocation: 'https://pub-cb21ede894ea4a9681d5a9533840d647.r2.dev/ruquitos-hero.png',
+    ruquitosLocation: '',
     animeLocation: '',
     gallery1: '',
     gallery2: '',
