@@ -89,20 +89,7 @@ function renderEventData() {
 
 function openTheme(theme) {
   selector.classList.add('hidden');
-
-  ruquitos.classList.toggle('hidden', theme !== 'ruquitos');
-  chaviza.classList.toggle('hidden', theme !== 'chaviza');
-
-  ruquitos.classList.toggle('active', theme === 'ruquitos');
-  chaviza.classList.toggle('active', theme === 'chaviza');
-
-  document.body.className = theme;
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function showSelector() {
-  selector.classList.remove('hidden');
+  selector.style.display = 'none';
 
   ruquitos.classList.add('hidden');
   chaviza.classList.add('hidden');
@@ -110,7 +97,34 @@ function showSelector() {
   ruquitos.classList.remove('active');
   chaviza.classList.remove('active');
 
+  const selectedPage = theme === 'ruquitos' ? ruquitos : chaviza;
+
+  selectedPage.classList.remove('hidden');
+  selectedPage.style.display = 'block';
+
+  requestAnimationFrame(() => {
+    selectedPage.classList.add('active');
+  });
+
+  document.body.className = theme;
+
+  window.scrollTo(0, 0);
+}
+
+function showSelector() {
+  selector.classList.remove('hidden');
+  selector.style.display = 'grid';
+
+  ruquitos.classList.add('hidden');
+  chaviza.classList.add('hidden');
+
+  ruquitos.classList.remove('active');
+  chaviza.classList.remove('active');
+
+  ruquitos.style.display = '';
+  chaviza.style.display = '';
+
   document.body.className = '';
 
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo(0, 0);
 }
