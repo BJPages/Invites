@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XV Años Valeria Sarahí</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=Kaushan+Script&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <main id="app">
+    <section id="selector" class="selector-screen">
+      <div class="selector-glow glow-a"></div>
+      <div class="selector-glow glow-b"></div>
+
+      <div class="selector-content">
+        <p class="eyebrow">XV Años de Valeria Sarahí</p>
+        <h1>¿De qué lado vienes?</h1>
+        <p class="subtitle">Elige tu experiencia para entrar a la invitación</p>
+
+        <div class="choice-grid">
+          <button class="choice-card choice-ruquitos" data-theme="ruquitos">
+            <span class="choice-icon">♕</span>
+            <span class="choice-title">Ruquitos</span>
+            <span class="choice-desc">Elegante · formal · tradicional</span>
+          </button>
+
+          <div class="vs">VS</div>
+
+          <button class="choice-card choice-chaviza" data-theme="chaviza">
+            <span class="choice-icon">⚔</span>
+            <span class="choice-title">Chaviza</span>
+            <span class="choice-desc">Anime · épico · legendario</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="ruquitos" class="experience ruquitos hidden">
+      <nav class="nav nav-light">
+        <div class="logo">VS</div>
+        <div class="nav-links">
+          <a href="#r-inicio">Inicio</a>
+          <a href="#r-evento">Evento</a>
+          <a href="#r-galeria">Galería</a>
+          <a href="#r-rsvp">Confirmar</a>
+        </div>
+        <button class="switch-btn" data-back>Elegir lado</button>
+      </nav>
+
+      <header id="r-inicio" class="hero hero-ruquitos">
+        <div class="crystal c1"></div>
+        <div class="crystal c2"></div>
+        <div class="butterfly b1">🦋</div>
+        <div class="butterfly b2">🦋</div>
+
+        <div class="hero-copy">
+          <p class="eyebrow">XV Años de</p>
+          <h2><span>Valeria</span><em>Sarahí</em></h2>
+          <p class="date">19 de diciembre de 2026</p>
+          <p class="place">Zacatlán, Puebla</p>
+        </div>
+
+        <div class="dress-card" aria-hidden="true"></div>
+      </header>
+
+      <section id="r-evento" class="section section-light">
+        <p class="eyebrow">El gran día</p>
+        <h3>Una noche mágica está por comenzar</h3>
+
+        <div class="timeline">
+          <article><span>⛪</span><h4>Ceremonia</h4><p>5:00 PM</p></article>
+          <article><span>🥂</span><h4>Recepción</h4><p>6:30 PM</p></article>
+          <article><span>💃</span><h4>Vals</h4><p>8:00 PM</p></article>
+          <article><span>🍽️</span><h4>Cena</h4><p>8:30 PM</p></article>
+          <article><span>🎵</span><h4>Fiesta</h4><p>10:00 PM</p></article>
+        </div>
+      </section>
+
+      <section class="location-card location-light">
+        <p class="eyebrow">Zacatlán, Puebla</p>
+        <h3>Un lugar mágico para una noche inolvidable</h3>
+        <p>Detalles completos de ubicación próximamente.</p>
+      </section>
+
+      <section id="r-galeria" class="section section-light">
+        <p class="eyebrow">Galería</p>
+        <h3>Momentos para recordar</h3>
+        <div class="gallery">
+          <div></div><div></div><div></div><div></div>
+        </div>
+      </section>
+
+      <section id="r-rsvp" class="rsvp rsvp-light">
+        <p class="eyebrow">Confirma tu asistencia</p>
+        <h3>Tu presencia hará este día aún más especial</h3>
+        <button>Confirmar aquí</button>
+      </section>
+    </section>
+
+    <section id="chaviza" class="experience chaviza hidden">
+      <nav class="nav nav-dark">
+        <div class="logo anime-logo">VS</div>
+        <div class="nav-links">
+          <a href="#c-inicio">Inicio</a>
+          <a href="#c-evento">Capítulos</a>
+          <a href="#c-galeria">Galería</a>
+          <a href="#c-rsvp">Misión</a>
+        </div>
+        <button class="switch-btn" data-back>Elegir lado</button>
+      </nav>
+
+      <header id="c-inicio" class="hero hero-chaviza">
+        <div class="moon"></div>
+        <div class="wisteria left"></div>
+        <div class="wisteria right"></div>
+        <div class="katana"></div>
+
+        <div class="anime-copy">
+          <p class="eyebrow">XV Años de</p>
+          <h2><span>Valeria</span><em>Sarahí</em></h2>
+          <p class="jp-date">十九日 · 十二月 · 二〇二六</p>
+          <p class="date">19 de diciembre de 2026</p>
+          <p class="place">Zacatlán, Puebla</p>
+        </div>
+      </header>
+
+      <section id="c-evento" class="section section-dark">
+        <p class="eyebrow">El gran día</p>
+        <h3>Los capítulos de esta historia</h3>
+
+        <div class="timeline anime-timeline">
+          <article><span>⛩️</span><h4>Primer capítulo</h4><p>5:00 PM</p></article>
+          <article><span>🌙</span><h4>El encuentro</h4><p>6:30 PM</p></article>
+          <article><span>🦋</span><h4>El vals</h4><p>8:00 PM</p></article>
+          <article><span>🍱</span><h4>La celebración</h4><p>8:30 PM</p></article>
+          <article><span>⚔️</span><h4>Fiesta final</h4><p>10:00 PM</p></article>
+        </div>
+      </section>
+
+      <section class="location-card location-dark">
+        <p class="eyebrow">Zacatlán, Puebla</p>
+        <h3>Un destino legendario para una historia inolvidable</h3>
+        <button>Explorar</button>
+      </section>
+
+      <section id="c-galeria" class="section section-dark">
+        <p class="eyebrow">Galería</p>
+        <h3>Fragmentos de la leyenda</h3>
+        <div class="gallery anime-gallery">
+          <div></div><div></div><div></div><div></div>
+        </div>
+      </section>
+
+      <section id="c-rsvp" class="rsvp rsvp-dark">
+        <p class="eyebrow">¿Aceptas esta misión?</p>
+        <h3>Tu presencia será parte de esta leyenda</h3>
+        <div class="mission-buttons">
+          <button>⚔ Aceptar</button>
+          <button>No podré asistir</button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="./script.js"></script>
+</body>
+</html>
