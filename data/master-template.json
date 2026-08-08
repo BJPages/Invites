@@ -12,7 +12,7 @@
   "place": "Lugar del evento",
   "description": "Descripción del evento",
 
-  "assetsPath": "assets/REPLACE_ME",
+  "assetsPath": "assets/general",
 
   "heroImage": "hero.jpg",
 
