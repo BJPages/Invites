@@ -70,7 +70,7 @@
 
   "rsvp": {
     "phone": "522212031544",
-    "messageTemplate": "Hola, soy {name}. Confirmo mi asistencia a los XV años de Valeria Aili. En total asistiremos {number} personas. ¡Gracias por la invitación!"
+    "messageTemplate": "Hola, soy {name}. Confirmo mi asistencia a los XV años de Valeria Aili. ¡Gracias por la invitación!"
   },
 
   "customScript": "https://bjpages.github.io/Invites/assets/general/7KQ2M9X.js",
