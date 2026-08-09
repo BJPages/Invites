@@ -21,14 +21,7 @@
 
   "assetsPath": "assets/general",
 
-  "heroImage": "https://unsplash.com/photos/71SPQWYi5bE/download?force=true&w=1800",
-
-  "gallery": [
-    "https://unsplash.com/photos/nNdjzaL_MY8/download?force=true&w=1400",
-    "https://unsplash.com/photos/fCG2Q1hf1YA/download?force=true&w=1400",
-    "https://unsplash.com/photos/vTY7DQv_Gb0/download?force=true&w=1400",
-    "https://unsplash.com/photos/p6ivkfWpf2g/download?force=true&w=1400"
-  ],
+  "heroImage": "https://images.unsplash.com/photo-1555231955-348aa2312e19",
 
   "music": {
     "enabled": true,
