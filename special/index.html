@@ -15,45 +15,88 @@
 <body>
   <audio id="bgMusic" preload="auto" loop></audio>
 
-  <button id="musicToggle" class="music-toggle hidden" type="button" aria-label="Pausar o reproducir musica">
+  <button
+    id="musicToggle"
+    class="music-toggle hidden"
+    type="button"
+    aria-label="Pausar o reproducir musica"
+  >
     <span class="music-icon" data-music-icon>♪</span>
     <span data-music-label>Música</span>
   </button>
 
   <main id="app">
+
+    <!-- SELECTOR -->
+
     <section id="selector" class="selector-screen">
       <div class="selector-glow glow-a"></div>
       <div class="selector-glow glow-b"></div>
 
       <div class="selector-content">
-        <p class="eyebrow">XV Años de <span data-field="fullName"></span></p>
+        <p class="eyebrow">
+          XV Años de <span data-field="fullName"></span>
+        </p>
+
         <h1 data-field="selectorTitle"></h1>
-        <p class="subtitle" data-field="selectorSubtitle"></p>
+
+        <p
+          class="subtitle"
+          data-field="selectorSubtitle"
+        ></p>
 
         <div class="choice-grid">
-          <button class="choice-card choice-ruquitos" data-theme="ruquitos" type="button">
+
+          <button
+            class="choice-card choice-ruquitos"
+            data-theme="ruquitos"
+            type="button"
+          >
             <span class="choice-icon">♕</span>
-            <span class="choice-title" data-field="ruquitosTitle"></span>
-            <span class="choice-desc" data-field="ruquitosDesc"></span>
+            <span
+              class="choice-title"
+              data-field="ruquitosTitle"
+            ></span>
+            <span
+              class="choice-desc"
+              data-field="ruquitosDesc"
+            ></span>
           </button>
 
           <div class="vs">VS</div>
 
-          <button class="choice-card choice-chaviza" data-theme="chaviza" type="button">
+          <button
+            class="choice-card choice-chaviza"
+            data-theme="chaviza"
+            type="button"
+          >
             <span class="choice-icon">⚔</span>
-            <span class="choice-title" data-field="chavizaTitle"></span>
-            <span class="choice-desc" data-field="chavizaDesc"></span>
+            <span
+              class="choice-title"
+              data-field="chavizaTitle"
+            ></span>
+            <span
+              class="choice-desc"
+              data-field="chavizaDesc"
+            ></span>
           </button>
+
         </div>
       </div>
     </section>
+
 
     <!-- =========================
          RUQUITOS
     ========================== -->
 
-    <section id="ruquitos" class="experience ruquitos hidden">
+    <section
+      id="ruquitos"
+      class="experience ruquitos hidden"
+    >
+
       <nav class="nav nav-light">
+
         <div class="logo">VS</div>
 
         <div class="nav-links">
@@ -63,12 +106,22 @@
           <a href="#r-rsvp">Confirmar</a>
         </div>
 
-        <button class="switch-btn" data-back type="button">
+        <button
+          class="switch-btn"
+          data-back
+          type="button"
+        >
           Elegir lado
         </button>
+
       </nav>
 
-      <header id="r-inicio" class="hero hero-ruquitos">
+
+      <header
+        id="r-inicio"
+        class="hero hero-ruquitos"
+      >
+
         <div class="crystal c1"></div>
         <div class="crystal c2"></div>
 
@@ -76,15 +129,26 @@
         <div class="butterfly b2">🦋</div>
 
         <div class="hero-copy">
-          <p class="eyebrow">XV Años de</p>
+
+          <p class="eyebrow">
+            XV Años de
+          </p>
 
           <h2>
             <span data-field="firstName"></span>
             <em data-field="middleName"></em>
           </h2>
 
-          <p class="date" data-field="fullDate"></p>
-          <p class="place" data-field="location"></p>
+          <p
+            class="date"
+            data-field="fullDate"
+          ></p>
+
+          <p
+            class="place"
+            data-field="location"
+          ></p>
+
         </div>
 
         <figure class="hero-image-card dress-card">
@@ -93,10 +157,20 @@
             alt="Imagen principal de Valeria Sarahí"
           />
         </figure>
+
       </header>
 
-      <section id="r-evento" class="section section-light">
-        <p class="eyebrow">El gran día</p>
+
+      <!-- EVENTO -->
+
+      <section
+        id="r-evento"
+        class="section section-light"
+      >
+
+        <p class="eyebrow">
+          El gran día
+        </p>
 
         <h3 data-field="formalScheduleTitle"></h3>
 
@@ -104,14 +178,37 @@
           class="timeline"
           data-schedule="formal"
         ></div>
+
+        <div class="event-link">
+          <a
+            class="link-button light-button"
+            data-link="salon"
+            href="#"
+            target="_blank"
+            rel="noopener"
+          >
+            Ver Salón & Jardín M&G
+          </a>
+        </div>
+
       </section>
 
-      <section id="r-galeria" class="section section-light">
-        <p class="eyebrow">Galería</p>
+
+      <!-- GALERÍA -->
+
+      <section
+        id="r-galeria"
+        class="section section-light"
+      >
+
+        <p class="eyebrow">
+          Galería
+        </p>
 
         <h3 data-field="formalGalleryTitle"></h3>
 
         <div class="gallery">
+
           <figure>
             <img
               data-img="gallery1"
@@ -139,10 +236,19 @@
               alt="Foto 4 de Valeria Sarahí"
             />
           </figure>
+
         </div>
+
       </section>
 
-      <section id="r-rsvp" class="rsvp rsvp-light">
+
+      <!-- CONFIRMACIÓN -->
+
+      <section
+        id="r-rsvp"
+        class="rsvp rsvp-light"
+      >
+
         <p class="eyebrow">
           Confirma tu asistencia
         </p>
@@ -150,11 +256,13 @@
         <h3 data-field="rsvpFormal"></h3>
 
         <div class="mission-buttons">
+
           <a
             class="action-btn primary-btn"
             data-link="rsvpAccept"
             href="#"
             target="_blank"
+            rel="noopener"
           >
             Confirmar asistencia
           </a>
@@ -164,20 +272,32 @@
             data-link="rsvpDecline"
             href="#"
             target="_blank"
+            rel="noopener"
           >
             No podré asistir
           </a>
+
         </div>
+
       </section>
+
     </section>
+
 
     <!-- =========================
          CHAVIZA
     ========================== -->
 
-    <section id="chaviza" class="experience chaviza hidden">
+    <section
+      id="chaviza"
+      class="experience chaviza hidden"
+    >
+
       <nav class="nav nav-dark">
-        <div class="logo anime-logo">VS</div>
+
+        <div class="logo anime-logo">
+          VS
+        </div>
 
         <div class="nav-links">
           <a href="#c-inicio">Inicio</a>
@@ -186,12 +306,22 @@
           <a href="#c-rsvp">Misión</a>
         </div>
 
-        <button class="switch-btn" data-back type="button">
+        <button
+          class="switch-btn"
+          data-back
+          type="button"
+        >
           Elegir lado
         </button>
+
       </nav>
 
-      <header id="c-inicio" class="hero hero-chaviza">
+
+      <header
+        id="c-inicio"
+        class="hero hero-chaviza"
+      >
+
         <div class="moon"></div>
 
         <div class="wisteria left"></div>
@@ -200,18 +330,31 @@
         <div class="katana"></div>
 
         <div class="anime-copy">
-          <p class="eyebrow">XV Años de</p>
+
+          <p class="eyebrow">
+            XV Años de
+          </p>
 
           <h2>
             <span data-field="firstName"></span>
             <em data-field="middleName"></em>
           </h2>
 
-          <p class="jp-date" data-field="japaneseDate"></p>
+          <p
+            class="jp-date"
+            data-field="japaneseDate"
+          ></p>
 
-          <p class="date" data-field="fullDate"></p>
+          <p
+            class="date"
+            data-field="fullDate"
+          ></p>
 
-          <p class="place" data-field="location"></p>
+          <p
+            class="place"
+            data-field="location"
+          ></p>
+
         </div>
 
         <figure class="anime-hero-image">
@@ -220,10 +363,20 @@
             alt="Arte anime inspirado para Valeria Sarahí"
           />
         </figure>
+
       </header>
 
-      <section id="c-evento" class="section section-dark">
-        <p class="eyebrow">El gran día</p>
+
+      <!-- EVENTO -->
+
+      <section
+        id="c-evento"
+        class="section section-dark"
+      >
+
+        <p class="eyebrow">
+          El gran día
+        </p>
 
         <h3 data-field="animeScheduleTitle"></h3>
 
@@ -231,14 +384,37 @@
           class="timeline anime-timeline"
           data-schedule="anime"
         ></div>
+
+        <div class="event-link">
+          <a
+            class="link-button dark-button"
+            data-link="salon"
+            href="#"
+            target="_blank"
+            rel="noopener"
+          >
+            ⚔ Ver Salón & Jardín M&G
+          </a>
+        </div>
+
       </section>
 
-      <section id="c-galeria" class="section section-dark">
-        <p class="eyebrow">Galería</p>
+
+      <!-- GALERÍA -->
+
+      <section
+        id="c-galeria"
+        class="section section-dark"
+      >
+
+        <p class="eyebrow">
+          Galería
+        </p>
 
         <h3 data-field="animeGalleryTitle"></h3>
 
         <div class="gallery anime-gallery">
+
           <figure>
             <img
               data-img="gallery1"
@@ -266,10 +442,19 @@
               alt="Fragmento 4 de la leyenda"
             />
           </figure>
+
         </div>
+
       </section>
 
-      <section id="c-rsvp" class="rsvp rsvp-dark">
+
+      <!-- CONFIRMACIÓN -->
+
+      <section
+        id="c-rsvp"
+        class="rsvp rsvp-dark"
+      >
+
         <p class="eyebrow">
           ¿Aceptas esta misión?
         </p>
@@ -277,11 +462,13 @@
         <h3 data-field="rsvpAnime"></h3>
 
         <div class="mission-buttons">
+
           <a
             class="action-btn primary-btn"
             data-link="rsvpAccept"
             href="#"
             target="_blank"
+            rel="noopener"
           >
             ⚔ Aceptar misión
           </a>
@@ -291,14 +478,19 @@
             data-link="rsvpDecline"
             href="#"
             target="_blank"
+            rel="noopener"
           >
             No podré asistir
           </a>
+
         </div>
+
       </section>
+
     </section>
+
   </main>
 
-  <script src="./script.js"></script>
+  <script src="./script.js?v=3"></script>
 </body>
 </html>
