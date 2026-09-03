@@ -114,11 +114,19 @@ button {
 }
 
 .choice-ruquitos {
-  background: linear-gradient(135deg, rgba(246, 239, 255, .35), rgba(196, 157, 255, .28));
+  background: linear-gradient(
+    135deg,
+    rgba(246, 239, 255, .35),
+    rgba(196, 157, 255, .28)
+  );
 }
 
 .choice-chaviza {
-  background: linear-gradient(135deg, rgba(31, 15, 61, .85), rgba(124, 58, 237, .25));
+  background: linear-gradient(
+    135deg,
+    rgba(31, 15, 61, .85),
+    rgba(124, 58, 237, .25)
+  );
 }
 
 .choice-icon {
@@ -288,8 +296,17 @@ button {
 .hero-ruquitos {
   grid-template-columns: 1fr;
   background:
-    radial-gradient(circle at 25% 15%, rgba(255, 255, 255, .9), transparent 35%),
-    linear-gradient(135deg, #fffaff, #efe3ff 60%, #d8c0ff);
+    radial-gradient(
+      circle at 25% 15%,
+      rgba(255, 255, 255, .9),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #fffaff,
+      #efe3ff 60%,
+      #d8c0ff
+    );
 }
 
 .hero-copy {
@@ -305,7 +322,13 @@ button {
   display: block;
   font-family: Playfair Display, serif;
   font-size: clamp(5rem, 14vw, 11rem);
-  background: linear-gradient(110deg, #6d4a9a, #c8a5ff, #8ff0ff, #7d4ab7);
+  background: linear-gradient(
+    110deg,
+    #6d4a9a,
+    #c8a5ff,
+    #8ff0ff,
+    #7d4ab7
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -335,8 +358,18 @@ button {
 .crystal {
   width: 160px;
   height: 160px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, .7), rgba(181, 132, 255, .25));
-  clip-path: polygon(50% 0, 100% 35%, 80% 100%, 20% 100%, 0 35%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .7),
+    rgba(181, 132, 255, .25)
+  );
+  clip-path: polygon(
+    50% 0,
+    100% 35%,
+    80% 100%,
+    20% 100%,
+    0 35%
+  );
 }
 
 .c1 {
@@ -370,8 +403,17 @@ button {
 .hero-chaviza {
   grid-template-columns: 1fr;
   background:
-    radial-gradient(circle at 75% 22%, rgba(216, 180, 254, .3), transparent 24%),
-    linear-gradient(135deg, #05050c, #130821 55%, #05050c);
+    radial-gradient(
+      circle at 75% 22%,
+      rgba(216, 180, 254, .3),
+      transparent 24%
+    ),
+    linear-gradient(
+      135deg,
+      #05050c,
+      #130821 55%,
+      #05050c
+    );
 }
 
 .anime-copy {
@@ -501,14 +543,29 @@ button {
 
 .location-light {
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, .8), rgba(218, 197, 255, .5)),
-    radial-gradient(circle at 20% 50%, rgba(180, 140, 255, .3), transparent 35%);
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, .8),
+      rgba(218, 197, 255, .5)
+    ),
+    radial-gradient(
+      circle at 20% 50%,
+      rgba(180, 140, 255, .3),
+      transparent 35%
+    );
 }
 
 .location-dark {
   background:
-    linear-gradient(rgba(9, 9, 22, .7), rgba(9, 9, 22, .95)),
-    radial-gradient(circle at 50% 10%, rgba(168, 85, 247, .5), transparent 42%);
+    linear-gradient(
+      rgba(9, 9, 22, .7),
+      rgba(9, 9, 22, .95)
+    ),
+    radial-gradient(
+      circle at 50% 10%,
+      rgba(168, 85, 247, .5),
+      transparent 42%
+    );
   border: 1px solid rgba(168, 85, 247, .25);
 }
 
@@ -523,15 +580,31 @@ button {
   position: relative;
   border-radius: 28px;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, .58), rgba(185, 145, 255, .22)),
-    radial-gradient(circle at 50% 45%, rgba(255, 255, 255, .65), transparent 38%);
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, .58),
+      rgba(185, 145, 255, .22)
+    ),
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(255, 255, 255, .65),
+      transparent 38%
+    );
   border: 1px solid rgba(150, 100, 190, .18);
 }
 
 .location-dark .location-image {
   background:
-    radial-gradient(circle at 60% 40%, rgba(236, 72, 153, .34), transparent 30%),
-    linear-gradient(135deg, rgba(22, 9, 34, .78), rgba(53, 19, 90, .72));
+    radial-gradient(
+      circle at 60% 40%,
+      rgba(236, 72, 153, .34),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(22, 9, 34, .78),
+      rgba(53, 19, 90, .72)
+    );
   border-color: rgba(168, 85, 247, .32);
 }
 
@@ -559,14 +632,30 @@ button {
   border-radius: 24px;
   border: 1px solid rgba(150, 100, 190, .18);
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, .7), rgba(185, 145, 255, .35)),
-    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, .8), transparent 38%);
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, .7),
+      rgba(185, 145, 255, .35)
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 255, 255, .8),
+      transparent 38%
+    );
 }
 
 .anime-gallery figure {
   background:
-    radial-gradient(circle at 60% 40%, rgba(236, 72, 153, .55), transparent 28%),
-    linear-gradient(135deg, #160922, #35135a);
+    radial-gradient(
+      circle at 60% 40%,
+      rgba(236, 72, 153, .55),
+      transparent 28%
+    ),
+    linear-gradient(
+      135deg,
+      #160922,
+      #35135a
+    );
   border: 1px solid rgba(168, 85, 247, .32);
 }
 
@@ -610,7 +699,10 @@ button {
   text-decoration: none;
   font-weight: 700;
   letter-spacing: .04em;
-  transition: transform .3s ease, box-shadow .3s ease, opacity .3s ease;
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease,
+    opacity .3s ease;
 }
 
 .link-button:hover,
@@ -622,20 +714,32 @@ button {
 .light-button,
 .rsvp-light .primary-btn {
   color: white;
-  background: linear-gradient(135deg, #8e62c8, #c8a5ff);
+  background: linear-gradient(
+    135deg,
+    #8e62c8,
+    #c8a5ff
+  );
   box-shadow: 0 20px 40px rgba(122, 86, 160, .25);
 }
 
 .dark-button,
 .rsvp-dark .primary-btn {
   color: white;
-  background: linear-gradient(135deg, #7c3aed, #ec4899);
+  background: linear-gradient(
+    135deg,
+    #7c3aed,
+    #ec4899
+  );
   box-shadow: 0 20px 40px rgba(168, 85, 247, .2);
 }
 
 .primary-btn {
   color: white;
-  background: linear-gradient(135deg, #7c3aed, #ec4899);
+  background: linear-gradient(
+    135deg,
+    #7c3aed,
+    #ec4899
+  );
 }
 
 .secondary-btn {
@@ -650,12 +754,20 @@ button {
 }
 
 .rsvp-light {
-  background: linear-gradient(135deg, #efe3ff, #fffaff);
+  background: linear-gradient(
+    135deg,
+    #efe3ff,
+    #fffaff
+  );
 }
 
 .rsvp-dark {
   background:
-    radial-gradient(circle at 50% 20%, rgba(168, 85, 247, .35), transparent 35%),
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(168, 85, 247, .35),
+      transparent 35%
+    ),
     #070713;
 }
 
@@ -700,7 +812,11 @@ button {
   width: 28px;
   height: 28px;
   border-radius: 999px;
-  background: linear-gradient(135deg, #c8a5ff, #ec4899);
+  background: linear-gradient(
+    135deg,
+    #c8a5ff,
+    #ec4899
+  );
   color: white;
   font-weight: 700;
 }
@@ -720,6 +836,7 @@ body.chaviza .music-toggle {
 /* RESPONSIVE */
 
 @media (max-width: 820px) {
+
   .choice-grid {
     grid-template-columns: 1fr;
   }
@@ -777,6 +894,21 @@ body.chaviza .music-toggle {
   .gallery,
   .location-card {
     grid-template-columns: 1fr;
+  }
+
+  /*
+   * GALERÍA EN CELULAR
+   * Mantiene las fotos en formato vertical.
+   */
+  .gallery figure {
+    height: auto;
+    aspect-ratio: 3 / 4;
+  }
+
+  .gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .location-card {
