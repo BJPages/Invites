@@ -1,3 +1,6 @@
+window.PASS_SCRIPT_VERSION = '2.0.0';
+console.info('[Invitación] script-pases-v2.js 2.0.0 cargado');
+
 const EVENT_DATA = {
   fullName: 'Valeria Sarahí',
   firstName: 'Valeria',
@@ -8,7 +11,6 @@ const EVENT_DATA = {
   japaneseDate: '十九日 · 十二月 · 二〇二六',
 
   location: 'Zacatlán, Puebla',
-
   whatsappNumber: '522224552910',
 
   passBackgrounds: {
@@ -225,6 +227,8 @@ const PASS_LABEL =
     PASS_COUNT
   );
 
+const passBackgroundPromises = {};
+
 
 /* =========================================================
    INICIO
@@ -236,6 +240,7 @@ renderImages();
 renderPassContent();
 renderRsvpLinks();
 bindPassDownloadButtons();
+preloadPassBackgrounds();
 
 
 /* =========================================================
@@ -292,6 +297,69 @@ bgMusic?.addEventListener(
     updateMusicButton(false);
   }
 );
+
+
+/* =========================================================
+   LEER NÚMERO DE PASES
+========================================================= */
+
+function getPassCount() {
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const raw =
+    params.get('pases') ||
+    params.get('personas') ||
+    '1';
+
+
+  const parsed =
+    Number.parseInt(
+      raw,
+      10
+    );
+
+
+  return (
+    Number.isInteger(parsed) &&
+    parsed > 0
+  )
+    ? parsed
+    : 1;
+
+}
+
+
+function formatPassLabel(
+  count
+) {
+
+  return (
+    `${count} ` +
+    (
+      count === 1
+        ? 'persona'
+        : 'personas'
+    )
+  );
+
+}
+
+
+function passInvitationText(
+  baseText
+) {
+
+  return (
+    `${baseText} ` +
+    `Nos llena de alegría compartir contigo tu pase para ${PASS_LABEL}.`
+  );
+
+}
 
 
 /* =========================================================
@@ -357,17 +425,15 @@ function renderEventData() {
       EVENT_DATA.labels
         .animeGalleryTitle,
 
-    /*
-     * AQUÍ agregamos el número de personas
-     * directamente al texto "Tu presencia..."
-     */
     rsvpFormal:
-      `${EVENT_DATA.labels.rsvpFormal} ` +
-      `Nos llena de alegría compartir contigo un pase para ${PASS_LABEL}.`,
+      passInvitationText(
+        EVENT_DATA.labels.rsvpFormal
+      ),
 
     rsvpAnime:
-      `${EVENT_DATA.labels.rsvpAnime} ` +
-      `Nos llena de alegría compartir contigo un pase para ${PASS_LABEL}.`
+      passInvitationText(
+        EVENT_DATA.labels.rsvpAnime
+      )
 
   };
 
@@ -396,6 +462,7 @@ function renderEventData() {
 
   document.title =
     `XV Años ${EVENT_DATA.fullName}`;
+
 }
 
 
@@ -525,6 +592,106 @@ function renderImages() {
 
 
 /* =========================================================
+   TEXTO DE LOS PASES
+========================================================= */
+
+function renderPassContent() {
+
+  document
+    .querySelectorAll(
+      '[data-pass-message]'
+    )
+    .forEach(
+      (element) => {
+
+        element.textContent =
+          `Pase para ${PASS_LABEL}`;
+
+      }
+    );
+
+
+  const instructions =
+    'En caso de asistir, primero descarga tu pase y después confirma tu asistencia por WhatsApp con el botón de abajo.';
+
+
+  document
+    .querySelectorAll(
+      '.pass-instructions'
+    )
+    .forEach(
+      (element) => {
+
+        element.textContent =
+          instructions;
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   WHATSAPP
+========================================================= */
+
+function buildWhatsAppLink(
+  message
+) {
+
+  return (
+    `https://wa.me/` +
+    `${EVENT_DATA.whatsappNumber}` +
+    `?text=` +
+    `${encodeURIComponent(message)}`
+  );
+
+}
+
+
+function renderRsvpLinks() {
+
+  /*
+   * Conserva el mensaje original:
+   *
+   * Hola, confirmo mi asistencia...
+   * ¡Ahí estaré! 💜
+   *
+   * y solamente agrega el número
+   * de personas en medio.
+   */
+  const acceptMessage =
+    `Hola, confirmo mi asistencia a los XV Años de ${EVENT_DATA.fullName}. ` +
+    `La asistencia será para ${PASS_LABEL}. ` +
+    '¡Ahí estaré! 💜';
+
+
+  /*
+   * No asistencia queda igual.
+   */
+  const declineMessage =
+    `Hola, muchas gracias por la invitación a los XV Años de ${EVENT_DATA.fullName}. ` +
+    'Lamentablemente no podré asistir.';
+
+
+  EVENT_DATA.links.rsvpAccept =
+    buildWhatsAppLink(
+      acceptMessage
+    );
+
+
+  EVENT_DATA.links.rsvpDecline =
+    buildWhatsAppLink(
+      declineMessage
+    );
+
+
+  renderLinks();
+
+}
+
+
+/* =========================================================
    LINKS
 ========================================================= */
 
@@ -565,7 +732,9 @@ function renderLinks() {
    TEMAS
 ========================================================= */
 
-function openTheme(theme) {
+function openTheme(
+  theme
+) {
 
   currentTheme =
     theme;
@@ -900,188 +1069,99 @@ function updateMusicButton(
 
 
 /* =========================================================
-   LEER NÚMERO DE PASES
+   PRE-CARGA DEL FONDO DEL PASE
 ========================================================= */
 
-function getPassCount() {
+function preloadPassBackgrounds() {
 
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
+  [
+    'ruquitos',
+    'chaviza'
+  ].forEach(
+    (theme) => {
 
+      getPassBackgroundImage(
+        theme
+      );
 
-  /*
-   * Principal:
-   *
-   * ?pases=4
-   *
-   * También acepta:
-   *
-   * ?personas=4
-   */
-  const rawValue =
-    params.get('pases') ||
-    params.get('personas') ||
-    '1';
+    }
+  );
+
+}
 
 
-  const parsed =
-    Number.parseInt(
-      rawValue,
-      10
-    );
+function getPassBackgroundSrc(
+  theme
+) {
 
+  const imageKey =
+    EVENT_DATA
+      .passBackgrounds[
+        theme
+      ];
+
+
+  return (
+    EVENT_DATA
+      .images[
+        imageKey
+      ] ||
+    EVENT_DATA
+      .images
+      .gallery1
+  );
+
+}
+
+
+function getPassBackgroundImage(
+  theme
+) {
 
   if (
-    Number.isInteger(
-      parsed
-    ) &&
-    parsed > 0
+    !passBackgroundPromises[
+      theme
+    ]
   ) {
 
-    return parsed;
+    passBackgroundPromises[
+      theme
+    ] =
+      loadImage(
+        getPassBackgroundSrc(
+          theme
+        ),
+        true,
+        2500
+      )
+      .catch(
+        (error) => {
+
+          console.warn(
+            'No se pudo precargar el fondo del pase; se usará el fondo alternativo.',
+            error
+          );
+
+
+          return null;
+
+        }
+      );
 
   }
 
 
-  return 1;
-
-}
-
-
-function formatPassLabel(
-  count
-) {
-
   return (
-    `${count} ` +
-    (
-      count === 1
-        ? 'persona'
-        : 'personas'
-    )
+    passBackgroundPromises[
+      theme
+    ]
   );
 
 }
 
 
 /* =========================================================
-   TEXTO DE PASE
-========================================================= */
-
-function renderPassContent() {
-
-  /*
-   * El texto principal con "Nos llena de alegría..."
-   * ahora está arriba, dentro de "Tu presencia...".
-   *
-   * Aquí solamente mostramos claramente
-   * el tipo de pase.
-   */
-  const passMessage =
-    `Pase para ${PASS_LABEL}`;
-
-
-  const instructions =
-    'En caso de asistir, primero descarga tu pase y después confirma tu asistencia por WhatsApp con el botón de abajo.';
-
-
-  document
-    .querySelectorAll(
-      '[data-pass-message]'
-    )
-    .forEach(
-      (element) => {
-
-        element.textContent =
-          passMessage;
-
-      }
-    );
-
-
-  document
-    .querySelectorAll(
-      '.pass-instructions'
-    )
-    .forEach(
-      (element) => {
-
-        element.textContent =
-          instructions;
-
-      }
-    );
-
-}
-
-
-/* =========================================================
-   WHATSAPP
-========================================================= */
-
-function buildWhatsAppLink(
-  message
-) {
-
-  return (
-    `https://wa.me/` +
-    `${EVENT_DATA.whatsappNumber}` +
-    `?text=` +
-    `${encodeURIComponent(message)}`
-  );
-
-}
-
-
-function renderRsvpLinks() {
-
-  /*
-   * Conservamos prácticamente
-   * el mensaje que ya tenías,
-   * agregando el número de personas.
-   */
-  const ending =
-    PASS_COUNT === 1
-      ? '¡Ahí estaré! 💜'
-      : '¡Ahí estaremos! 💜';
-
-
-  const acceptMessage =
-    `Hola, confirmo mi asistencia a los XV Años de ${EVENT_DATA.fullName}. ` +
-    `La confirmación es para ${PASS_LABEL}. ` +
-    `${ending}`;
-
-
-  /*
-   * El mensaje de NO ASISTIR
-   * se queda igual.
-   */
-  const declineMessage =
-    `Hola, muchas gracias por la invitación a los XV Años de ${EVENT_DATA.fullName}. ` +
-    `Lamentablemente no podré asistir.`;
-
-
-  EVENT_DATA.links.rsvpAccept =
-    buildWhatsAppLink(
-      acceptMessage
-    );
-
-
-  EVENT_DATA.links.rsvpDecline =
-    buildWhatsAppLink(
-      declineMessage
-    );
-
-
-  renderLinks();
-
-}
-
-
-/* =========================================================
-   DESCARGAR PASE
+   BOTÓN DESCARGAR PASE
 ========================================================= */
 
 function bindPassDownloadButtons() {
@@ -1161,7 +1241,7 @@ function bindPassDownloadButtons() {
                   );
 
                 },
-                1000
+                1500
               );
 
             } catch (error) {
@@ -1173,7 +1253,7 @@ function bindPassDownloadButtons() {
 
 
               alert(
-                'No se pudo generar el pase. Revisa la consola para ver el detalle.'
+                `No se pudo generar el pase: ${error.message}`
               );
 
             } finally {
@@ -1197,53 +1277,28 @@ function bindPassDownloadButtons() {
 
 
 /* =========================================================
-   FONDO DEL PASE
-========================================================= */
-
-function getPassBackgroundSrc() {
-
-  const theme =
-    currentTheme ===
-    'chaviza'
-      ? 'chaviza'
-      : 'ruquitos';
-
-
-  const imageKey =
-    EVENT_DATA
-      .passBackgrounds[
-        theme
-      ];
-
-
-  return (
-    EVENT_DATA
-      .images[
-        imageKey
-      ] ||
-    EVENT_DATA
-      .images
-      .gallery1
-  );
-
-}
-
-
-/* =========================================================
    GENERAR PNG
 ========================================================= */
 
 async function generatePassImage() {
 
   /*
-   * IMPORTANTE:
+   * Ya NO espera document.fonts.ready.
    *
-   * Ya NO esperamos document.fonts.ready.
-   *
-   * Si Google Fonts falla o tarda,
-   * Canvas simplemente utiliza
-   * Georgia / Arial como fallback.
+   * Los timeouts de Google Fonts
+   * no bloquean la descarga.
    */
+  if (
+    typeof QRCode ===
+    'undefined'
+  ) {
+
+    throw new Error(
+      'No cargó la librería del código QR.'
+    );
+
+  }
+
 
   const canvas =
     document.createElement(
@@ -1268,7 +1323,7 @@ async function generatePassImage() {
   if (!ctx) {
 
     throw new Error(
-      'Canvas no disponible.'
+      'Canvas no está disponible en este navegador.'
     );
 
   }
@@ -1281,40 +1336,19 @@ async function generatePassImage() {
       : 'ruquitos';
 
 
-  let backgroundImage =
-    null;
-
-
   /*
-   * Intentamos utilizar la imagen
-   * que ya tienes.
+   * Si la imagen R2 ya precargó,
+   * se utiliza.
    *
-   * Si por CORS o red no puede
-   * usarse en Canvas, NO detenemos
-   * la generación.
+   * Si R2/CORS falla, el pase
+   * NO falla: se usa degradado.
    */
-  try {
-
-    backgroundImage =
-      await loadImage(
-        getPassBackgroundSrc(),
-        true,
-        6000
-      );
-
-  } catch (error) {
-
-    console.warn(
-      'No se pudo usar la imagen de fondo del pase; se utilizará un fondo degradado.',
-      error
+  const backgroundImage =
+    await getPassBackgroundImage(
+      theme
     );
 
-  }
 
-
-  /*
-   * Fondo
-   */
   if (backgroundImage) {
 
     drawCoverImage(
@@ -1328,54 +1362,9 @@ async function generatePassImage() {
 
   } else {
 
-    const fallback =
-      ctx.createLinearGradient(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      );
-
-
-    if (
-      theme ===
-      'chaviza'
-    ) {
-
-      fallback.addColorStop(
-        0,
-        '#080814'
-      );
-
-
-      fallback.addColorStop(
-        1,
-        '#35135a'
-      );
-
-    } else {
-
-      fallback.addColorStop(
-        0,
-        '#fffaff'
-      );
-
-
-      fallback.addColorStop(
-        1,
-        '#d8c0ff'
-      );
-
-    }
-
-
-    ctx.fillStyle =
-      fallback;
-
-
-    ctx.fillRect(
-      0,
-      0,
+    drawFallbackBackground(
+      ctx,
+      theme,
       canvas.width,
       canvas.height
     );
@@ -1383,14 +1372,143 @@ async function generatePassImage() {
   }
 
 
+  drawPassOverlay(
+    ctx,
+    theme,
+    canvas.width,
+    canvas.height
+  );
+
+
+  drawPassBorder(
+    ctx,
+    theme
+  );
+
+
+  drawPassText(
+    ctx,
+    theme
+  );
+
+
   /*
-   * Capa de contraste
+   * Texto PLANO almacenado
+   * dentro del QR.
    */
+  const qrText =
+    `Mis XV Vale - Pase para ${PASS_LABEL}`;
+
+
+  const qrDataUrl =
+    generateQrDataUrl(
+      qrText
+    );
+
+
+  const qrImage =
+    await loadImage(
+      qrDataUrl,
+      false,
+      2000
+    );
+
+
+  drawQrBlock(
+    ctx,
+    qrImage
+  );
+
+
+  return canvasToPngBlob(
+    canvas
+  );
+
+}
+
+
+/* =========================================================
+   FONDO ALTERNATIVO
+========================================================= */
+
+function drawFallbackBackground(
+  ctx,
+  theme,
+  width,
+  height
+) {
+
+  const gradient =
+    ctx.createLinearGradient(
+      0,
+      0,
+      width,
+      height
+    );
+
+
+  if (
+    theme ===
+    'chaviza'
+  ) {
+
+    gradient.addColorStop(
+      0,
+      '#080814'
+    );
+
+
+    gradient.addColorStop(
+      1,
+      '#35135a'
+    );
+
+  } else {
+
+    gradient.addColorStop(
+      0,
+      '#fffaff'
+    );
+
+
+    gradient.addColorStop(
+      1,
+      '#d8c0ff'
+    );
+
+  }
+
+
+  ctx.fillStyle =
+    gradient;
+
+
+  ctx.fillRect(
+    0,
+    0,
+    width,
+    height
+  );
+
+}
+
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+function drawPassOverlay(
+  ctx,
+  theme,
+  width,
+  height
+) {
+
   const overlay =
     ctx.createLinearGradient(
       0,
       0,
-      canvas.width,
+      width,
       0
     );
 
@@ -1446,16 +1564,21 @@ async function generatePassImage() {
   ctx.fillRect(
     0,
     0,
-    canvas.width,
-    canvas.height
+    width,
+    height
   );
 
+}
 
-  drawPassBorder(
-    ctx,
-    theme
-  );
 
+/* =========================================================
+   TEXTO DEL PASE
+========================================================= */
+
+function drawPassText(
+  ctx,
+  theme
+) {
 
   const textColor =
     theme ===
@@ -1487,7 +1610,7 @@ async function generatePassImage() {
 
 
   /*
-   * Título
+   * MIS XV
    */
   ctx.fillStyle =
     secondaryColor;
@@ -1523,7 +1646,7 @@ async function generatePassImage() {
 
 
   /*
-   * Fecha
+   * Fecha y lugar
    */
   ctx.fillStyle =
     secondaryColor;
@@ -1540,9 +1663,6 @@ async function generatePassImage() {
   );
 
 
-  /*
-   * Lugar
-   */
   ctx.fillText(
     EVENT_DATA.location,
     145,
@@ -1551,7 +1671,7 @@ async function generatePassImage() {
 
 
   /*
-   * Número de personas
+   * Pase
    */
   ctx.fillStyle =
     accentColor;
@@ -1569,7 +1689,7 @@ async function generatePassImage() {
 
 
   /*
-   * Texto auxiliar
+   * Texto inferior
    */
   ctx.fillStyle =
     textColor;
@@ -1604,34 +1724,18 @@ async function generatePassImage() {
   ctx.globalAlpha =
     1;
 
-
-  /*
-   * QR
-   *
-   * El contenido sigue siendo
-   * TEXTO PLANO.
-   */
-  const qrText =
-    `Mis XV Vale - Pase para ${PASS_LABEL}`;
+}
 
 
-  const qrDataUrl =
-    generateQrDataUrl(
-      qrText
-    );
+/* =========================================================
+   QR
+========================================================= */
 
+function drawQrBlock(
+  ctx,
+  qrImage
+) {
 
-  const qrImage =
-    await loadImage(
-      qrDataUrl,
-      false,
-      3000
-    );
-
-
-  /*
-   * Tarjeta del QR
-   */
   drawRoundedRect(
     ctx,
     1110,
@@ -1658,9 +1762,6 @@ async function generatePassImage() {
   );
 
 
-  /*
-   * Texto QR
-   */
   ctx.fillStyle =
     '#2e2140';
 
@@ -1694,14 +1795,101 @@ async function generatePassImage() {
   ctx.textAlign =
     'left';
 
+}
 
-  /*
-   * Convertimos a Blob.
-   *
-   * Esto consume menos memoria
-   * que convertir toda la imagen
-   * a una enorme URL base64.
-   */
+
+function generateQrDataUrl(
+  text
+) {
+
+  const container =
+    document.createElement(
+      'div'
+    );
+
+
+  container.style.position =
+    'fixed';
+
+
+  container.style.left =
+    '-10000px';
+
+
+  container.style.top =
+    '-10000px';
+
+
+  document.body
+    .appendChild(
+      container
+    );
+
+
+  try {
+
+    new QRCode(
+      container,
+      {
+        text:
+          text,
+
+        width:
+          330,
+
+        height:
+          330,
+
+        colorDark:
+          '#171129',
+
+        colorLight:
+          '#ffffff',
+
+        correctLevel:
+          QRCode
+            .CorrectLevel
+            .M
+      }
+    );
+
+
+    const qrCanvas =
+      container.querySelector(
+        'canvas'
+      );
+
+
+    if (!qrCanvas) {
+
+      throw new Error(
+        'La librería QR no creó el canvas esperado.'
+      );
+
+    }
+
+
+    return qrCanvas.toDataURL(
+      'image/png'
+    );
+
+  } finally {
+
+    container.remove();
+
+  }
+
+}
+
+
+/* =========================================================
+   CANVAS -> PNG
+========================================================= */
+
+function canvasToPngBlob(
+  canvas
+) {
+
   return new Promise(
     (
       resolve,
@@ -1738,156 +1926,13 @@ async function generatePassImage() {
 
 
 /* =========================================================
-   GENERAR QR
-========================================================= */
-
-function generateQrDataUrl(
-  text
-) {
-
-  if (
-    typeof QRCode ===
-    'undefined'
-  ) {
-
-    throw new Error(
-      'La librería QRCode no está disponible.'
-    );
-
-  }
-
-
-  const container =
-    document.createElement(
-      'div'
-    );
-
-
-  container.style.position =
-    'fixed';
-
-
-  container.style.left =
-    '-9999px';
-
-
-  container.style.top =
-    '-9999px';
-
-
-  document.body
-    .appendChild(
-      container
-    );
-
-
-  new QRCode(
-    container,
-    {
-      text:
-        text,
-
-      width:
-        330,
-
-      height:
-        330,
-
-      colorDark:
-        '#171129',
-
-      colorLight:
-        '#ffffff',
-
-      correctLevel:
-        QRCode
-          .CorrectLevel
-          .M
-    }
-  );
-
-
-  const qrCanvas =
-    container.querySelector(
-      'canvas'
-    );
-
-
-  if (!qrCanvas) {
-
-    container.remove();
-
-
-    throw new Error(
-      'No se pudo crear el código QR.'
-    );
-
-  }
-
-
-  const dataUrl =
-    qrCanvas.toDataURL(
-      'image/png'
-    );
-
-
-  container.remove();
-
-
-  return dataUrl;
-
-}
-
-
-/* =========================================================
-   MARCO DEL PASE
-========================================================= */
-
-function drawPassBorder(
-  ctx,
-  theme
-) {
-
-  ctx.save();
-
-
-  ctx.lineWidth =
-    3;
-
-
-  ctx.strokeStyle =
-    theme ===
-    'chaviza'
-      ? 'rgba(236, 72, 153, 0.75)'
-      : 'rgba(128, 80, 168, 0.60)';
-
-
-  drawRoundedRect(
-    ctx,
-    42,
-    42,
-    1516,
-    816,
-    34
-  );
-
-
-  ctx.stroke();
-
-
-  ctx.restore();
-
-}
-
-
-/* =========================================================
    CARGAR IMAGEN
 ========================================================= */
 
 function loadImage(
   src,
   useCors = false,
-  timeoutMs = 6000
+  timeoutMs = 2500
 ) {
 
   return new Promise(
@@ -1919,7 +1964,7 @@ function loadImage(
 
             reject(
               new Error(
-                `Tiempo agotado al cargar la imagen: ${src}`
+                `Tiempo agotado al cargar imagen: ${src}`
               )
             );
 
@@ -1979,7 +2024,7 @@ function loadImage(
 
           reject(
             new Error(
-              `No se pudo cargar la imagen: ${src}`
+              `No se pudo cargar imagen: ${src}`
             )
           );
 
@@ -1996,7 +2041,7 @@ function loadImage(
 
 
 /* =========================================================
-   CUBRIR CANVAS CON IMAGEN
+   IMAGEN COVER
 ========================================================= */
 
 function drawCoverImage(
@@ -2050,6 +2095,47 @@ function drawCoverImage(
     drawWidth,
     drawHeight
   );
+
+}
+
+
+/* =========================================================
+   MARCO
+========================================================= */
+
+function drawPassBorder(
+  ctx,
+  theme
+) {
+
+  ctx.save();
+
+
+  ctx.lineWidth =
+    3;
+
+
+  ctx.strokeStyle =
+    theme ===
+    'chaviza'
+      ? 'rgba(236, 72, 153, 0.75)'
+      : 'rgba(128, 80, 168, 0.60)';
+
+
+  drawRoundedRect(
+    ctx,
+    42,
+    42,
+    1516,
+    816,
+    34
+  );
+
+
+  ctx.stroke();
+
+
+  ctx.restore();
 
 }
 
