@@ -11,10 +11,6 @@ const EVENT_DATA = {
 
   whatsappNumber: '522224552910',
 
-  /*
-   * Usamos las imágenes que ya existen como fondo
-   * para el pase descargable.
-   */
   passBackgrounds: {
     ruquitos: 'ruquitosHero',
     chaviza: 'chavizaHero'
@@ -22,11 +18,6 @@ const EVENT_DATA = {
 
   links: {
     salon: 'https://share.google/EekuzPNNUuxc9XwVi',
-
-    /*
-     * Estos dos enlaces se reemplazan automáticamente
-     * más abajo para incluir el número de personas.
-     */
     rsvpAccept: '',
     rsvpDecline: ''
   },
@@ -51,10 +42,6 @@ const EVENT_DATA = {
       'https://pub-cb21ede894ea4a9681d5a9533840d647.r2.dev/vale4.jpeg'
   },
 
-  /*
-   * Cuando tengas las canciones,
-   * pega aquí las URLs.
-   */
   audio: {
     ruquitos: '',
     chaviza: ''
@@ -178,10 +165,10 @@ const EVENT_DATA = {
       'Fragmentos de la leyenda',
 
     rsvpFormal:
-      'Tu presencia hará este día aún más especial',
+      'Tu presencia hará este día aún más especial.',
 
     rsvpAnime:
-      'Tu presencia será parte de esta leyenda'
+      'Tu presencia será parte de esta leyenda.'
   }
 };
 
@@ -212,10 +199,14 @@ const musicToggle =
   document.querySelector('#musicToggle');
 
 const musicLabel =
-  document.querySelector('[data-music-label]');
+  document.querySelector(
+    '[data-music-label]'
+  );
 
 const musicIcon =
-  document.querySelector('[data-music-icon]');
+  document.querySelector(
+    '[data-music-icon]'
+  );
 
 
 let currentTheme = null;
@@ -230,7 +221,9 @@ const PASS_COUNT =
   getPassCount();
 
 const PASS_LABEL =
-  formatPassLabel(PASS_COUNT);
+  formatPassLabel(
+    PASS_COUNT
+  );
 
 
 /* =========================================================
@@ -249,38 +242,56 @@ bindPassDownloadButtons();
    EVENTOS
 ========================================================= */
 
-choiceButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    openTheme(
-      button.dataset.theme
+choiceButtons.forEach(
+  (button) => {
+
+    button.addEventListener(
+      'click',
+      () => {
+
+        openTheme(
+          button.dataset.theme
+        );
+
+      }
     );
-  });
-});
+
+  }
+);
 
 
-backButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    showSelector();
-  });
-});
+backButtons.forEach(
+  (button) => {
+
+    button.addEventListener(
+      'click',
+      showSelector
+    );
+
+  }
+);
 
 
-if (musicToggle) {
-  musicToggle.addEventListener('click', () => {
-    toggleMusic();
-  });
-}
+musicToggle?.addEventListener(
+  'click',
+  toggleMusic
+);
 
 
-if (bgMusic) {
-  bgMusic.addEventListener('play', () => {
+bgMusic?.addEventListener(
+  'play',
+  () => {
     updateMusicButton(true);
-  });
+  }
+);
 
-  bgMusic.addEventListener('pause', () => {
+
+bgMusic?.addEventListener(
+  'pause',
+  () => {
     updateMusicButton(false);
-  });
-}
+  }
+);
 
 
 /* =========================================================
@@ -288,7 +299,9 @@ if (bgMusic) {
 ========================================================= */
 
 function renderEventData() {
+
   const fields = {
+
     fullName:
       EVENT_DATA.fullName,
 
@@ -329,35 +342,54 @@ function renderEventData() {
       EVENT_DATA.labels.chavizaDesc,
 
     formalScheduleTitle:
-      EVENT_DATA.labels.formalScheduleTitle,
+      EVENT_DATA.labels
+        .formalScheduleTitle,
 
     animeScheduleTitle:
-      EVENT_DATA.labels.animeScheduleTitle,
+      EVENT_DATA.labels
+        .animeScheduleTitle,
 
     formalGalleryTitle:
-      EVENT_DATA.labels.formalGalleryTitle,
+      EVENT_DATA.labels
+        .formalGalleryTitle,
 
     animeGalleryTitle:
-      EVENT_DATA.labels.animeGalleryTitle,
+      EVENT_DATA.labels
+        .animeGalleryTitle,
 
+    /*
+     * AQUÍ agregamos el número de personas
+     * directamente al texto "Tu presencia..."
+     */
     rsvpFormal:
-      EVENT_DATA.labels.rsvpFormal,
+      `${EVENT_DATA.labels.rsvpFormal} ` +
+      `Nos llena de alegría compartir contigo un pase para ${PASS_LABEL}.`,
 
     rsvpAnime:
-      EVENT_DATA.labels.rsvpAnime
+      `${EVENT_DATA.labels.rsvpAnime} ` +
+      `Nos llena de alegría compartir contigo un pase para ${PASS_LABEL}.`
+
   };
 
 
-  Object.entries(fields).forEach(
+  Object.entries(
+    fields
+  ).forEach(
     ([key, value]) => {
+
       document
         .querySelectorAll(
           `[data-field="${key}"]`
         )
-        .forEach((element) => {
-          element.textContent =
-            value;
-        });
+        .forEach(
+          (element) => {
+
+            element.textContent =
+              value;
+
+          }
+        );
+
     }
   );
 
@@ -372,40 +404,54 @@ function renderEventData() {
 ========================================================= */
 
 function renderSchedules() {
+
   document
     .querySelectorAll(
       '[data-schedule]'
     )
-    .forEach((container) => {
-      const type =
-        container.dataset.schedule;
+    .forEach(
+      (container) => {
 
-      const items =
-        EVENT_DATA.schedule[type] || [];
+        const type =
+          container.dataset.schedule;
 
-      container.innerHTML =
-        items
-          .map((item) => `
-            <article>
-              <span>
-                ${item.icon || ''}
-              </span>
 
-              <h4>
-                ${item.title || ''}
-              </h4>
+        const items =
+          EVENT_DATA
+            .schedule[type] ||
+          [];
 
-              <p class="schedule-time">
-                ${item.time || ''}
-              </p>
 
-              <small>
-                ${item.description || ''}
-              </small>
-            </article>
-          `)
-          .join('');
-    });
+        container.innerHTML =
+          items
+            .map(
+              (item) => `
+                <article>
+
+                  <span>
+                    ${item.icon || ''}
+                  </span>
+
+                  <h4>
+                    ${item.title || ''}
+                  </h4>
+
+                  <p class="schedule-time">
+                    ${item.time || ''}
+                  </p>
+
+                  <small>
+                    ${item.description || ''}
+                  </small>
+
+                </article>
+              `
+            )
+            .join('');
+
+      }
+    );
+
 }
 
 
@@ -414,41 +460,67 @@ function renderSchedules() {
 ========================================================= */
 
 function renderImages() {
+
   document
-    .querySelectorAll('[data-img]')
-    .forEach((image) => {
-      const key =
-        image.dataset.img;
+    .querySelectorAll(
+      '[data-img]'
+    )
+    .forEach(
+      (image) => {
 
-      const src =
-        EVENT_DATA.images[key];
+        const key =
+          image.dataset.img;
 
-      const wrapper =
-        image.closest('figure') ||
-        image.parentElement;
 
-      if (src) {
-        image.src = src;
+        const src =
+          EVENT_DATA.images[key];
 
-        image.classList.remove(
-          'is-placeholder'
-        );
 
-        wrapper?.classList.remove(
-          'image-placeholder'
-        );
-      } else {
-        image.removeAttribute('src');
+        const wrapper =
+          image.closest('figure') ||
+          image.parentElement;
 
-        image.classList.add(
-          'is-placeholder'
-        );
 
-        wrapper?.classList.add(
-          'image-placeholder'
-        );
+        if (src) {
+
+          image.src =
+            src;
+
+
+          image.classList.remove(
+            'is-placeholder'
+          );
+
+
+          wrapper
+            ?.classList
+            .remove(
+              'image-placeholder'
+            );
+
+        } else {
+
+          image.removeAttribute(
+            'src'
+          );
+
+
+          image.classList.add(
+            'is-placeholder'
+          );
+
+
+          wrapper
+            ?.classList
+            .add(
+              'image-placeholder'
+            );
+
+        }
+
       }
-    });
+    );
+
 }
 
 
@@ -457,23 +529,35 @@ function renderImages() {
 ========================================================= */
 
 function renderLinks() {
+
   document
-    .querySelectorAll('[data-link]')
-    .forEach((link) => {
-      const key =
-        link.dataset.link;
+    .querySelectorAll(
+      '[data-link]'
+    )
+    .forEach(
+      (link) => {
 
-      const href =
-        EVENT_DATA.links[key];
+        const key =
+          link.dataset.link;
 
-      link.href =
-        href || '#';
 
-      link.classList.toggle(
-        'is-disabled',
-        !href || href === '#'
-      );
-    });
+        const href =
+          EVENT_DATA.links[key];
+
+
+        link.href =
+          href || '#';
+
+
+        link.classList.toggle(
+          'is-disabled',
+          !href ||
+          href === '#'
+        );
+
+      }
+    );
+
 }
 
 
@@ -482,11 +566,15 @@ function renderLinks() {
 ========================================================= */
 
 function openTheme(theme) {
-  currentTheme = theme;
+
+  currentTheme =
+    theme;
+
 
   selector.classList.add(
     'hidden'
   );
+
 
   selector.style.display =
     'none';
@@ -496,6 +584,7 @@ function openTheme(theme) {
     'hidden'
   );
 
+
   chaviza.classList.add(
     'hidden'
   );
@@ -504,6 +593,7 @@ function openTheme(theme) {
   ruquitos.classList.remove(
     'active'
   );
+
 
   chaviza.classList.remove(
     'active'
@@ -516,35 +606,53 @@ function openTheme(theme) {
       : chaviza;
 
 
-  selectedPage.classList.remove(
-    'hidden'
-  );
+  selectedPage
+    .classList
+    .remove(
+      'hidden'
+    );
+
 
   selectedPage.style.display =
     'block';
 
 
-  requestAnimationFrame(() => {
-    selectedPage.classList.add(
-      'active'
-    );
-  });
+  requestAnimationFrame(
+    () => {
+
+      selectedPage
+        .classList
+        .add(
+          'active'
+        );
+
+    }
+  );
 
 
   document.body.className =
     theme;
 
 
-  startThemeMusic(theme);
+  startThemeMusic(
+    theme
+  );
 
-  window.scrollTo(0, 0);
+
+  window.scrollTo(
+    0,
+    0
+  );
+
 }
 
 
 function showSelector() {
+
   selector.classList.remove(
     'hidden'
   );
+
 
   selector.style.display =
     'grid';
@@ -553,6 +661,7 @@ function showSelector() {
   ruquitos.classList.add(
     'hidden'
   );
+
 
   chaviza.classList.add(
     'hidden'
@@ -563,26 +672,43 @@ function showSelector() {
     'active'
   );
 
+
   chaviza.classList.remove(
     'active'
   );
 
 
-  ruquitos.style.display = '';
-  chaviza.style.display = '';
+  ruquitos.style.display =
+    '';
 
 
-  document.body.className = '';
+  chaviza.style.display =
+    '';
 
-  currentTheme = null;
+
+  document.body.className =
+    '';
+
+
+  currentTheme =
+    null;
+
 
   stopMusic();
 
-  musicToggle?.classList.add(
-    'hidden'
+
+  musicToggle
+    ?.classList
+    .add(
+      'hidden'
+    );
+
+
+  window.scrollTo(
+    0,
+    0
   );
 
-  window.scrollTo(0, 0);
 }
 
 
@@ -590,7 +716,10 @@ function showSelector() {
    MÚSICA
 ========================================================= */
 
-function startThemeMusic(theme) {
+function startThemeMusic(
+  theme
+) {
+
   if (
     !bgMusic ||
     !musicToggle
@@ -603,63 +732,79 @@ function startThemeMusic(theme) {
     EVENT_DATA.audio[theme];
 
 
-  musicToggle.classList.remove(
-    'hidden'
-  );
+  musicToggle
+    .classList
+    .remove(
+      'hidden'
+    );
 
 
   if (!src) {
-    musicReady = false;
+
+    musicReady =
+      false;
+
 
     bgMusic.pause();
+
 
     bgMusic.removeAttribute(
       'src'
     );
+
 
     updateMusicButton(
       false,
       'Sin música'
     );
 
+
     return;
+
   }
 
 
-  musicReady = true;
+  musicReady =
+    true;
 
 
   if (
-    bgMusic.getAttribute('src') !== src
+    bgMusic.getAttribute(
+      'src'
+    ) !== src
   ) {
-    bgMusic.src = src;
+
+    bgMusic.src =
+      src;
+
+
     bgMusic.load();
+
   }
 
 
-  bgMusic.volume = 0.55;
+  bgMusic.volume =
+    0.55;
 
 
-  const playPromise =
-    bgMusic.play();
+  bgMusic
+    .play()
+    .catch(
+      () => {
 
+        updateMusicButton(
+          false,
+          'Reproducir música'
+        );
 
-  if (
-    playPromise &&
-    typeof playPromise.catch ===
-      'function'
-  ) {
-    playPromise.catch(() => {
-      updateMusicButton(
-        false,
-        'Reproducir música'
-      );
-    });
-  }
+      }
+    );
+
 }
 
 
 function toggleMusic() {
+
   if (
     !musicReady ||
     !bgMusic
@@ -668,37 +813,59 @@ function toggleMusic() {
   }
 
 
-  if (bgMusic.paused) {
+  if (
+    bgMusic.paused
+  ) {
+
     bgMusic
       .play()
-      .catch(() => {
-        updateMusicButton(
-          false,
-          'Reproducir música'
-        );
-      });
+      .catch(
+        () => {
+
+          updateMusicButton(
+            false,
+            'Reproducir música'
+          );
+
+        }
+      );
+
   } else {
+
     bgMusic.pause();
+
   }
+
 }
 
 
 function stopMusic() {
+
   if (!bgMusic) {
     return;
   }
 
+
   bgMusic.pause();
 
-  bgMusic.currentTime = 0;
+
+  bgMusic.currentTime =
+    0;
+
 
   bgMusic.removeAttribute(
     'src'
   );
 
-  musicReady = false;
 
-  updateMusicButton(false);
+  musicReady =
+    false;
+
+
+  updateMusicButton(
+    false
+  );
+
 }
 
 
@@ -706,6 +873,7 @@ function updateMusicButton(
   isPlaying,
   customLabel
 ) {
+
   if (
     !musicLabel ||
     !musicIcon
@@ -714,37 +882,29 @@ function updateMusicButton(
   }
 
 
-  if (customLabel) {
-    musicLabel.textContent =
-      customLabel;
-
-    musicIcon.textContent =
-      isPlaying
-        ? 'Ⅱ'
-        : '♪';
-
-    return;
-  }
-
-
   musicLabel.textContent =
-    isPlaying
-      ? 'Pausar música'
-      : 'Reproducir música';
+    customLabel ||
+    (
+      isPlaying
+        ? 'Pausar música'
+        : 'Reproducir música'
+    );
 
 
   musicIcon.textContent =
     isPlaying
       ? 'Ⅱ'
       : '♪';
+
 }
 
 
 /* =========================================================
-   LEER NÚMERO DE PASES DE LA URL
+   LEER NÚMERO DE PASES
 ========================================================= */
 
 function getPassCount() {
+
   const params =
     new URLSearchParams(
       window.location.search
@@ -753,9 +913,11 @@ function getPassCount() {
 
   /*
    * Principal:
+   *
    * ?pases=4
    *
    * También acepta:
+   *
    * ?personas=4
    */
   const rawValue =
@@ -771,64 +933,87 @@ function getPassCount() {
     );
 
 
-  /*
-   * Si ponen algo inválido,
-   * dejamos 1 persona.
-   */
   if (
-    !Number.isInteger(parsed) ||
-    parsed < 1
+    Number.isInteger(
+      parsed
+    ) &&
+    parsed > 0
   ) {
-    return 1;
+
+    return parsed;
+
   }
 
 
-  return parsed;
+  return 1;
+
 }
 
 
-function formatPassLabel(count) {
-  return `${count} ${
-    count === 1
-      ? 'persona'
-      : 'personas'
-  }`;
+function formatPassLabel(
+  count
+) {
+
+  return (
+    `${count} ` +
+    (
+      count === 1
+        ? 'persona'
+        : 'personas'
+    )
+  );
+
 }
 
 
 /* =========================================================
-   TEXTO DE PASES
+   TEXTO DE PASE
 ========================================================= */
 
 function renderPassContent() {
-  const message =
-    PASS_COUNT === 1
-      ? 'Nos llena de alegría compartir contigo un pase para 1 persona.'
-      : `Nos llena de alegría compartir contigo un pase para ${PASS_COUNT} personas.`;
+
+  /*
+   * El texto principal con "Nos llena de alegría..."
+   * ahora está arriba, dentro de "Tu presencia...".
+   *
+   * Aquí solamente mostramos claramente
+   * el tipo de pase.
+   */
+  const passMessage =
+    `Pase para ${PASS_LABEL}`;
 
 
   const instructions =
-    'Si vas a acompañarnos, primero descarga tu pase y después confirma tu asistencia por WhatsApp con el botón de abajo.';
+    'En caso de asistir, primero descarga tu pase y después confirma tu asistencia por WhatsApp con el botón de abajo.';
 
 
   document
     .querySelectorAll(
       '[data-pass-message]'
     )
-    .forEach((element) => {
-      element.textContent =
-        message;
-    });
+    .forEach(
+      (element) => {
+
+        element.textContent =
+          passMessage;
+
+      }
+    );
 
 
   document
     .querySelectorAll(
       '.pass-instructions'
     )
-    .forEach((element) => {
-      element.textContent =
-        instructions;
-    });
+    .forEach(
+      (element) => {
+
+        element.textContent =
+          instructions;
+
+      }
+    );
+
 }
 
 
@@ -836,29 +1021,46 @@ function renderPassContent() {
    WHATSAPP
 ========================================================= */
 
-function buildWhatsAppLink(message) {
+function buildWhatsAppLink(
+  message
+) {
+
   return (
     `https://wa.me/` +
     `${EVENT_DATA.whatsappNumber}` +
-    `?text=${encodeURIComponent(message)}`
+    `?text=` +
+    `${encodeURIComponent(message)}`
   );
+
 }
 
 
 function renderRsvpLinks() {
-  let acceptMessage;
 
-  if (PASS_COUNT === 1) {
-    acceptMessage =
-      `Hola, confirmo mi asistencia a los XV Años de ${EVENT_DATA.fullName}. Asistiré 1 persona. ¡Ahí estaré! 💜`;
-  } else {
-    acceptMessage =
-      `Hola, confirmo nuestra asistencia a los XV Años de ${EVENT_DATA.fullName}. Asistiremos ${PASS_COUNT} personas. ¡Ahí estaremos! 💜`;
-  }
+  /*
+   * Conservamos prácticamente
+   * el mensaje que ya tenías,
+   * agregando el número de personas.
+   */
+  const ending =
+    PASS_COUNT === 1
+      ? '¡Ahí estaré! 💜'
+      : '¡Ahí estaremos! 💜';
 
 
+  const acceptMessage =
+    `Hola, confirmo mi asistencia a los XV Años de ${EVENT_DATA.fullName}. ` +
+    `La confirmación es para ${PASS_LABEL}. ` +
+    `${ending}`;
+
+
+  /*
+   * El mensaje de NO ASISTIR
+   * se queda igual.
+   */
   const declineMessage =
-    `Hola, muchas gracias por la invitación a los XV Años de ${EVENT_DATA.fullName}. Lamentablemente no podré asistir.`;
+    `Hola, muchas gracias por la invitación a los XV Años de ${EVENT_DATA.fullName}. ` +
+    `Lamentablemente no podré asistir.`;
 
 
   EVENT_DATA.links.rsvpAccept =
@@ -874,83 +1076,123 @@ function renderRsvpLinks() {
 
 
   renderLinks();
+
 }
 
 
 /* =========================================================
-   BOTÓN DESCARGAR PASE
+   DESCARGAR PASE
 ========================================================= */
 
 function bindPassDownloadButtons() {
+
   document
     .querySelectorAll(
       '[data-download-pass]'
     )
-    .forEach((button) => {
-      button.addEventListener(
-        'click',
-        async () => {
-          const originalText =
-            button.textContent.trim();
+    .forEach(
+      (button) => {
+
+        button.addEventListener(
+          'click',
+          async () => {
+
+            const originalText =
+              button
+                .textContent
+                .trim();
 
 
-          button.disabled = true;
-
-          button.textContent =
-            'Generando pase...';
+            button.disabled =
+              true;
 
 
-          try {
-            const dataUrl =
-              await generatePassImage();
+            button.textContent =
+              'Generando pase...';
 
 
-            const link =
-              document.createElement(
-                'a'
+            try {
+
+              const blob =
+                await generatePassImage();
+
+
+              const objectUrl =
+                URL.createObjectURL(
+                  blob
+                );
+
+
+              const link =
+                document.createElement(
+                  'a'
+                );
+
+
+              link.href =
+                objectUrl;
+
+
+              link.download =
+                `mis-xv-vale-pase-${PASS_COUNT}-${
+                  PASS_COUNT === 1
+                    ? 'persona'
+                    : 'personas'
+                }.png`;
+
+
+              document.body
+                .appendChild(
+                  link
+                );
+
+
+              link.click();
+
+
+              link.remove();
+
+
+              setTimeout(
+                () => {
+
+                  URL.revokeObjectURL(
+                    objectUrl
+                  );
+
+                },
+                1000
+              );
+
+            } catch (error) {
+
+              console.error(
+                'No se pudo generar el pase:',
+                error
               );
 
 
-            link.href =
-              dataUrl;
+              alert(
+                'No se pudo generar el pase. Revisa la consola para ver el detalle.'
+              );
+
+            } finally {
+
+              button.disabled =
+                false;
 
 
-            link.download =
-              `mis-xv-vale-pase-${PASS_COUNT}-${
-                PASS_COUNT === 1
-                  ? 'persona'
-                  : 'personas'
-              }.png`;
+              button.textContent =
+                originalText;
 
+            }
 
-            document.body.appendChild(
-              link
-            );
-
-
-            link.click();
-
-            link.remove();
-          } catch (error) {
-            console.error(
-              'No se pudo generar el pase:',
-              error
-            );
-
-
-            alert(
-              'No se pudo generar el pase. Verifica que la imagen de fondo permita ser utilizada desde tu página.'
-            );
-          } finally {
-            button.disabled =
-              false;
-
-            button.textContent =
-              originalText;
           }
-        }
-      );
-    });
+        );
+
+      }
+    );
+
 }
 
 
@@ -959,21 +1201,31 @@ function bindPassDownloadButtons() {
 ========================================================= */
 
 function getPassBackgroundSrc() {
+
   const theme =
-    currentTheme === 'chaviza'
+    currentTheme ===
+    'chaviza'
       ? 'chaviza'
       : 'ruquitos';
 
 
   const imageKey =
     EVENT_DATA
-      .passBackgrounds[theme];
+      .passBackgrounds[
+        theme
+      ];
 
 
   return (
-    EVENT_DATA.images[imageKey] ||
-    EVENT_DATA.images.gallery1
+    EVENT_DATA
+      .images[
+        imageKey
+      ] ||
+    EVENT_DATA
+      .images
+      .gallery1
   );
+
 }
 
 
@@ -982,17 +1234,16 @@ function getPassBackgroundSrc() {
 ========================================================= */
 
 async function generatePassImage() {
-  /*
-   * Esperamos a que carguen las fuentes
-   * de Google antes de dibujar.
-   */
-  if (
-    document.fonts &&
-    document.fonts.ready
-  ) {
-    await document.fonts.ready;
-  }
 
+  /*
+   * IMPORTANTE:
+   *
+   * Ya NO esperamos document.fonts.ready.
+   *
+   * Si Google Fonts falla o tarda,
+   * Canvas simplemente utiliza
+   * Georgia / Arial como fallback.
+   */
 
   const canvas =
     document.createElement(
@@ -1000,54 +1251,140 @@ async function generatePassImage() {
     );
 
 
-  canvas.width = 1600;
-  canvas.height = 900;
+  canvas.width =
+    1600;
+
+
+  canvas.height =
+    900;
 
 
   const ctx =
-    canvas.getContext('2d');
+    canvas.getContext(
+      '2d'
+    );
 
 
   if (!ctx) {
+
     throw new Error(
       'Canvas no disponible.'
     );
+
   }
 
 
   const theme =
-    currentTheme === 'chaviza'
+    currentTheme ===
+    'chaviza'
       ? 'chaviza'
       : 'ruquitos';
 
 
+  let backgroundImage =
+    null;
+
+
   /*
-   * Cargamos una de las imágenes
-   * que ya existen en tu página.
+   * Intentamos utilizar la imagen
+   * que ya tienes.
+   *
+   * Si por CORS o red no puede
+   * usarse en Canvas, NO detenemos
+   * la generación.
    */
-  const backgroundImage =
-    await loadImage(
-      getPassBackgroundSrc(),
-      true
+  try {
+
+    backgroundImage =
+      await loadImage(
+        getPassBackgroundSrc(),
+        true,
+        6000
+      );
+
+  } catch (error) {
+
+    console.warn(
+      'No se pudo usar la imagen de fondo del pase; se utilizará un fondo degradado.',
+      error
     );
+
+  }
 
 
   /*
    * Fondo
    */
-  drawCoverImage(
-    ctx,
-    backgroundImage,
-    0,
-    0,
-    canvas.width,
-    canvas.height
-  );
+  if (backgroundImage) {
+
+    drawCoverImage(
+      ctx,
+      backgroundImage,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+  } else {
+
+    const fallback =
+      ctx.createLinearGradient(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+
+    if (
+      theme ===
+      'chaviza'
+    ) {
+
+      fallback.addColorStop(
+        0,
+        '#080814'
+      );
+
+
+      fallback.addColorStop(
+        1,
+        '#35135a'
+      );
+
+    } else {
+
+      fallback.addColorStop(
+        0,
+        '#fffaff'
+      );
+
+
+      fallback.addColorStop(
+        1,
+        '#d8c0ff'
+      );
+
+    }
+
+
+    ctx.fillStyle =
+      fallback;
+
+
+    ctx.fillRect(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+  }
 
 
   /*
-   * Overlay para que el texto
-   * siempre sea legible.
+   * Capa de contraste
    */
   const overlay =
     ctx.createLinearGradient(
@@ -1058,36 +1395,47 @@ async function generatePassImage() {
     );
 
 
-  if (theme === 'chaviza') {
+  if (
+    theme ===
+    'chaviza'
+  ) {
+
     overlay.addColorStop(
       0,
       'rgba(7, 7, 19, 0.94)'
     );
+
 
     overlay.addColorStop(
       0.55,
       'rgba(22, 8, 37, 0.78)'
     );
 
+
     overlay.addColorStop(
       1,
       'rgba(7, 7, 19, 0.42)'
     );
+
   } else {
+
     overlay.addColorStop(
       0,
       'rgba(255, 250, 255, 0.96)'
     );
+
 
     overlay.addColorStop(
       0.55,
       'rgba(255, 250, 255, 0.84)'
     );
 
+
     overlay.addColorStop(
       1,
       'rgba(238, 224, 255, 0.42)'
     );
+
   }
 
 
@@ -1103,9 +1451,6 @@ async function generatePassImage() {
   );
 
 
-  /*
-   * Marco
-   */
   drawPassBorder(
     ctx,
     theme
@@ -1113,19 +1458,22 @@ async function generatePassImage() {
 
 
   const textColor =
-    theme === 'chaviza'
+    theme ===
+    'chaviza'
       ? '#ffffff'
       : '#3f2858';
 
 
   const secondaryColor =
-    theme === 'chaviza'
+    theme ===
+    'chaviza'
       ? '#e9d5ff'
       : '#6d4a9a';
 
 
   const accentColor =
-    theme === 'chaviza'
+    theme ===
+    'chaviza'
       ? '#ec4899'
       : '#8050a8';
 
@@ -1133,18 +1481,20 @@ async function generatePassImage() {
   ctx.textAlign =
     'left';
 
+
   ctx.textBaseline =
     'alphabetic';
 
 
   /*
-   * MIS XV
+   * Título
    */
   ctx.fillStyle =
     secondaryColor;
 
+
   ctx.font =
-    '600 34px Cinzel, serif';
+    '600 34px Cinzel, Georgia, serif';
 
 
   ctx.fillText(
@@ -1160,8 +1510,9 @@ async function generatePassImage() {
   ctx.fillStyle =
     textColor;
 
+
   ctx.font =
-    '700 88px "Playfair Display", serif';
+    '700 88px "Playfair Display", Georgia, serif';
 
 
   ctx.fillText(
@@ -1177,8 +1528,9 @@ async function generatePassImage() {
   ctx.fillStyle =
     secondaryColor;
 
+
   ctx.font =
-    '500 31px Inter, sans-serif';
+    '500 31px Inter, Arial, sans-serif';
 
 
   ctx.fillText(
@@ -1204,8 +1556,9 @@ async function generatePassImage() {
   ctx.fillStyle =
     accentColor;
 
+
   ctx.font =
-    '700 72px Inter, sans-serif';
+    '700 72px Inter, Arial, sans-serif';
 
 
   ctx.fillText(
@@ -1221,11 +1574,13 @@ async function generatePassImage() {
   ctx.fillStyle =
     textColor;
 
+
   ctx.globalAlpha =
     0.78;
 
+
   ctx.font =
-    '400 28px Inter, sans-serif';
+    '400 28px Inter, Arial, sans-serif';
 
 
   ctx.fillText(
@@ -1236,7 +1591,7 @@ async function generatePassImage() {
 
 
   ctx.font =
-    '500 25px Inter, sans-serif';
+    '500 25px Inter, Arial, sans-serif';
 
 
   ctx.fillText(
@@ -1251,9 +1606,10 @@ async function generatePassImage() {
 
 
   /*
-   * Contenido exacto del QR.
+   * QR
    *
-   * Es TEXTO PLANO.
+   * El contenido sigue siendo
+   * TEXTO PLANO.
    */
   const qrText =
     `Mis XV Vale - Pase para ${PASS_LABEL}`;
@@ -1267,12 +1623,14 @@ async function generatePassImage() {
 
   const qrImage =
     await loadImage(
-      qrDataUrl
+      qrDataUrl,
+      false,
+      3000
     );
 
 
   /*
-   * Tarjeta blanca QR
+   * Tarjeta del QR
    */
   drawRoundedRect(
     ctx,
@@ -1287,12 +1645,10 @@ async function generatePassImage() {
   ctx.fillStyle =
     'rgba(255, 255, 255, 0.96)';
 
+
   ctx.fill();
 
 
-  /*
-   * QR
-   */
   ctx.drawImage(
     qrImage,
     1142,
@@ -1303,16 +1659,18 @@ async function generatePassImage() {
 
 
   /*
-   * Texto debajo del QR
+   * Texto QR
    */
   ctx.fillStyle =
     '#2e2140';
 
+
   ctx.textAlign =
     'center';
 
+
   ctx.font =
-    '700 25px Inter, sans-serif';
+    '700 25px Inter, Arial, sans-serif';
 
 
   ctx.fillText(
@@ -1323,7 +1681,7 @@ async function generatePassImage() {
 
 
   ctx.font =
-    '400 20px Inter, sans-serif';
+    '400 20px Inter, Arial, sans-serif';
 
 
   ctx.fillText(
@@ -1338,12 +1696,44 @@ async function generatePassImage() {
 
 
   /*
-   * Convertimos todo a PNG.
+   * Convertimos a Blob.
+   *
+   * Esto consume menos memoria
+   * que convertir toda la imagen
+   * a una enorme URL base64.
    */
-  return canvas.toDataURL(
-    'image/png',
-    1
+  return new Promise(
+    (
+      resolve,
+      reject
+    ) => {
+
+      canvas.toBlob(
+        (blob) => {
+
+          if (blob) {
+
+            resolve(
+              blob
+            );
+
+          } else {
+
+            reject(
+              new Error(
+                'No se pudo convertir el pase a PNG.'
+              )
+            );
+
+          }
+
+        },
+        'image/png'
+      );
+
+    }
   );
+
 }
 
 
@@ -1351,11 +1741,22 @@ async function generatePassImage() {
    GENERAR QR
 ========================================================= */
 
-function generateQrDataUrl(text) {
-  /*
-   * QRCodeJS necesita un elemento
-   * del DOM para dibujar el QR.
-   */
+function generateQrDataUrl(
+  text
+) {
+
+  if (
+    typeof QRCode ===
+    'undefined'
+  ) {
+
+    throw new Error(
+      'La librería QRCode no está disponible.'
+    );
+
+  }
+
+
   const container =
     document.createElement(
       'div'
@@ -1365,16 +1766,19 @@ function generateQrDataUrl(text) {
   container.style.position =
     'fixed';
 
+
   container.style.left =
     '-9999px';
+
 
   container.style.top =
     '-9999px';
 
 
-  document.body.appendChild(
-    container
-  );
+  document.body
+    .appendChild(
+      container
+    );
 
 
   new QRCode(
@@ -1396,7 +1800,9 @@ function generateQrDataUrl(text) {
         '#ffffff',
 
       correctLevel:
-        QRCode.CorrectLevel.M
+        QRCode
+          .CorrectLevel
+          .M
     }
   );
 
@@ -1408,11 +1814,14 @@ function generateQrDataUrl(text) {
 
 
   if (!qrCanvas) {
+
     container.remove();
+
 
     throw new Error(
       'No se pudo crear el código QR.'
     );
+
   }
 
 
@@ -1426,6 +1835,7 @@ function generateQrDataUrl(text) {
 
 
   return dataUrl;
+
 }
 
 
@@ -1437,6 +1847,7 @@ function drawPassBorder(
   ctx,
   theme
 ) {
+
   ctx.save();
 
 
@@ -1445,7 +1856,8 @@ function drawPassBorder(
 
 
   ctx.strokeStyle =
-    theme === 'chaviza'
+    theme ===
+    'chaviza'
       ? 'rgba(236, 72, 153, 0.75)'
       : 'rgba(128, 80, 168, 0.60)';
 
@@ -1462,7 +1874,9 @@ function drawPassBorder(
 
   ctx.stroke();
 
+
   ctx.restore();
+
 }
 
 
@@ -1472,42 +1886,112 @@ function drawPassBorder(
 
 function loadImage(
   src,
-  useCors = false
+  useCors = false,
+  timeoutMs = 6000
 ) {
+
   return new Promise(
-    (resolve, reject) => {
+    (
+      resolve,
+      reject
+    ) => {
+
       const image =
         new Image();
 
 
-      /*
-       * Necesario para exportar canvas
-       * cuando usamos las imágenes R2.
-       */
+      let finished =
+        false;
+
+
+      const timeoutId =
+        setTimeout(
+          () => {
+
+            if (finished) {
+              return;
+            }
+
+
+            finished =
+              true;
+
+
+            reject(
+              new Error(
+                `Tiempo agotado al cargar la imagen: ${src}`
+              )
+            );
+
+          },
+          timeoutMs
+        );
+
+
       if (useCors) {
+
         image.crossOrigin =
           'anonymous';
+
       }
 
 
-      image.onload = () => {
-        resolve(image);
-      };
+      image.onload =
+        () => {
+
+          if (finished) {
+            return;
+          }
 
 
-      image.onerror = () => {
-        reject(
-          new Error(
-            `No se pudo cargar la imagen: ${src}`
-          )
-        );
-      };
+          finished =
+            true;
+
+
+          clearTimeout(
+            timeoutId
+          );
+
+
+          resolve(
+            image
+          );
+
+        };
+
+
+      image.onerror =
+        () => {
+
+          if (finished) {
+            return;
+          }
+
+
+          finished =
+            true;
+
+
+          clearTimeout(
+            timeoutId
+          );
+
+
+          reject(
+            new Error(
+              `No se pudo cargar la imagen: ${src}`
+            )
+          );
+
+        };
 
 
       image.src =
         src;
+
     }
   );
+
 }
 
 
@@ -1523,29 +2007,40 @@ function drawCoverImage(
   width,
   height
 ) {
+
   const scale =
     Math.max(
-      width / image.width,
-      height / image.height
+      width /
+        image.width,
+      height /
+        image.height
     );
 
 
   const drawWidth =
-    image.width * scale;
+    image.width *
+    scale;
 
 
   const drawHeight =
-    image.height * scale;
+    image.height *
+    scale;
 
 
   const drawX =
     x +
-    (width - drawWidth) / 2;
+    (
+      width -
+      drawWidth
+    ) / 2;
 
 
   const drawY =
     y +
-    (height - drawHeight) / 2;
+    (
+      height -
+      drawHeight
+    ) / 2;
 
 
   ctx.drawImage(
@@ -1555,6 +2050,7 @@ function drawCoverImage(
     drawWidth,
     drawHeight
   );
+
 }
 
 
@@ -1570,6 +2066,7 @@ function drawRoundedRect(
   height,
   radius
 ) {
+
   const r =
     Math.min(
       radius,
@@ -1588,7 +2085,9 @@ function drawRoundedRect(
 
 
   ctx.lineTo(
-    x + width - r,
+    x +
+      width -
+      r,
     y
   );
 
@@ -1604,14 +2103,18 @@ function drawRoundedRect(
 
   ctx.lineTo(
     x + width,
-    y + height - r
+    y +
+      height -
+      r
   );
 
 
   ctx.arcTo(
     x + width,
     y + height,
-    x + width - r,
+    x +
+      width -
+      r,
     y + height,
     r
   );
@@ -1627,7 +2130,9 @@ function drawRoundedRect(
     x,
     y + height,
     x,
-    y + height - r,
+    y +
+      height -
+      r,
     r
   );
 
@@ -1648,4 +2153,5 @@ function drawRoundedRect(
 
 
   ctx.closePath();
+
 }
