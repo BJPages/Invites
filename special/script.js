@@ -10,9 +10,10 @@ const EVENT_DATA = {
   location: 'Zacatlán, Puebla',
 
   links: {
-    rsvpFormal: '#',
-    rsvpAnime: '#',
+    salon: 'https://share.google/EekuzPNNUuxc9XwVi',
+
     rsvpAccept: 'https://wa.me/522224552910?text=Hola%2C%20confirmo%20mi%20asistencia%20a%20los%20XV%20A%C3%B1os%20de%20Valeria%20Sarah%C3%AD.%20%C2%A1Ah%C3%AD%20estar%C3%A9!%20%F0%9F%92%9C',
+
     rsvpDecline: 'https://wa.me/522224552910?text=Hola%2C%20muchas%20gracias%20por%20la%20invitaci%C3%B3n%20a%20los%20XV%20A%C3%B1os%20de%20Valeria%20Sarah%C3%AD.%20Lamentablemente%20no%20podr%C3%A9%20asistir.'
   },
 
@@ -30,13 +31,17 @@ const EVENT_DATA = {
     gallery4: 'https://pub-cb21ede894ea4a9681d5a9533840d647.r2.dev/vale4.jpeg'
   },
 
-  // Cambia estos src cuando tengas las canciones.
+  /*
+   * Cuando tengas las canciones,
+   * pega aquí las URLs.
+   */
   audio: {
     ruquitos: '',
     chaviza: ''
   },
 
   schedule: {
+
     formal: [
       {
         icon: '⛪',
@@ -44,24 +49,28 @@ const EVENT_DATA = {
         title: 'Ceremonia',
         description: 'Parroquia de San Pedro, Zacatlán, Puebla'
       },
+
       {
         icon: '🥂',
         time: '6:00 PM',
         title: 'Recepción',
         description: 'Salón & Jardín M&G, Zacatlán, Puebla'
       },
+
       {
         icon: '🍽️',
         time: '7:00 PM',
         title: 'Cena',
         description: 'Cena de celebración'
       },
+
       {
         icon: '💃',
         time: '9:00 PM',
         title: 'Vals',
         description: 'Un momento muy especial'
       },
+
       {
         icon: '🎵',
         time: '10:00 PM',
@@ -70,6 +79,7 @@ const EVENT_DATA = {
       }
     ],
 
+
     anime: [
       {
         icon: '⛩️',
@@ -77,24 +87,28 @@ const EVENT_DATA = {
         title: 'Primer capítulo',
         description: 'Ceremonia en la Parroquia de San Pedro, Zacatlán, Puebla'
       },
+
       {
         icon: '🌙',
         time: '6:00 PM',
         title: 'El encuentro',
         description: 'Recepción en Salón & Jardín M&G, Zacatlán, Puebla'
       },
+
       {
         icon: '🍱',
         time: '7:00 PM',
         title: 'El banquete',
         description: 'Cena de celebración'
       },
+
       {
         icon: '🦋',
         time: '9:00 PM',
         title: 'El vals',
         description: 'La escena más especial de la noche'
       },
+
       {
         icon: '⚔️',
         time: '10:00 PM',
@@ -102,44 +116,72 @@ const EVENT_DATA = {
         description: 'Comienza el baile y la celebración'
       }
     ]
+
   },
+
 
   labels: {
     selectorTitle: '¿De qué lado vienes?',
-    selectorSubtitle: 'Elige tu experiencia para entrar a la invitación',
+
+    selectorSubtitle:
+      'Elige tu experiencia para entrar a la invitación',
 
     ruquitosTitle: 'Ruquitos',
     chavizaTitle: 'Chaviza',
 
-    ruquitosDesc: 'Elegante · formal · tradicional',
-    chavizaDesc: 'Anime · épico · legendario',
+    ruquitosDesc:
+      'Elegante · formal · tradicional',
 
-    formalScheduleTitle: 'Una noche mágica está por comenzar',
-    animeScheduleTitle: 'Los capítulos de esta historia',
+    chavizaDesc:
+      'Anime · épico · legendario',
 
-    formalGalleryTitle: 'Momentos para recordar',
-    animeGalleryTitle: 'Fragmentos de la leyenda',
+    formalScheduleTitle:
+      'Una noche mágica está por comenzar',
 
-    rsvpFormal: 'Tu presencia hará este día aún más especial',
-    rsvpAnime: 'Tu presencia será parte de esta leyenda'
+    animeScheduleTitle:
+      'Los capítulos de esta historia',
+
+    formalGalleryTitle:
+      'Momentos para recordar',
+
+    animeGalleryTitle:
+      'Fragmentos de la leyenda',
+
+    rsvpFormal:
+      'Tu presencia hará este día aún más especial',
+
+    rsvpAnime:
+      'Tu presencia será parte de esta leyenda'
   }
 };
 
 
-const selector = document.querySelector('#selector');
-const ruquitos = document.querySelector('#ruquitos');
-const chaviza = document.querySelector('#chaviza');
+const selector =
+  document.querySelector('#selector');
 
-const choiceButtons = document.querySelectorAll('[data-theme]');
-const backButtons = document.querySelectorAll('[data-back]');
+const ruquitos =
+  document.querySelector('#ruquitos');
 
-const bgMusic = document.querySelector('#bgMusic');
+const chaviza =
+  document.querySelector('#chaviza');
 
-const musicToggle = document.querySelector('#musicToggle');
+const choiceButtons =
+  document.querySelectorAll('[data-theme]');
 
-const musicLabel = document.querySelector('[data-music-label]');
+const backButtons =
+  document.querySelectorAll('[data-back]');
 
-const musicIcon = document.querySelector('[data-music-icon]');
+const bgMusic =
+  document.querySelector('#bgMusic');
+
+const musicToggle =
+  document.querySelector('#musicToggle');
+
+const musicLabel =
+  document.querySelector('[data-music-label]');
+
+const musicIcon =
+  document.querySelector('[data-music-icon]');
 
 
 let currentTheme = null;
@@ -182,6 +224,7 @@ bgMusic.addEventListener('pause', () => {
 
 
 function renderEventData() {
+
   const fields = {
     fullName: EVENT_DATA.fullName,
     firstName: EVENT_DATA.firstName,
@@ -193,65 +236,88 @@ function renderEventData() {
 
     location: EVENT_DATA.location,
 
-    selectorTitle: EVENT_DATA.labels.selectorTitle,
-    selectorSubtitle: EVENT_DATA.labels.selectorSubtitle,
+    selectorTitle:
+      EVENT_DATA.labels.selectorTitle,
 
-    ruquitosTitle: EVENT_DATA.labels.ruquitosTitle,
-    chavizaTitle: EVENT_DATA.labels.chavizaTitle,
+    selectorSubtitle:
+      EVENT_DATA.labels.selectorSubtitle,
 
-    ruquitosDesc: EVENT_DATA.labels.ruquitosDesc,
-    chavizaDesc: EVENT_DATA.labels.chavizaDesc,
+    ruquitosTitle:
+      EVENT_DATA.labels.ruquitosTitle,
 
-    formalScheduleTitle: EVENT_DATA.labels.formalScheduleTitle,
-    animeScheduleTitle: EVENT_DATA.labels.animeScheduleTitle,
+    chavizaTitle:
+      EVENT_DATA.labels.chavizaTitle,
 
-    formalGalleryTitle: EVENT_DATA.labels.formalGalleryTitle,
-    animeGalleryTitle: EVENT_DATA.labels.animeGalleryTitle,
+    ruquitosDesc:
+      EVENT_DATA.labels.ruquitosDesc,
 
-    rsvpFormal: EVENT_DATA.labels.rsvpFormal,
-    rsvpAnime: EVENT_DATA.labels.rsvpAnime
+    chavizaDesc:
+      EVENT_DATA.labels.chavizaDesc,
+
+    formalScheduleTitle:
+      EVENT_DATA.labels.formalScheduleTitle,
+
+    animeScheduleTitle:
+      EVENT_DATA.labels.animeScheduleTitle,
+
+    formalGalleryTitle:
+      EVENT_DATA.labels.formalGalleryTitle,
+
+    animeGalleryTitle:
+      EVENT_DATA.labels.animeGalleryTitle,
+
+    rsvpFormal:
+      EVENT_DATA.labels.rsvpFormal,
+
+    rsvpAnime:
+      EVENT_DATA.labels.rsvpAnime
   };
 
 
-  Object.entries(fields).forEach(([key, value]) => {
-    document
-      .querySelectorAll(`[data-field="${key}"]`)
-      .forEach((element) => {
-        element.textContent = value;
-      });
-  });
+  Object.entries(fields).forEach(
+    ([key, value]) => {
+
+      document
+        .querySelectorAll(
+          `[data-field="${key}"]`
+        )
+        .forEach((element) => {
+          element.textContent = value;
+        });
+
+    }
+  );
 
 
-  document.title = `XV Años ${EVENT_DATA.fullName}`;
-
-
-  document
-    .querySelectorAll('[data-link]')
-    .forEach((link) => {
-      const key = link.dataset.link;
-
-      if (EVENT_DATA.links[key]) {
-        link.href = EVENT_DATA.links[key];
-      }
-    });
+  document.title =
+    `XV Años ${EVENT_DATA.fullName}`;
 }
 
 
 function renderSchedules() {
+
   document
     .querySelectorAll('[data-schedule]')
     .forEach((container) => {
-      const type = container.dataset.schedule;
 
-      const items = EVENT_DATA.schedule[type] || [];
+      const type =
+        container.dataset.schedule;
+
+      const items =
+        EVENT_DATA.schedule[type] || [];
 
 
       container.innerHTML = items
         .map((item) => `
           <article>
-            <span>${item.icon || ''}</span>
 
-            <h4>${item.title || ''}</h4>
+            <span>
+              ${item.icon || ''}
+            </span>
+
+            <h4>
+              ${item.title || ''}
+            </h4>
 
             <p class="schedule-time">
               ${item.time || ''}
@@ -260,20 +326,27 @@ function renderSchedules() {
             <small>
               ${item.description || ''}
             </small>
+
           </article>
         `)
         .join('');
+
     });
+
 }
 
 
 function renderImages() {
+
   document
     .querySelectorAll('[data-img]')
     .forEach((image) => {
-      const key = image.dataset.img;
 
-      const src = EVENT_DATA.images[key];
+      const key =
+        image.dataset.img;
+
+      const src =
+        EVENT_DATA.images[key];
 
       const wrapper =
         image.closest('figure') ||
@@ -281,46 +354,70 @@ function renderImages() {
 
 
       if (src) {
+
         image.src = src;
 
-        image.classList.remove('is-placeholder');
+        image.classList.remove(
+          'is-placeholder'
+        );
 
-        wrapper?.classList.remove('image-placeholder');
+        wrapper?.classList.remove(
+          'image-placeholder'
+        );
+
       } else {
+
         image.removeAttribute('src');
 
-        image.classList.add('is-placeholder');
+        image.classList.add(
+          'is-placeholder'
+        );
 
-        wrapper?.classList.add('image-placeholder');
+        wrapper?.classList.add(
+          'image-placeholder'
+        );
+
       }
+
     });
+
 }
 
 
 function renderLinks() {
+
   document
     .querySelectorAll('[data-link]')
     .forEach((link) => {
-      const key = link.dataset.link;
 
-      const href = EVENT_DATA.links[key];
+      const key =
+        link.dataset.link;
+
+      const href =
+        EVENT_DATA.links[key];
 
 
-      link.href = href || '#';
+      link.href =
+        href || '#';
+
 
       link.classList.toggle(
         'is-disabled',
         !href || href === '#'
       );
+
     });
+
 }
 
 
 function openTheme(theme) {
+
   currentTheme = theme;
 
 
   selector.classList.add('hidden');
+
   selector.style.display = 'none';
 
 
@@ -338,38 +435,63 @@ function openTheme(theme) {
       : chaviza;
 
 
-  selectedPage.classList.remove('hidden');
+  selectedPage.classList.remove(
+    'hidden'
+  );
 
-  selectedPage.style.display = 'block';
+
+  selectedPage.style.display =
+    'block';
 
 
   requestAnimationFrame(() => {
-    selectedPage.classList.add('active');
+
+    selectedPage.classList.add(
+      'active'
+    );
+
   });
 
 
-  document.body.className = theme;
+  document.body.className =
+    theme;
 
 
   startThemeMusic(theme);
 
 
   window.scrollTo(0, 0);
+
 }
 
 
 function showSelector() {
-  selector.classList.remove('hidden');
 
-  selector.style.display = 'grid';
-
-
-  ruquitos.classList.add('hidden');
-  chaviza.classList.add('hidden');
+  selector.classList.remove(
+    'hidden'
+  );
 
 
-  ruquitos.classList.remove('active');
-  chaviza.classList.remove('active');
+  selector.style.display =
+    'grid';
+
+
+  ruquitos.classList.add(
+    'hidden'
+  );
+
+  chaviza.classList.add(
+    'hidden'
+  );
+
+
+  ruquitos.classList.remove(
+    'active'
+  );
+
+  chaviza.classList.remove(
+    'active'
+  );
 
 
   ruquitos.style.display = '';
@@ -378,33 +500,52 @@ function showSelector() {
 
   document.body.className = '';
 
+
   currentTheme = null;
 
 
   stopMusic();
 
-  musicToggle.classList.add('hidden');
+
+  musicToggle.classList.add(
+    'hidden'
+  );
 
 
   window.scrollTo(0, 0);
+
 }
 
 
 function startThemeMusic(theme) {
-  const src = EVENT_DATA.audio[theme];
+
+  const src =
+    EVENT_DATA.audio[theme];
 
 
-  musicToggle.classList.remove('hidden');
+  musicToggle.classList.remove(
+    'hidden'
+  );
 
 
   if (!src) {
+
     musicReady = false;
 
-    bgMusic.removeAttribute('src');
+
+    bgMusic.removeAttribute(
+      'src'
+    );
+
 
     bgMusic.pause();
 
-    updateMusicButton(false, 'Sin música');
+
+    updateMusicButton(
+      false,
+      'Sin música'
+    );
+
 
     return;
   }
@@ -413,60 +554,89 @@ function startThemeMusic(theme) {
   musicReady = true;
 
 
-  if (bgMusic.getAttribute('src') !== src) {
+  if (
+    bgMusic.getAttribute('src') !== src
+  ) {
+
     bgMusic.src = src;
 
     bgMusic.load();
+
   }
 
 
   bgMusic.volume = 0.55;
 
 
-  const playPromise = bgMusic.play();
+  const playPromise =
+    bgMusic.play();
 
 
   if (
     playPromise &&
-    typeof playPromise.catch === 'function'
+    typeof playPromise.catch ===
+      'function'
   ) {
+
     playPromise.catch(() => {
+
       updateMusicButton(
         false,
         'Reproducir música'
       );
+
     });
+
   }
+
 }
 
 
 function toggleMusic() {
+
   if (!musicReady) return;
 
 
   if (bgMusic.paused) {
-    bgMusic.play().catch(() => {
-      updateMusicButton(
-        false,
-        'Reproducir música'
-      );
-    });
+
+    bgMusic
+      .play()
+      .catch(() => {
+
+        updateMusicButton(
+          false,
+          'Reproducir música'
+        );
+
+      });
+
   } else {
+
     bgMusic.pause();
+
   }
+
 }
 
 
 function stopMusic() {
+
   bgMusic.pause();
+
 
   bgMusic.currentTime = 0;
 
-  bgMusic.removeAttribute('src');
+
+  bgMusic.removeAttribute(
+    'src'
+  );
+
 
   musicReady = false;
 
+
   updateMusicButton(false);
+
 }
 
 
@@ -474,11 +644,18 @@ function updateMusicButton(
   isPlaying,
   customLabel
 ) {
+
   if (customLabel) {
-    musicLabel.textContent = customLabel;
+
+    musicLabel.textContent =
+      customLabel;
+
 
     musicIcon.textContent =
-      isPlaying ? 'Ⅱ' : '♪';
+      isPlaying
+        ? 'Ⅱ'
+        : '♪';
+
 
     return;
   }
@@ -491,5 +668,8 @@ function updateMusicButton(
 
 
   musicIcon.textContent =
-    isPlaying ? 'Ⅱ' : '♪';
+    isPlaying
+      ? 'Ⅱ'
+      : '♪';
+
 }
