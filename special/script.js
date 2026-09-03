@@ -12,8 +12,8 @@ const EVENT_DATA = {
   links: {
     rsvpFormal: '#',
     rsvpAnime: '#',
-    rsvpAccept: '',
-    rsvpDecline: ''
+    rsvpAccept: 'https://wa.me/522224552910?text=Hola%2C%20confirmo%20mi%20asistencia%20a%20los%20XV%20A%C3%B1os%20de%20Valeria%20Sarah%C3%AD.%20%C2%A1Ah%C3%AD%20estar%C3%A9!%20%F0%9F%92%9C',
+    rsvpDecline: 'https://wa.me/522224552910?text=Hola%2C%20muchas%20gracias%20por%20la%20invitaci%C3%B3n%20a%20los%20XV%20A%C3%B1os%20de%20Valeria%20Sarah%C3%AD.%20Lamentablemente%20no%20podr%C3%A9%20asistir.'
   },
 
   images: {
