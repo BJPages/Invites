@@ -45,8 +45,8 @@ const EVENT_DATA = {
   },
 
   audio: {
-    ruquitos: '',
-    chaviza: ''
+    ruquitos: 'https://pub-bf4d56dadb734e72a4b39759296097cf.r2.dev/TS_L.mp3',
+    chaviza: 'https://pub-bf4d56dadb734e72a4b39759296097cf.r2.dev/DS_O2.mp3'
   },
 
   schedule: {
