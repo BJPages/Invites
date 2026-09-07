@@ -1,6 +1,3 @@
-window.PASS_SCRIPT_VERSION = '2.0.0';
-console.info('[Invitación] script-pases-v2.js 2.0.0 cargado');
-
 const EVENT_DATA = {
   fullName: 'Valeria Sarahí',
   firstName: 'Valeria',
@@ -12,6 +9,8 @@ const EVENT_DATA = {
 
   location: 'Zacatlán, Puebla',
   whatsappNumber: '522224552910',
+
+  countdownTarget: '2026-12-19T17:00:00-06:00',
 
   passBackgrounds: {
     ruquitos: 'ruquitosHero',
@@ -45,8 +44,11 @@ const EVENT_DATA = {
   },
 
   audio: {
-    ruquitos: 'https://pub-bf4d56dadb734e72a4b39759296097cf.r2.dev/TS_L.mp3',
-    chaviza: 'https://pub-bf4d56dadb734e72a4b39759296097cf.r2.dev/DS_O2.mp3'
+    ruquitos:
+      'https://pub-bf4d56dadb734e72a4b39759296097cf.r2.dev/TS_L.mp3',
+
+    chaviza:
+      'https://pub-bf4d56dadb734e72a4b39759296097cf.r2.dev/DS_O2.mp3'
   },
 
   schedule: {
@@ -215,10 +217,6 @@ let currentTheme = null;
 let musicReady = false;
 
 
-/* =========================================================
-   PASES
-========================================================= */
-
 const PASS_COUNT =
   getPassCount();
 
@@ -227,7 +225,8 @@ const PASS_LABEL =
     PASS_COUNT
   );
 
-const passBackgroundPromises = {};
+const passBackgroundPromises =
+  {};
 
 
 /* =========================================================
@@ -241,6 +240,7 @@ renderPassContent();
 renderRsvpLinks();
 bindPassDownloadButtons();
 preloadPassBackgrounds();
+startCountdown();
 
 
 /* =========================================================
@@ -286,7 +286,11 @@ musicToggle?.addEventListener(
 bgMusic?.addEventListener(
   'play',
   () => {
-    updateMusicButton(true);
+
+    updateMusicButton(
+      true
+    );
+
   }
 );
 
@@ -294,13 +298,17 @@ bgMusic?.addEventListener(
 bgMusic?.addEventListener(
   'pause',
   () => {
-    updateMusicButton(false);
+
+    updateMusicButton(
+      false
+    );
+
   }
 );
 
 
 /* =========================================================
-   LEER NÚMERO DE PASES
+   PASES
 ========================================================= */
 
 function getPassCount() {
@@ -325,7 +333,9 @@ function getPassCount() {
 
 
   return (
-    Number.isInteger(parsed) &&
+    Number.isInteger(
+      parsed
+    ) &&
     parsed > 0
   )
     ? parsed
@@ -484,8 +494,7 @@ function renderSchedules() {
 
 
         const items =
-          EVENT_DATA
-            .schedule[type] ||
+          EVENT_DATA.schedule[type] ||
           [];
 
 
@@ -494,7 +503,6 @@ function renderSchedules() {
             .map(
               (item) => `
                 <article>
-
                   <span>
                     ${item.icon || ''}
                   </span>
@@ -510,7 +518,6 @@ function renderSchedules() {
                   <small>
                     ${item.description || ''}
                   </small>
-
                 </article>
               `
             )
@@ -592,7 +599,7 @@ function renderImages() {
 
 
 /* =========================================================
-   TEXTO DE LOS PASES
+   TEXTO DE PASE
 ========================================================= */
 
 function renderPassContent() {
@@ -651,24 +658,12 @@ function buildWhatsAppLink(
 
 function renderRsvpLinks() {
 
-  /*
-   * Conserva el mensaje original:
-   *
-   * Hola, confirmo mi asistencia...
-   * ¡Ahí estaré! 💜
-   *
-   * y solamente agrega el número
-   * de personas en medio.
-   */
   const acceptMessage =
     `Hola, confirmo mi asistencia a los XV Años de ${EVENT_DATA.fullName}. ` +
     `La asistencia será para ${PASS_LABEL}. ` +
     '¡Ahí estaré! 💜';
 
 
-  /*
-   * No asistencia queda igual.
-   */
   const declineMessage =
     `Hola, muchas gracias por la invitación a los XV Años de ${EVENT_DATA.fullName}. ` +
     'Lamentablemente no podré asistir.';
@@ -893,7 +888,9 @@ function startThemeMusic(
     !bgMusic ||
     !musicToggle
   ) {
+
     return;
+
   }
 
 
@@ -978,7 +975,9 @@ function toggleMusic() {
     !musicReady ||
     !bgMusic
   ) {
+
     return;
+
   }
 
 
@@ -1011,7 +1010,9 @@ function toggleMusic() {
 function stopMusic() {
 
   if (!bgMusic) {
+
     return;
+
   }
 
 
@@ -1047,7 +1048,9 @@ function updateMusicButton(
     !musicLabel ||
     !musicIcon
   ) {
+
     return;
+
   }
 
 
@@ -1064,6 +1067,185 @@ function updateMusicButton(
     isPlaying
       ? 'Ⅱ'
       : '♪';
+
+}
+
+
+/* =========================================================
+   CUENTA REGRESIVA
+========================================================= */
+
+function startCountdown() {
+
+  updateCountdown();
+
+
+  window.setInterval(
+    updateCountdown,
+    1000
+  );
+
+}
+
+
+function updateCountdown() {
+
+  const target =
+    new Date(
+      EVENT_DATA.countdownTarget
+    ).getTime();
+
+
+  const now =
+    Date.now();
+
+
+  const remaining =
+    Math.max(
+      target - now,
+      0
+    );
+
+
+  const days =
+    Math.floor(
+      remaining /
+      86400000
+    );
+
+
+  const hours =
+    Math.floor(
+      (
+        remaining %
+        86400000
+      ) /
+      3600000
+    );
+
+
+  const minutes =
+    Math.floor(
+      (
+        remaining %
+        3600000
+      ) /
+      60000
+    );
+
+
+  const seconds =
+    Math.floor(
+      (
+        remaining %
+        60000
+      ) /
+      1000
+    );
+
+
+  document
+    .querySelectorAll(
+      '[data-countdown-days]'
+    )
+    .forEach(
+      (element) => {
+
+        element.textContent =
+          String(
+            days
+          ).padStart(
+            2,
+            '0'
+          );
+
+      }
+    );
+
+
+  document
+    .querySelectorAll(
+      '[data-countdown-hours]'
+    )
+    .forEach(
+      (element) => {
+
+        element.textContent =
+          String(
+            hours
+          ).padStart(
+            2,
+            '0'
+          );
+
+      }
+    );
+
+
+  document
+    .querySelectorAll(
+      '[data-countdown-minutes]'
+    )
+    .forEach(
+      (element) => {
+
+        element.textContent =
+          String(
+            minutes
+          ).padStart(
+            2,
+            '0'
+          );
+
+      }
+    );
+
+
+  document
+    .querySelectorAll(
+      '[data-countdown-seconds]'
+    )
+    .forEach(
+      (element) => {
+
+        element.textContent =
+          String(
+            seconds
+          ).padStart(
+            2,
+            '0'
+          );
+
+      }
+    );
+
+
+  if (
+    remaining <= 0
+  ) {
+
+    document
+      .querySelectorAll(
+        '[data-countdown-message]'
+      )
+      .forEach(
+        (element) => {
+
+          const isAnime =
+            element.closest(
+              '.countdown-dark'
+            );
+
+
+          element.textContent =
+            isAnime
+              ? '⚔ La espera terminó. Hoy comienza la leyenda.'
+              : '✨ La espera terminó. Hoy es el gran día.';
+
+        }
+      );
+
+  }
 
 }
 
@@ -1282,12 +1464,6 @@ function bindPassDownloadButtons() {
 
 async function generatePassImage() {
 
-  /*
-   * Ya NO espera document.fonts.ready.
-   *
-   * Los timeouts de Google Fonts
-   * no bloquean la descarga.
-   */
   if (
     typeof QRCode ===
     'undefined'
@@ -1336,13 +1512,6 @@ async function generatePassImage() {
       : 'ruquitos';
 
 
-  /*
-   * Si la imagen R2 ya precargó,
-   * se utiliza.
-   *
-   * Si R2/CORS falla, el pase
-   * NO falla: se usa degradado.
-   */
   const backgroundImage =
     await getPassBackgroundImage(
       theme
@@ -1392,10 +1561,6 @@ async function generatePassImage() {
   );
 
 
-  /*
-   * Texto PLANO almacenado
-   * dentro del QR.
-   */
   const qrText =
     `Mis XV Vale - Pase para ${PASS_LABEL}`;
 
@@ -1448,8 +1613,7 @@ function drawFallbackBackground(
 
 
   if (
-    theme ===
-    'chaviza'
+    theme === 'chaviza'
   ) {
 
     gradient.addColorStop(
@@ -1494,7 +1658,7 @@ function drawFallbackBackground(
 
 
 /* =========================================================
-   OVERLAY
+   OVERLAY DEL PASE
 ========================================================= */
 
 function drawPassOverlay(
@@ -1514,8 +1678,7 @@ function drawPassOverlay(
 
 
   if (
-    theme ===
-    'chaviza'
+    theme === 'chaviza'
   ) {
 
     overlay.addColorStop(
@@ -1581,22 +1744,19 @@ function drawPassText(
 ) {
 
   const textColor =
-    theme ===
-    'chaviza'
+    theme === 'chaviza'
       ? '#ffffff'
       : '#3f2858';
 
 
   const secondaryColor =
-    theme ===
-    'chaviza'
+    theme === 'chaviza'
       ? '#e9d5ff'
       : '#6d4a9a';
 
 
   const accentColor =
-    theme ===
-    'chaviza'
+    theme === 'chaviza'
       ? '#ec4899'
       : '#8050a8';
 
@@ -1609,9 +1769,6 @@ function drawPassText(
     'alphabetic';
 
 
-  /*
-   * MIS XV
-   */
   ctx.fillStyle =
     secondaryColor;
 
@@ -1627,9 +1784,6 @@ function drawPassText(
   );
 
 
-  /*
-   * Nombre
-   */
   ctx.fillStyle =
     textColor;
 
@@ -1645,9 +1799,6 @@ function drawPassText(
   );
 
 
-  /*
-   * Fecha y lugar
-   */
   ctx.fillStyle =
     secondaryColor;
 
@@ -1670,9 +1821,6 @@ function drawPassText(
   );
 
 
-  /*
-   * Pase
-   */
   ctx.fillStyle =
     accentColor;
 
@@ -1688,9 +1836,6 @@ function drawPassText(
   );
 
 
-  /*
-   * Texto inferior
-   */
   ctx.fillStyle =
     textColor;
 
@@ -1883,7 +2028,7 @@ function generateQrDataUrl(
 
 
 /* =========================================================
-   CANVAS -> PNG
+   CANVAS A PNG
 ========================================================= */
 
 function canvasToPngBlob(
@@ -1954,7 +2099,9 @@ function loadImage(
           () => {
 
             if (finished) {
+
               return;
+
             }
 
 
@@ -1985,7 +2132,9 @@ function loadImage(
         () => {
 
           if (finished) {
+
             return;
+
           }
 
 
@@ -2009,7 +2158,9 @@ function loadImage(
         () => {
 
           if (finished) {
+
             return;
+
           }
 
 
@@ -2116,8 +2267,7 @@ function drawPassBorder(
 
 
   ctx.strokeStyle =
-    theme ===
-    'chaviza'
+    theme === 'chaviza'
       ? 'rgba(236, 72, 153, 0.75)'
       : 'rgba(128, 80, 168, 0.60)';
 
