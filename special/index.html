@@ -3,16 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>XV Años Valeria Sarahí</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=Kaushan+Script&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=Kaushan+Script&family=Playfair+Display:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
 
   <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body>
+
   <audio id="bgMusic" preload="auto" loop></audio>
 
   <button
@@ -21,21 +27,39 @@
     type="button"
     aria-label="Pausar o reproducir musica"
   >
-    <span class="music-icon" data-music-icon>♪</span>
-    <span data-music-label>Música</span>
+    <span
+      class="music-icon"
+      data-music-icon
+    >
+      ♪
+    </span>
+
+    <span data-music-label>
+      Música
+    </span>
   </button>
+
 
   <main id="app">
 
-    <!-- SELECTOR -->
 
-    <section id="selector" class="selector-screen">
+    <!-- =====================================================
+         SELECTOR
+    ====================================================== -->
+
+    <section
+      id="selector"
+      class="selector-screen"
+    >
+
       <div class="selector-glow glow-a"></div>
       <div class="selector-glow glow-b"></div>
 
       <div class="selector-content">
+
         <p class="eyebrow">
-          XV Años de <span data-field="fullName"></span>
+          XV Años de
+          <span data-field="fullName"></span>
         </p>
 
         <h1 data-field="selectorTitle"></h1>
@@ -45,6 +69,7 @@
           data-field="selectorSubtitle"
         ></p>
 
+
         <div class="choice-grid">
 
           <button
@@ -52,7 +77,10 @@
             data-theme="ruquitos"
             type="button"
           >
-            <span class="choice-icon">♕</span>
+
+            <span class="choice-icon">
+              ♕
+            </span>
 
             <span
               class="choice-title"
@@ -63,16 +91,24 @@
               class="choice-desc"
               data-field="ruquitosDesc"
             ></span>
+
           </button>
 
-          <div class="vs">VS</div>
+
+          <div class="vs">
+            VS
+          </div>
+
 
           <button
             class="choice-card choice-chaviza"
             data-theme="chaviza"
             type="button"
           >
-            <span class="choice-icon">⚔</span>
+
+            <span class="choice-icon">
+              ⚔
+            </span>
 
             <span
               class="choice-title"
@@ -83,31 +119,53 @@
               class="choice-desc"
               data-field="chavizaDesc"
             ></span>
+
           </button>
 
         </div>
+
       </div>
+
     </section>
 
 
-    <!-- =========================
+
+    <!-- =====================================================
          RUQUITOS
-    ========================== -->
+    ====================================================== -->
 
     <section
       id="ruquitos"
       class="experience ruquitos hidden"
     >
 
+
+      <!-- NAV -->
+
       <nav class="nav nav-light">
 
-        <div class="logo">VS</div>
+        <div class="logo">
+          VS
+        </div>
 
         <div class="nav-links">
-          <a href="#r-inicio">Inicio</a>
-          <a href="#r-evento">Evento</a>
-          <a href="#r-galeria">Galería</a>
-          <a href="#r-rsvp">Confirmar</a>
+
+          <a href="#r-inicio">
+            Inicio
+          </a>
+
+          <a href="#r-evento">
+            Evento
+          </a>
+
+          <a href="#r-galeria">
+            Galería
+          </a>
+
+          <a href="#r-rsvp">
+            Confirmar
+          </a>
+
         </div>
 
         <button
@@ -121,7 +179,10 @@
       </nav>
 
 
-      <!-- HERO -->
+
+      <!-- =================================================
+           HERO
+      ================================================== -->
 
       <header
         id="r-inicio"
@@ -131,8 +192,14 @@
         <div class="crystal c1"></div>
         <div class="crystal c2"></div>
 
-        <div class="butterfly b1">🦋</div>
-        <div class="butterfly b2">🦋</div>
+        <div class="butterfly b1">
+          🦋
+        </div>
+
+        <div class="butterfly b2">
+          🦋
+        </div>
+
 
         <div class="hero-copy">
 
@@ -141,8 +208,11 @@
           </p>
 
           <h2>
+
             <span data-field="firstName"></span>
+
             <em data-field="middleName"></em>
+
           </h2>
 
           <p
@@ -157,21 +227,28 @@
 
         </div>
 
+
         <figure class="hero-image-card dress-card">
+
           <img
             data-img="ruquitosHero"
             alt="Imagen principal de Valeria Sarahí"
           />
+
         </figure>
 
       </header>
 
 
-      <!-- CUENTA REGRESIVA -->
+
+      <!-- =================================================
+           CUENTA REGRESIVA
+      ================================================== -->
 
       <section
         class="countdown-section countdown-light"
       >
+
         <div class="countdown-shell">
 
           <p class="eyebrow countdown-eyebrow">
@@ -186,9 +263,12 @@
             Faltan...
           </p>
 
+
           <div class="countdown-grid">
 
+
             <article class="countdown-card">
+
               <span
                 class="countdown-value"
                 data-countdown-days
@@ -199,9 +279,12 @@
               <span class="countdown-label">
                 Días
               </span>
+
             </article>
 
+
             <article class="countdown-card">
+
               <span
                 class="countdown-value"
                 data-countdown-hours
@@ -212,9 +295,12 @@
               <span class="countdown-label">
                 Horas
               </span>
+
             </article>
 
+
             <article class="countdown-card">
+
               <span
                 class="countdown-value"
                 data-countdown-minutes
@@ -225,9 +311,12 @@
               <span class="countdown-label">
                 Minutos
               </span>
+
             </article>
 
+
             <article class="countdown-card">
+
               <span
                 class="countdown-value"
                 data-countdown-seconds
@@ -238,9 +327,12 @@
               <span class="countdown-label">
                 Segundos
               </span>
+
             </article>
 
+
           </div>
+
 
           <p
             class="countdown-footnote"
@@ -250,10 +342,14 @@
           </p>
 
         </div>
+
       </section>
 
 
-      <!-- EVENTO -->
+
+      <!-- =================================================
+           EVENTO
+      ================================================== -->
 
       <section
         id="r-evento"
@@ -266,10 +362,12 @@
 
         <h3 data-field="formalScheduleTitle"></h3>
 
+
         <div
           class="timeline"
           data-schedule="formal"
         ></div>
+
 
         <div class="event-link">
 
@@ -288,7 +386,48 @@
       </section>
 
 
-      <!-- GALERÍA -->
+
+      <!-- =================================================
+           CÓDIGO DE VESTIMENTA
+      ================================================== -->
+
+      <section
+        class="section section-light"
+      >
+
+        <p class="eyebrow">
+          Código de vestimenta
+        </p>
+
+        <h3>
+          Elegantes para una noche inolvidable
+        </h3>
+
+
+        <div class="pass-box pass-box-light">
+
+          <p class="pass-message">
+            ✨ Vestimenta formal
+          </p>
+
+          <p class="pass-instructions">
+            Queremos verte espectacular y disfrutar juntos
+            de esta noche tan especial.
+            Solo te pedimos un pequeño favor:
+            <strong>
+              el color lila queda reservado para la quinceañera. 💜
+            </strong>
+          </p>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =================================================
+           GALERÍA
+      ================================================== -->
 
       <section
         id="r-galeria"
@@ -301,34 +440,46 @@
 
         <h3 data-field="formalGalleryTitle"></h3>
 
+
         <div class="gallery">
 
           <figure>
+
             <img
               data-img="gallery1"
               alt="Foto 1 de Valeria Sarahí"
             />
+
           </figure>
 
+
           <figure>
+
             <img
               data-img="gallery2"
               alt="Foto 2 de Valeria Sarahí"
             />
+
           </figure>
 
+
           <figure>
+
             <img
               data-img="gallery3"
               alt="Foto 3 de Valeria Sarahí"
             />
+
           </figure>
 
+
           <figure>
+
             <img
               data-img="gallery4"
               alt="Foto 4 de Valeria Sarahí"
             />
+
           </figure>
 
         </div>
@@ -336,7 +487,10 @@
       </section>
 
 
-      <!-- CONFIRMACIÓN -->
+
+      <!-- =================================================
+           CONFIRMACIÓN
+      ================================================== -->
 
       <section
         id="r-rsvp"
@@ -349,6 +503,7 @@
 
         <h3 data-field="rsvpFormal"></h3>
 
+
         <div class="pass-box pass-box-light">
 
           <p
@@ -357,7 +512,9 @@
           ></p>
 
           <p class="pass-instructions">
-            En caso de asistir, primero descarga tu pase y después confirma tu asistencia por WhatsApp con el botón de abajo.
+            En caso de asistir, primero descarga tu pase
+            y después confirma tu asistencia por WhatsApp
+            con el botón de abajo.
           </p>
 
           <button
@@ -370,6 +527,7 @@
 
         </div>
 
+
         <div class="mission-buttons">
 
           <a
@@ -381,6 +539,7 @@
           >
             Confirmar asistencia
           </a>
+
 
           <a
             class="action-btn secondary-btn"
@@ -396,17 +555,22 @@
 
       </section>
 
+
     </section>
 
 
-    <!-- =========================
+
+    <!-- =====================================================
          CHAVIZA
-    ========================== -->
+    ====================================================== -->
 
     <section
       id="chaviza"
       class="experience chaviza hidden"
     >
+
+
+      <!-- NAV -->
 
       <nav class="nav nav-dark">
 
@@ -415,11 +579,25 @@
         </div>
 
         <div class="nav-links">
-          <a href="#c-inicio">Inicio</a>
-          <a href="#c-evento">Capítulos</a>
-          <a href="#c-galeria">Galería</a>
-          <a href="#c-rsvp">Misión</a>
+
+          <a href="#c-inicio">
+            Inicio
+          </a>
+
+          <a href="#c-evento">
+            Capítulos
+          </a>
+
+          <a href="#c-galeria">
+            Galería
+          </a>
+
+          <a href="#c-rsvp">
+            Misión
+          </a>
+
         </div>
+
 
         <button
           class="switch-btn"
@@ -432,7 +610,10 @@
       </nav>
 
 
-      <!-- HERO -->
+
+      <!-- =================================================
+           HERO
+      ================================================== -->
 
       <header
         id="c-inicio"
@@ -446,6 +627,7 @@
 
         <div class="katana"></div>
 
+
         <div class="anime-copy">
 
           <p class="eyebrow">
@@ -453,19 +635,25 @@
           </p>
 
           <h2>
+
             <span data-field="firstName"></span>
+
             <em data-field="middleName"></em>
+
           </h2>
+
 
           <p
             class="jp-date"
             data-field="japaneseDate"
           ></p>
 
+
           <p
             class="date"
             data-field="fullDate"
           ></p>
+
 
           <p
             class="place"
@@ -473,6 +661,7 @@
           ></p>
 
         </div>
+
 
         <figure class="anime-hero-image">
 
@@ -486,11 +675,15 @@
       </header>
 
 
-      <!-- CUENTA REGRESIVA -->
+
+      <!-- =================================================
+           CUENTA REGRESIVA
+      ================================================== -->
 
       <section
         class="countdown-section countdown-dark"
       >
+
         <div class="countdown-shell">
 
           <p class="eyebrow countdown-eyebrow">
@@ -505,9 +698,12 @@
             El gran día comienza en...
           </p>
 
+
           <div class="countdown-grid">
 
+
             <article class="countdown-card">
+
               <span
                 class="countdown-value"
                 data-countdown-days
@@ -518,9 +714,12 @@
               <span class="countdown-label">
                 Días
               </span>
+
             </article>
 
+
             <article class="countdown-card">
+
               <span
                 class="countdown-value"
                 data-countdown-hours
@@ -531,9 +730,12 @@
               <span class="countdown-label">
                 Horas
               </span>
+
             </article>
 
+
             <article class="countdown-card">
+
               <span
                 class="countdown-value"
                 data-countdown-minutes
@@ -544,9 +746,12 @@
               <span class="countdown-label">
                 Minutos
               </span>
+
             </article>
 
+
             <article class="countdown-card">
+
               <span
                 class="countdown-value"
                 data-countdown-seconds
@@ -557,9 +762,12 @@
               <span class="countdown-label">
                 Segundos
               </span>
+
             </article>
 
+
           </div>
+
 
           <p
             class="countdown-footnote"
@@ -569,10 +777,14 @@
           </p>
 
         </div>
+
       </section>
 
 
-      <!-- EVENTO -->
+
+      <!-- =================================================
+           EVENTO
+      ================================================== -->
 
       <section
         id="c-evento"
@@ -585,10 +797,12 @@
 
         <h3 data-field="animeScheduleTitle"></h3>
 
+
         <div
           class="timeline anime-timeline"
           data-schedule="anime"
         ></div>
+
 
         <div class="event-link">
 
@@ -607,7 +821,47 @@
       </section>
 
 
-      <!-- GALERÍA -->
+
+      <!-- =================================================
+           CÓDIGO DE VESTIMENTA
+      ================================================== -->
+
+      <section
+        class="section section-dark"
+      >
+
+        <p class="eyebrow">
+          Código de vestimenta
+        </p>
+
+        <h3>
+          Prepara tu mejor outfit para la misión
+        </h3>
+
+
+        <div class="pass-box pass-box-dark">
+
+          <p class="pass-message">
+            ⚔️ Vestimenta formal
+          </p>
+
+          <p class="pass-instructions">
+            Toda gran celebración merece un outfit legendario.
+            Solo existe una regla en esta misión:
+            <strong>
+              el color lila está reservado para nuestra protagonista. 💜
+            </strong>
+          </p>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =================================================
+           GALERÍA
+      ================================================== -->
 
       <section
         id="c-galeria"
@@ -620,34 +874,46 @@
 
         <h3 data-field="animeGalleryTitle"></h3>
 
+
         <div class="gallery anime-gallery">
 
           <figure>
+
             <img
               data-img="gallery1"
               alt="Fragmento 1 de la leyenda"
             />
+
           </figure>
 
+
           <figure>
+
             <img
               data-img="gallery2"
               alt="Fragmento 2 de la leyenda"
             />
+
           </figure>
 
+
           <figure>
+
             <img
               data-img="gallery3"
               alt="Fragmento 3 de la leyenda"
             />
+
           </figure>
 
+
           <figure>
+
             <img
               data-img="gallery4"
               alt="Fragmento 4 de la leyenda"
             />
+
           </figure>
 
         </div>
@@ -655,7 +921,10 @@
       </section>
 
 
-      <!-- CONFIRMACIÓN -->
+
+      <!-- =================================================
+           CONFIRMACIÓN
+      ================================================== -->
 
       <section
         id="c-rsvp"
@@ -668,6 +937,7 @@
 
         <h3 data-field="rsvpAnime"></h3>
 
+
         <div class="pass-box pass-box-dark">
 
           <p
@@ -676,7 +946,9 @@
           ></p>
 
           <p class="pass-instructions">
-            En caso de asistir, primero descarga tu pase y después confirma tu asistencia por WhatsApp con el botón de abajo.
+            En caso de asistir, primero descarga tu pase
+            y después confirma tu asistencia por WhatsApp
+            con el botón de abajo.
           </p>
 
           <button
@@ -689,6 +961,7 @@
 
         </div>
 
+
         <div class="mission-buttons">
 
           <a
@@ -700,6 +973,7 @@
           >
             ⚔ Aceptar misión
           </a>
+
 
           <a
             class="action-btn secondary-btn"
@@ -715,11 +989,18 @@
 
       </section>
 
+
     </section>
+
 
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"
+  ></script>
+
   <script src="./script2.js"></script>
+
 </body>
 </html>
