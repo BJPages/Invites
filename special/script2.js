@@ -3,6 +3,13 @@ const EVENT_DATA = {
   firstName: 'Valeria',
   middleName: 'Sarahí',
 
+  family: {
+    parent1: 'Guadalupe Fernández Santos',
+    parent2: 'Richard Flores Gayosso',
+    godparent1: 'Rene Castro Santos',
+    godparent2: 'Ana Margarita Millán Cosme'
+  },
+
   fullDate: '19 de diciembre de 2026',
   shortDate: '19 · Diciembre · 2026',
   japaneseDate: '十九日 · 十二月 · 二〇二六',
@@ -388,6 +395,8 @@ function renderEventData() {
 
     middleName:
       EVENT_DATA.middleName,
+
+    ...EVENT_DATA.family,
 
     fullDate:
       EVENT_DATA.fullDate,
